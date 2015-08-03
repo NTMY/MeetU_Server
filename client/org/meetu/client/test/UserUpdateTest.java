@@ -15,7 +15,8 @@ public class UserUpdateTest {
 	public static void main(String[] args) {
 		UserUpdateListener listener = new UserUpdateListenerImpl();
 		User user = new User();
-		user.setId(0);
+		user.setId(1);
+		user.setMobile("15011448840");
 		user.setName("高文");
 		new UserUpdateHandler().onUpdate(listener, user);
 	}

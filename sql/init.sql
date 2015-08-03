@@ -14,7 +14,7 @@ create table u_user(
 	name varchar(64) comment '真实姓名',
 	nickname varchar(64) comment '昵称',
 	birthdate varchar(64) comment '生日',
-	gender varchar(2) comment '性别 男/女',
+	gender varchar(4) comment '性别 男/女',
 	qq varchar(32) comment 'qq',
 	email varchar(64) comment 'email',
 	company varchar(128) comment '公司名称',
@@ -64,7 +64,7 @@ create table sys_param(
 ) comment '系统参数表';
 
 
-insert into sys_param values ('upload_freq','600'); --上传间隔时间
+insert into sys_param values ('upload_freq','600');
 
 drop table if exists sys_client_info;
 create table sys_client_info (

@@ -9,7 +9,13 @@ public interface IUserService {
 	
 	int insert(User u) throws Exception;
 
+	void update(User u) throws Exception;
+	
 	List<User> queryList(User u);
 	
+	User queryById(User u) throws Exception;
+	
 	int queryNearUsersCount(BigDecimal longitude , BigDecimal latitude);
+	
+	
 }

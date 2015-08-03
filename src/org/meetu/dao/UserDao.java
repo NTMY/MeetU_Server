@@ -9,7 +9,6 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
 import org.meetu.model.User;
 
 public class UserDao {
@@ -62,6 +61,25 @@ public class UserDao {
 		List<User> userList = new ArrayList<User>();
 		userList = query.list();
 		return userList;
+	}
+	
+	public User selectById(User user) throws Exception
+	{
+		Session session = sessionFactory.openSession();
+		String sql = "select U from User U where 1= 1 ";
+		if (null != user.getId() && !"".equals(user.getId()))
+		{
+			sql += " and U.id = '" + user.getId() + "'";// id
+		}
+		Query query = session.createQuery(sql);
+		List<User> userList = new ArrayList<User>();
+		userList = query.list();
+		if(userList == null || userList.size() != 1) {
+			throw new Exception("用户查询异常SELECT_BY_ID");
+		} else {
+			user = userList.get(0);
+		}
+		return user;
 	}
 	
 	/**

@@ -19,6 +19,11 @@ public class UserService implements IUserService {
 		return retPK;
 	}
 	
+	@Override
+	public void update(User u) throws Exception {
+		userDao.update(u);
+	}
+	
 	/**
 	 * 查找附近的人具体信息
 	 * */
@@ -28,6 +33,15 @@ public class UserService implements IUserService {
 		return list;
 	}
 
+	/**
+	 * 根据userId查询单个用户
+	 * */
+	@Override
+	public User queryById(User user) throws Exception {
+		user = userDao.selectById(user);
+		return user;
+	}
+	
 	/**
 	 * 查找附近的人个数
 	 * */

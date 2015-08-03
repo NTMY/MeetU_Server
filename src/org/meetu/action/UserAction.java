@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
+import org.meetu.dto.BaseDto;
 import org.meetu.dto.UserAccessDto;
 import org.meetu.model.User;
 import org.meetu.service.UserService;
 import org.meetu.util.BeanConverter;
 import org.meetu.util.SecureUtil;
+import org.meetu.util.TimeUtil;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -87,6 +90,7 @@ public class UserAction extends ActionSupport {
 				accessDto = new UserAccessDto(ACCESS_STATUS_LOGIN, user);
 			} else if (list != null && list.size() == 0) {
 				// 如果用户不存在
+				user.setRegtime(TimeUtil.parseDate2Str(new Date()));
 				int pk = userService.insert(user);
 				accessDto = new UserAccessDto(ACCESS_STATUS_REG, user);
 			} else {
@@ -109,16 +113,37 @@ public class UserAction extends ActionSupport {
 		return null;
 	}
 
-	public String update() throws ClassNotFoundException, IOException {
+	/**
+	 * 更新用户资料接口
+	 * */
+	public String update() {
 		request = ServletActionContext.getRequest();
 		response = ServletActionContext.getResponse();
-		
-		InputStream inputStream = request.getInputStream();
-		ObjectInputStream objectInputStream = new ObjectInputStream(
-				new BufferedInputStream(inputStream));
-		User user = (User) objectInputStream.readObject();
-		objectInputStream.close();
-	
+		BaseDto dto = new BaseDto();// 返回的BaseDto对象
+		try {
+			out = response.getWriter();
+			// user对象为客户端上传的对象
+			// 根据上传用户信息查询用户,userDB为数据库里的对象
+			User userDB = userService.queryById(user);
+			user.setStatus(userDB.getStatus());//用户状态status不能被客户端更新
+			if(userDB == null) {
+				throw new RuntimeException();
+			} else {
+				userService.update(user);
+			}
+			// 当查出一条数据时,才是正常逻辑
+			userService.update(user);
+		} catch (Exception e) {
+			logger.error(e);
+			dto.setErrCode(STATUS_FAIL);
+			dto.setErrMsg("用户更新资料异常");
+		} finally {
+			retXml = BeanConverter.bean2xml(dto);
+			logger.warn("用户修改资料UPDATE接口返回XML");
+			logger.warn(retXml);
+			out.write(retXml);
+			out.close();
+		}
 		return null;
 	}
 
