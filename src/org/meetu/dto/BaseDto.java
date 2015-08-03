@@ -1,9 +1,11 @@
 package org.meetu.dto;
 
+import java.io.Serializable;
+
 /**
  * DTO基类
  * */
-public class BaseDto {
+public class BaseDto implements Serializable {
 	
 	/**
 	 * 错误码

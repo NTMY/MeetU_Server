@@ -1,9 +1,11 @@
 package org.meetu.model;
 
+import java.io.Serializable;
+
 /**
  * Model层基类,Model层实体类都继承此类
  * */
-public class BaseModel {
+public class BaseModel implements Serializable {
 	/**
 	 * 错误码
 	 * 如果错误码不为空,则不用识别其子类属性

@@ -59,7 +59,7 @@ public interface Constant {
 	//	45.55.4.64
 	// localhost
 	/**SERVER_IP*/
-	String IP = "45.55.4.64";
+	String IP = "localhost";
 	/**SERVER_PORT*/
 	String PORT = "8080";
 

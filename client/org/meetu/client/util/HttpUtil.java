@@ -1,19 +1,29 @@
 package org.meetu.client.util;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
-import static org.meetu.constant.Constant.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.meetu.model.User;
+import org.meetu.util.SecureUtil;
 
+import static org.meetu.constant.Constant.*;
 
 /**
  * HTTP通信工具类
  * */
 public class HttpUtil {
+	private static Log logger = LogFactory.getLog(HttpUtil.class);
+
 	/**
 	 * 向指定 URL 发送POST方法的请求
 	 * 
@@ -26,13 +36,14 @@ public class HttpUtil {
 	public static String sendPost(String url, String param) {
 		PrintWriter out = null;
 		BufferedReader in = null;
+
 		String result = "";
 		try {
 			URL realUrl = new URL(url);
 			// 打开和URL之间的连接
 			URLConnection conn = realUrl.openConnection();
-			conn.setConnectTimeout(TIMEOUT_HTTP);//设置连接超时时间
-			conn.setReadTimeout(TIMEOUT_HTTP);//设置read超时时间
+			// conn.setConnectTimeout(TIMEOUT_HTTP);// 设置连接超时时间
+			// conn.setReadTimeout(TIMEOUT_HTTP);// 设置read超时时间
 			// 设置通用的请求属性
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
@@ -41,6 +52,7 @@ public class HttpUtil {
 			// 发送POST请求必须设置如下两行
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
+			// 如果参数是String
 			// 获取URLConnection对象对应的输出流
 			out = new PrintWriter(conn.getOutputStream());
 			// 发送请求参数
@@ -54,12 +66,12 @@ public class HttpUtil {
 			while ((line = in.readLine()) != null) {
 				result += line;
 			}
+
 		} catch (Exception e) {
 			System.out.println("发送 POST 请求出现异常！" + e);
-			e.printStackTrace();
-		}
-		// 使用finally块来关闭输出流、输入流
-		finally {
+			logger.error(e);
+		} finally {
+			// 使用finally块来关闭输出流、输入流
 			try {
 				if (out != null) {
 					out.close();
@@ -68,16 +80,24 @@ public class HttpUtil {
 					in.close();
 				}
 			} catch (IOException ex) {
-				ex.printStackTrace();
+				logger.error(ex);
 			}
 		}
 		return result;
 	}
-	
-	
-	
+
 	public static void main(String[] args) {
-		String xml = sendPost("http://45.55.4.64:8080/meetu/userAction!access?","user.mobile=13911592475&user.pwd=abc");
-		System.out.println(xml);
+		// String xml = sendPost(
+		// "http://45.55.4.64:8080/meetu/userAction!access?",
+		// "user.mobile=13911592475&user.pwd=abc");
+
+		User user = new User();
+		user.setId(0);
+		user.setName("高文");
+		String str = "";
+		String xmlObj = sendPost(
+				"http://localhost:8080/meetu/userAction!update?",
+				str);
+		System.out.println(xmlObj);
 	}
 }

@@ -68,20 +68,25 @@
 
  	
 	<!-- User Beans -->
+	
+	<bean name="userAction" class="org.meetu.action.UserAction">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<bean name="meetuAction" class="org.meetu.action.MeetuAction">
+		<property name="currService" ref="currService"></property>
+		<property name="hisService" ref="hisService"></property>
+	</bean>
+	
+
+	<bean id="userService" class="org.meetu.service.UserService">
+		<property name="userDao" ref="userDao"></property>
+	</bean>	
 	<bean id="userDao" class="org.meetu.dao.UserDao">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="userService" class="org.meetu.service.UserService">
-		<property name="userDao" ref="userDao"></property>
-	</bean>
-	<bean name="userAction" class="org.meetu.action.UserAction">
-		<property name="userService" ref="userService"></property>
-		<property name="currService" ref="currService"></property>
-		<property name="hisService" ref="hisService"></property>
-	</bean>
-
 
 	<bean id="currService" class="org.meetu.service.LocationCurrService">
 		<property name="currDao" ref="currDao"></property>
@@ -92,7 +97,6 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-
 
 	<bean id="hisService" class="org.meetu.service.LocationHisService">
 		<property name="hisDao" ref="hisDao"></property>

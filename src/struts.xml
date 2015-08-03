@@ -34,4 +34,8 @@
 		</action>
 	</package>
 	
+	<package name="meetu" extends="struts-default" namespace="/">
+		<action name="meetuAction" class="org.meetu.action.MeetuAction">
+		</action>
+	</package>
 </struts>
