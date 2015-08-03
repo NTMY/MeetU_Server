@@ -2,7 +2,7 @@ package org.meetu.client.test;
 
 import org.meetu.client.handler.MeetuUploadHandler;
 import org.meetu.client.listener.MeetuUploadListener;
-import org.meetu.client.listener.MeetuUploadListenerImpl;
+import org.meetu.client.listener.impl.MeetuUploadListenerImpl;
 import org.meetu.model.LocationCurr;
 
 /**

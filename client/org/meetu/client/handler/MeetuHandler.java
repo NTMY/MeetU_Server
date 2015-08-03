@@ -17,7 +17,7 @@ import static org.meetu.constant.Constant.*;
  * */
 public class MeetuHandler {
 	private static Log logger = LogFactory.getLog(MeetuHandler.class);
-	private static final String subUrl = "/userAction!meetu?";
+	private static final String subUrl = "/meetuAction!meetu?";
 
 	/**
 	 * 此方法供客户端调用

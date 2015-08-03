@@ -16,7 +16,7 @@ import static org.meetu.constant.Constant.*;
  * */
 public class MeetuUploadHandler {
 	private static Log logger = LogFactory.getLog(MeetuUploadHandler.class);
-	private static final String subUrl = "/userAction!upload?";
+	private static final String subUrl = "/meetuAction!upload?";
 
 	/**
 	 * 此方法供客户端调用
