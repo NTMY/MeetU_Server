@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+	<!-- <constant name="struts.multipart.saveDir" value="/tmpUploadFileFolder"/> -->
+	
+	<!-- 设置编码格式 -->
+ 	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	
+	<package name="forward" extends="struts-default" namespace="/">
+		<action name="login">
+			<result>/user-reg-login.jsp</result>
+		</action>
+		<action name="index">
+			<result>/user-index.jsp</result>
+		</action>
+		<action name="calendar">
+			<result>/scripts/calendar/index1.jsp</result>
+		</action>		
+	</package>
+
+
+	<package name="user" extends="struts-default" namespace="/">
+		<action name="userAction" class="org.meetu.action.UserAction">
+		</action>
+	</package>
+
+	<package name="pub" extends="struts-default" namespace="/">
+		<action name="pubAction" class="org.meetu.action.PubAction">
+		</action>
+	</package>
+	
+</struts>

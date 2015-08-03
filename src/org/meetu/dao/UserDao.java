@@ -1,0 +1,78 @@
+package org.meetu.dao;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import org.meetu.model.User;
+
+public class UserDao {
+	private static final Log log = LogFactory.getLog(UserDao.class);
+
+	private SessionFactory sessionFactory;
+
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+	public int insert(User u) throws Exception {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		// 2 ways : Serializable save()/void persist()
+		int pk = (Integer)session.save(u);
+		log.info("return PK = " + pk);
+		session.getTransaction().commit();
+		session.close();
+		return pk;
+	}
+
+	public void update(User u) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.update(u);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	public void delete(User u) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.delete(u);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	public List<User> selectListAll(User user)
+	{
+		Session session = sessionFactory.openSession();
+		String sql = "select U from User U where 1= 1 ";
+		if (null != user.getId() && !"".equals(user.getId()))
+		{
+			sql += " and U.id = '" + user.getId() + "'";// id
+		}
+		if (null != user.getMobile() && !"".equals(user.getMobile()))
+		{
+			sql += " and U.mobile = '" + user.getMobile() + "'";// id
+		}
+		Query query = session.createQuery(sql);
+		List<User> userList = new ArrayList<User>();
+		userList = query.list();
+		return userList;
+	}
+	
+	/**
+	 * getters and setters
+	 * */
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+}

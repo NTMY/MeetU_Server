@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.meetu.model">
+
+	<class name="User" table="u_user">
+		<id name="id" column="id">
+			<generator class="identity" />
+		</id>
+		<property name="mobile" column="mobile" type="java.lang.String" />
+		<property name="pwd" column="pwd" type="java.lang.String" />
+		<property name="imei" column="imei" type="java.lang.String" />
+		<property name="name" column="name" type="java.lang.String" />
+		<property name="nickname" column="nickname" type="java.lang.String" />
+		<property name="birthdate" column="birthdate" type="java.lang.String" />
+		<property name="gender" column="gender" type="java.lang.String" />
+		<property name="qq" column="qq" type="java.lang.String" />
+		<property name="email" column="email" type="java.lang.String" />
+		<property name="company" column="company" type="java.lang.String" />
+		<property name="company_addr" column="company_addr" type="java.lang.String" />
+		<property name="home_addr" column="home_addr" type="java.lang.String" />
+		<property name="regtime" column="regtime" type="java.lang.String" />
+		<property name="status" column="status" type="java.lang.String" />
+		<!-- 
+		<one-to-one name="locCurr" />
+		 -->
+	</class>
+
+</hibernate-mapping>
+
