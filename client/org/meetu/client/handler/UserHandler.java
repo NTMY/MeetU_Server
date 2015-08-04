@@ -13,16 +13,37 @@ import static org.meetu.client.util.HttpUtil.*;
 import static org.meetu.constant.Constant.*;
 
 /**
- * 处理access(reg/login)过程 供客户端调用
+ * 处理access(reg/login)过程
+ * 供客户端调用
  * */
-public class UserUpdateHandler {
-	private static Log logger = LogFactory.getLog(UserUpdateHandler.class);
-	private static final String subUrl = "/userAction!update?";
-
+public class UserHandler {
+	private static Log logger = LogFactory.getLog(UserHandler.class);
+	 
+	
 	/**
+	 * 用户接入(注册/登录)<br>
 	 * 此方法供客户端调用
 	 * */
+	public void onAccess(UserAccessListener listener, User user) {
+		String subUrl = "/userAction!access?";
+		StringBuffer param = new StringBuffer();
+		param.append("user.mobile=").append(user.getMobile()).append("&user.pwd=").append(user.getPwd());
+		String xml = sendPost(URL+subUrl , param.toString());
+		logger.info("xml == " + xml);
+		UserAccessDto bean = (UserAccessDto)BeanConverter.xmlToBean(xml);
+		if(listener != null) {
+			listener.access(bean);
+		}
+		
+	}
+
+	
+	/**
+	 * 更新用户属性<br>
+	 * 此方法供客户端调用<br>
+	 * */
 	public void onUpdate(UserUpdateListener listener, User user) {
+		String subUrl = "/userAction!update?";
 		StringBuffer param = new StringBuffer();
 		param.append("user.id=").append(user.getId());
 		//手机号
@@ -50,7 +71,7 @@ public class UserUpdateHandler {
 			param.append("&user.qq=").append(user.getQq());
 		}
 		//Email
-		if (user.getPwd() != null && !user.getPwd().equals("")) {
+		if (user.getEmail() != null && !user.getEmail().equals("")) {
 			param.append("&user.email=").append(user.getEmail());
 		}
 		
@@ -62,5 +83,4 @@ public class UserUpdateHandler {
 		}
 
 	}
-
 }

@@ -1,8 +1,6 @@
 package org.meetu.client.listener;
 
-import java.util.List;
-
-import org.meetu.model.LocationCurr;
+import org.meetu.util.ListBean;
 
 
 /**
@@ -13,6 +11,6 @@ public interface MeetuListener {
 	/**
 	 * 客户端实现此方法
 	 * */
-	void meetu(List<LocationCurr> list);
+	void meetu(ListBean beans);
 	
 }

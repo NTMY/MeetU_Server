@@ -33,6 +33,7 @@
 				<value>org/meetu/model/LocationCurr.hbm.xml</value>
 				<value>org/meetu/model/LocationHis.hbm.xml</value>
 				<value>org/meetu/model/FriendReq.hbm.xml</value>
+				<value>org/meetu/model/Feedback.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -61,53 +62,6 @@
 
 	<!-- 自动扫描注解类所在的包 -->
 	<context:component-scan base-package="org.meetu" />
-	
-	
-	<!-- 
-	<bean name="userAction" class="org.meetu.action.UserAction">
-		<property name="userService" ref="userService"></property>
-	</bean>
-
-	<bean name="meetuAction" class="org.meetu.action.MeetuAction">
-		<property name="currService" ref="currService"></property>
-		<property name="hisService" rexf="hisService"></property>
-	</bean>
-
-	<bean name="friendAction" class="org.meetu.action.FriendAction">
-	</bean>
-	<bean name="reqService" class="org.meetu.service.FriendReqService"></bean> 
-		 <bean name="reqDao" class="org.meetu.dao.FriendReqDao"> 
-	</bean>
-
-	<bean id="userService" class="org.meetu.service.UserService">
-		<property name="userDao" ref="userDao"></property>
-	</bean>
-	<bean id="userDao" class="org.meetu.dao.UserDao">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
-
-	<bean id="currService" class="org.meetu.service.LocationCurrService">
-		<property name="currDao" ref="currDao"></property>
-	</bean>
-
-	<bean id="currDao" class="org.meetu.dao.LocationCurrDao">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
-
-	<bean id="hisService" class="org.meetu.service.LocationHisService">
-		<property name="hisDao" ref="hisDao"></property>
-	</bean>
-
-	<bean id="hisDao" class="org.meetu.dao.LocationHisDao">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
- -->
 
 
 	<!-- about tx -->

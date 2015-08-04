@@ -43,4 +43,9 @@
 		<action name="friendAction" class="org.meetu.action.FriendAction">
 		</action>
 	</package>
+	
+	<package name="feedbak" extends="struts-default" namespace="/">
+		<action name="feedbackAction" class="org.meetu.action.FeedbackAction">
+		</action>
+	</package>	
 </struts>

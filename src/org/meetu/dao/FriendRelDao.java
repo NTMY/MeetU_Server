@@ -23,14 +23,13 @@ public class FriendRelDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public int insert(FriendRel rel) throws Exception {
+	public void insert(FriendRel rel) throws Exception {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		int pk = (Integer) session.save(rel);
+		Object pk =  session.save(rel);
 		logger.info("return PK = " + pk);
 		session.getTransaction().commit();
 		session.close();
-		return pk;
 	}
 
 	public void update(FriendRel rel) {
@@ -53,7 +52,7 @@ public class FriendRelDao {
 		return list;
 	}
 
-	public FriendRel selectById(FriendRel rel) throws Exception {
+	public List<FriendRel> selectByUserId(Integer userId) throws Exception {
 		Session session = sessionFactory.openSession();
 		// from后面是类名，不是表名
 		String hql = "from FriendReq R where R.reqId = :reqId";// 使用命名参数，推荐使用，易读。
@@ -65,12 +64,7 @@ public class FriendRelDao {
 //		}
 		List<FriendRel> list = new ArrayList<FriendRel>();
 		list = query.list();
-		if (list == null || list.size() != 1) {
-			throw new Exception("好友请求查询异常SELECT_BY_ID");
-		} else {
-			rel = list.get(0);
-		}
-		return rel;
+		return list;
 	}
 
 

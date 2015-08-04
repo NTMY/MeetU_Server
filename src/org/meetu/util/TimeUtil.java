@@ -14,12 +14,17 @@ public class TimeUtil {
 	private static SimpleDateFormat format = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss");
 
+	/**
+	 * Date对象转String yyyy-MM-dd HH:mm:ss
+	 * */
 	public static String parseDate2Str(Date date) {
 		String dateStr =  format.format(date);
 		return dateStr;
 	}
 	
-	
+	/**
+	 * String转Date对象 yyyy-MM-dd HH:mm:ss
+	 * */
 	public static Date parseStr2Date(String str) {
 		Date date = null;
 		try {

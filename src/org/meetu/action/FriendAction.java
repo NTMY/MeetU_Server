@@ -19,7 +19,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import static org.meetu.constant.Constant.*;
 /**
- * 好友操作Action
+ * 好友操作Action<br>
  * */
 public class FriendAction extends ActionSupport {
 	
@@ -58,8 +58,8 @@ public class FriendAction extends ActionSupport {
 		BaseDto dto = new BaseDto();//返回的对象
 		try {
 			out = response.getWriter();
-			req.setReqTime(new Date());
-			req.setReqStatus(REQ_STATUS_ORIGIN);
+			req.setReqTime(new Date());//请求时间为当前时间
+			req.setReqStatus(REQ_STATUS_ORIGIN);//设置请求状态为初始状态
 			reqService.insert(req);
 		} catch (Exception e) {
 			logger.error(e);

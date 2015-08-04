@@ -14,8 +14,8 @@ import org.apache.struts2.ServletActionContext;
 import org.meetu.dto.BaseDto;
 import org.meetu.model.LocationCurr;
 import org.meetu.model.LocationHis;
-import org.meetu.service.LocationCurrService;
-import org.meetu.service.LocationHisService;
+import org.meetu.service.impl.LocationCurrServiceImpl;
+import org.meetu.service.impl.LocationHisServiceImpl;
 import org.meetu.util.BeanConverter;
 import org.meetu.util.ListBean;
 import org.meetu.util.RangeCalculator;
@@ -29,10 +29,10 @@ public class MeetuAction {
 	private static Log logger = LogFactory.getLog(MeetuAction.class);
 	
 	@Autowired
-	private LocationCurrService currService;
+	private LocationCurrServiceImpl currService;
 	
 	@Autowired
-	private LocationHisService hisService;
+	private LocationHisServiceImpl hisService;
 
 	HttpServletRequest request = null;
 
@@ -111,6 +111,7 @@ public class MeetuAction {
 
 		LocationCurr oldCurr = new LocationCurr();
 		oldCurr.setUserId(curr.getUserId());
+		
 		try {
 			out = response.getWriter();
 			List<LocationCurr> isExistList = currService.queryAll(oldCurr);
@@ -140,15 +141,19 @@ public class MeetuAction {
 			List list = currService.queryNear(curr);// 查询附近的人
 
 			beans.setList(list);
-			retXml = BeanConverter.bean2xml(beans); // detail数据
+			
+			throw new Exception();
 		} catch (Exception e) {
+			beans = new ListBean<>();
 			beans.setErrCode(STATUS_FAIL);
 			beans.setErrMsg("查询附近的人出现异常");
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
+			retXml = BeanConverter.bean2xml(beans); // detail数据
 			logger.warn("用户相遇MEETU接口返回XML");
 			logger.warn(retXml);
 			out.write(retXml);
+			out.close();
 		}
 		return null;
 	}
@@ -156,19 +161,19 @@ public class MeetuAction {
 	/**
 	 * getters and setters
 	 * */
-	public LocationCurrService getCurrService() {
+	public LocationCurrServiceImpl getCurrService() {
 		return currService;
 	}
 
-	public void setCurrService(LocationCurrService currService) {
+	public void setCurrService(LocationCurrServiceImpl currService) {
 		this.currService = currService;
 	}
 
-	public LocationHisService getHisService() {
+	public LocationHisServiceImpl getHisService() {
 		return hisService;
 	}
 
-	public void setHisService(LocationHisService hisService) {
+	public void setHisService(LocationHisServiceImpl hisService) {
 		this.hisService = hisService;
 	}
 

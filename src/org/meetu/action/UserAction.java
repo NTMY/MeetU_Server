@@ -13,7 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import org.meetu.dto.BaseDto;
 import org.meetu.dto.UserAccessDto;
 import org.meetu.model.User;
-import org.meetu.service.UserService;
+import org.meetu.service.impl.UserServiceImpl;
 import org.meetu.util.BeanConverter;
 import org.meetu.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class UserAction extends ActionSupport {
 	private static Log logger = LogFactory.getLog(UserAction.class);
 	
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 
 	HttpServletRequest request = null;
 
@@ -129,7 +129,7 @@ public class UserAction extends ActionSupport {
 			User userDB = userService.queryById(user);
 
 			if(userDB == null) {
-				dto.setErrCode("");
+				dto.setErrCode(STATUS_FAIL);
 				dto.setErrMsg("用户不存在,请联系我们");
 				return null;
 			} else {

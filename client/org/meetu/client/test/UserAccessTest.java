@@ -1,6 +1,6 @@
 package org.meetu.client.test;
 
-import org.meetu.client.handler.UserAccessHandler;
+import org.meetu.client.handler.UserHandler;
 import org.meetu.client.listener.UserAccessListener;
 import org.meetu.client.listener.impl.UserAccessListenerImpl;
 import org.meetu.model.User;
@@ -12,8 +12,8 @@ public class UserAccessTest {
 	public static void main(String[] args) {
 		UserAccessListener listener = new UserAccessListenerImpl();
 		User user = new User();
-		user.setMobile("15011448841");
+		user.setMobile("1501144884911");
 		user.setPwd("123123");
-		new UserAccessHandler().onAccess(listener, user);
+		new UserHandler().onAccess(listener, user);
 	}
 }

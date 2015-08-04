@@ -4,13 +4,13 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="org.meetu.model">
-
 	<class name="Feedback" table="sys_feedback" dynamic-update="true">
-		<property  name="userId" column="userId" type="java.lang.Integer" />
-		<property name="friendId" column="friendId" type="java.lang.Integer" />
-		<property name="statusRel" column="statusRel" type="java.lang.String" />
-		<property name="happenTime" column="happenTime" type="java.lang.String" />
+		<!-- Hibernate无主键配置 -->
+		<composite-id>
+			<key-property name="userId" column="userId" type="java.lang.Integer" />
+			<key-property name="content" column="content" type="java.lang.String" />
+			<key-property name="feedbackTime" column="feedbackTime" type="java.util.Date" />
+		</composite-id>
 	</class>
-
 </hibernate-mapping>
 

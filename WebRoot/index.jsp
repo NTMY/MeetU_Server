@@ -29,5 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     http://localhost:8080/meetu/userAction!update?&user.id=1&user.mobile=15011448840&user.name=gaowen<br>
     <br>
     http://localhost:8080/meetu/friendAction!sendFriendReq?&req.reqUserId=1&req.reqFriendId=1&req.reqWay=QQ&req.reqFriendData=1053186456&req.reqMessage=loveISlove<br>
+    <br>
+    http://localhost:8080/meetu/feedbackAction!feedback?feed.userId=1&feed.content=fuckUALL<br>
   </body>
 </html>
