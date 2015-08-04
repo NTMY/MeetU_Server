@@ -26,11 +26,11 @@ create table u_user(
 
 drop table if exists u_device; 
 create table u_device(
-	id int(16) auto_increment primary key comment '主键',
-	imei varchar(64) comment '手机imei',
+	imei varchar(64) primary key comment '手机imei(主键)',
 	os_name varchar(64) comment '操作系统名称',
 	os_ver varchar(32) comment '操作系统版本',
 	device_company varchar(64) comment '设备制造厂商'
+
 ) comment = '用户设备表';
 
 
@@ -58,13 +58,16 @@ create table u_loc_curr(
 
 drop table if exists sys_param;
 create table sys_param(
-	_key varchar(32),
-	_value varchar(128),
+	_key varchar(32) comment '参数名称',
+	_value varchar(128) comment '参数值',
+	description varchar(128) comment '描述',
 	primary key (_key, _value)
 ) comment '系统参数表';
 
 
-insert into sys_param values ('upload_freq','600');
+insert into sys_param values ('upload_freq','600','上传频率(单位秒)');
+insert into sys_param values ('meetu_freq','600','上传并查找频率(单位秒)');
+
 
 drop table if exists sys_client_info;
 create table sys_client_info (
@@ -76,9 +79,6 @@ create table sys_client_info (
 ) comment '客户端信息表'; 
 
 insert into sys_client_info values('android','0.1','123123','desc 0.1版本');
-
-
-
 
 
 

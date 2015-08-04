@@ -84,6 +84,42 @@ public class User extends BaseModel {
 		
 	}
 	
+	/**
+	 * 融合User对象,将上传的用户信息merge到db中的用户信息后,执行update
+	 * @param user 上传来的user对象
+	 * @return 融合之后的userDB对象
+	 * */
+	public void merge(User user) {
+		//手机号
+		if (user.getMobile() != null && !user.getMobile().equals("")) {
+			this.mobile = user.getMobile();
+		}
+		//姓名
+		if (user.getName() != null && !user.getName().equals("")) {
+			this.name = user.getName();
+		}
+		//密码
+		if (user.getPwd() != null && !user.getPwd().equals("")) {
+			this.pwd = user.getPwd();
+		}
+		//生日
+		if (user.getBirthdate() != null && !user.getBirthdate().equals("")) {
+			this.birthdate = user.getBirthdate();
+		}
+		//性别
+		if (user.getGender() != null && !user.getGender().equals("")) {
+			this.gender = user.getGender();
+		}
+		//QQ
+		if (user.getQq() != null && !user.getQq().equals("")) {
+			this.qq = user.getQq();
+		}
+		//Email
+		if (user.getEmail() != null && !user.getEmail().equals("")) {
+			this.email = user.getEmail();
+		}
+	}
+	
 	@Override
 	public String toString(){
 		return "id="+this.getId();

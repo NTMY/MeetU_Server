@@ -18,6 +18,7 @@ public class UserUpdateTest {
 		user.setId(1);
 		user.setMobile("15011448840");
 		user.setName("高文");
+		user.setQq("1053186456");
 		new UserUpdateHandler().onUpdate(listener, user);
 	}
 }

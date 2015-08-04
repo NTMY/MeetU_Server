@@ -69,11 +69,16 @@ public class UserAction extends ActionSupport {
 		try {
 			out = response.getWriter();
 			user.setStatus(STATUS_USER_COMMON);
-			if (user.getMobile() == null || user.getPwd() == null
-					|| !checkMobile(user.getMobile())) {
+			if (user.getMobile() == null || user.getPwd() == null) {
 				accessDto.setErrCode(STATUS_ILLEGAL_PARAM);
+				accessDto.setErrMsg("上传参数异常");
 				retXml = BeanConverter.bean2xml(accessDto);
-				out.write(retXml);
+				return null;
+			}
+			if(!checkMobile(user.getMobile())) {
+				accessDto.setErrCode(STATUS_ILLEGAL_PARAM);
+				accessDto.setErrMsg("手机号格式非法");
+				retXml = BeanConverter.bean2xml(accessDto);
 				return null;
 			}
 			List<User> list = userService.queryList(user);
@@ -82,8 +87,8 @@ public class UserAction extends ActionSupport {
 				if (!list.get(0).getPwd().equals(user.getPwd())) {
 					// 如果密码错误
 					accessDto.setErrCode(STATUS_LOGIN_ERR);
+					accessDto.setErrMsg("密码错误");
 					retXml = BeanConverter.bean2xml(accessDto);
-					out.write(retXml);
 					return null;
 				}
 				user = list.get(0);
@@ -125,14 +130,17 @@ public class UserAction extends ActionSupport {
 			// user对象为客户端上传的对象
 			// 根据上传用户信息查询用户,userDB为数据库里的对象
 			User userDB = userService.queryById(user);
-			user.setStatus(userDB.getStatus());//用户状态status不能被客户端更新
+
 			if(userDB == null) {
-				throw new RuntimeException();
+				dto.setErrCode("");
+				dto.setErrMsg("用户不存在,请联系我们");
+				return null;
 			} else {
-				userService.update(user);
+//				user.setRegtime(userDB.getRegtime());//用户注册时间不能被客户端更新
+//				user.setStatus(userDB.getStatus());//用户状态status不能被客户端更新
+				userDB.merge(user);//将上传用户的信息merge到db中的用户并update
+				userService.update(userDB);
 			}
-			// 当查出一条数据时,才是正常逻辑
-			userService.update(user);
 		} catch (Exception e) {
 			logger.error(e);
 			dto.setErrCode(STATUS_FAIL);
