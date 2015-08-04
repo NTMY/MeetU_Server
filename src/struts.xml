@@ -38,4 +38,9 @@
 		<action name="meetuAction" class="org.meetu.action.MeetuAction">
 		</action>
 	</package>
+	
+	<package name="friend" extends="struts-default" namespace="/">
+		<action name="friendAction" class="org.meetu.action.FriendAction">
+		</action>
+	</package>
 </struts>

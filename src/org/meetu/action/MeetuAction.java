@@ -19,16 +19,19 @@ import org.meetu.service.LocationHisService;
 import org.meetu.util.BeanConverter;
 import org.meetu.util.ListBean;
 import org.meetu.util.RangeCalculator;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 相遇Action
  * */
 public class MeetuAction {
-	
+
 	private static Log logger = LogFactory.getLog(MeetuAction.class);
-
+	
+	@Autowired
 	private LocationCurrService currService;
-
+	
+	@Autowired
 	private LocationHisService hisService;
 
 	HttpServletRequest request = null;
@@ -36,6 +39,7 @@ public class MeetuAction {
 	HttpServletResponse response = null;
 
 	PrintWriter out = null;
+	
 	/**
 	 * 写回的xml
 	 * */
@@ -103,8 +107,8 @@ public class MeetuAction {
 	public String meetu() {
 		request = ServletActionContext.getRequest();
 		response = ServletActionContext.getResponse();
-		ListBean<LocationCurr> beans = new ListBean<LocationCurr>();//返回的对象(转xml)
-		
+		ListBean<LocationCurr> beans = new ListBean<LocationCurr>();// 返回的对象(转xml)
+
 		LocationCurr oldCurr = new LocationCurr();
 		oldCurr.setUserId(curr.getUserId());
 		try {
@@ -115,7 +119,7 @@ public class MeetuAction {
 				beans.setErrMsg("DB查询异常");
 				return null;
 			}
-			
+
 			// 如果在curr当前表中有1条此用户记录,则将老数据迁入his历史表,
 			if (isExistList.size() == 1) {
 				oldCurr = isExistList.get(0);
@@ -134,7 +138,7 @@ public class MeetuAction {
 					curr.getLongitude(), 3000);
 			curr.setRange(range);// 设置边界值(查询条件)
 			List list = currService.queryNear(curr);// 查询附近的人
-			
+
 			beans.setList(list);
 			retXml = BeanConverter.bean2xml(beans); // detail数据
 		} catch (Exception e) {

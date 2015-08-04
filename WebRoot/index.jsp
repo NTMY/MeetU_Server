@@ -24,6 +24,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     Meet U <br>
     http://localhost:8080/meetu/meetuAction!meetu?curr.userId=0&curr.longitude=50.000000&curr.latitude=10.000000&curr.address=广安门车站东街&curr.business=广安门商圈<br>
     http://localhost:8080/meetu/meetuAction!upload?curr.userId=0&curr.longitude=50.000000&curr.latitude=10.000000&curr.address=广安门车站东街&curr.business=广安门商圈<br>
-    http://localhost:8080/meetu/userAction!access?&user.mobile=15011448840&user.pwd=123123
+    <br>
+    http://localhost:8080/meetu/userAction!access?&user.mobile=15011448840&user.pwd=123123<br>
+    http://localhost:8080/meetu/userAction!update?&user.id=1&user.mobile=15011448840&user.name=gaowen<br>
+    <br>
+    http://localhost:8080/meetu/friendAction!sendFriendReq?&req.reqUserId=1&req.reqFriendId=1&req.reqWay=QQ&req.reqFriendData=1053186456&req.reqMessage=loveISlove<br>
   </body>
 </html>

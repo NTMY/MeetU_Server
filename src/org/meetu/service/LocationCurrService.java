@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.meetu.dao.LocationCurrDao;
 import org.meetu.model.LocationCurr;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LocationCurrService implements ILocationCurrService {
 
-	
+	@Autowired
 	private LocationCurrDao currDao;
 	
 	@Override
@@ -37,19 +40,6 @@ public class LocationCurrService implements ILocationCurrService {
 		return list;
 	}
 
-	public LocationCurrDao getCurrDao() {
-		return currDao;
-	}
-
-	public void setCurrDao(LocationCurrDao currDao) {
-		this.currDao = currDao;
-	}
-	
-
-
-
-	
-	
 	
 	
 }

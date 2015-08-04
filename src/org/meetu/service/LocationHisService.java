@@ -2,10 +2,13 @@ package org.meetu.service;
 
 import org.meetu.dao.LocationHisDao;
 import org.meetu.model.LocationHis;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LocationHisService implements ILocationHisService {
 
-	
+	@Autowired
 	private LocationHisDao hisDao;
 	
 	@Override
@@ -18,15 +21,5 @@ public class LocationHisService implements ILocationHisService {
 		hisDao.delete(his);		
 	}
 
-	
-	
-	public LocationHisDao getHisDao() {
-		return hisDao;
-	}
-
-	public void setHisDao(LocationHisDao hisDao) {
-		this.hisDao = hisDao;
-	}
-	
 	
 }

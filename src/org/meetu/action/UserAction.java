@@ -1,9 +1,5 @@
 package org.meetu.action;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
@@ -19,8 +15,8 @@ import org.meetu.dto.UserAccessDto;
 import org.meetu.model.User;
 import org.meetu.service.UserService;
 import org.meetu.util.BeanConverter;
-import org.meetu.util.SecureUtil;
 import org.meetu.util.TimeUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -34,7 +30,8 @@ public class UserAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	private static Log logger = LogFactory.getLog(UserAction.class);
-
+	
+	@Autowired
 	private UserService userService;
 
 	HttpServletRequest request = null;
@@ -68,7 +65,7 @@ public class UserAction extends ActionSupport {
 		UserAccessDto accessDto = new UserAccessDto();// 返回的对象/转xml
 		try {
 			out = response.getWriter();
-			user.setStatus(STATUS_USER_COMMON);
+			user.setStatus(USER_STATUS_COMMON);
 			if (user.getMobile() == null || user.getPwd() == null) {
 				accessDto.setErrCode(STATUS_ILLEGAL_PARAM);
 				accessDto.setErrMsg("上传参数异常");
@@ -155,16 +152,10 @@ public class UserAction extends ActionSupport {
 		return null;
 	}
 
+	
 	/************************************************************
 	 * getters and setters
 	 *************************************************************/
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
 
 	public User getUser() {
 		return user;

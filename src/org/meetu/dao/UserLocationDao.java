@@ -1,6 +1,5 @@
 package org.meetu.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,14 +9,15 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.meetu.model.User;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserLocationDao {
 	private static final Log log = LogFactory.getLog(UserLocationDao.class);
 
+	@Autowired
 	private SessionFactory sessionFactory;
-
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	public int insert(User u) {
 		Session session = sessionFactory.openSession();
@@ -67,12 +67,5 @@ public class UserLocationDao {
 	/**
 	 * getters and setters
 	 * */
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
 
 }

@@ -81,7 +81,35 @@ create table sys_client_info (
 insert into sys_client_info values('android','0.1','123123','desc 0.1版本');
 
 
+drop table if exists u_friends_rel;
+create table u_friends_rel (
+	userId int(16) not null comment '用户id',
+	friendId int(16) not null comment '朋友id',
+	relStatus varchar(4) not null comment '朋友状态0:正常 1:亲密状态 2:黑名单 3:已删除',
+	happenTime timestamp comment '成为朋友的时间',
+	primary key (userId , friendId)
+) comment '用户好友关系表'; 
 
+
+drop table if exists u_friends_req;
+create table u_friends_req (
+	reqId int primary key auto_increment comment '好友申请数据id(主键自增)',
+	reqUserId int(16) not null comment '用户id(申请人)',
+	reqFriendId int(16) not null comment '想添加好友的id(被申请人)',
+	reqWay varchar(16) not null comment '添加途径 ID/MOBILE/NAME/QQ/EMAIL',
+	reqFriendData varchar(64) not null comment '想添加好友的数据 与way对应',	
+	reqMessage varchar(512) not null comment '请求留言',
+	reqStatus varchar(4) not null comment '请求的状态 0:已提交,未处理 1:已同意 2:已拒绝 3:已忽略 4忽略并拒绝此人再次添加',
+	reqTime timestamp comment '请求发送的时间',
+	respTime timestamp comment '请求处理的时间'
+) comment '用户好友请求表,在合适的时间推送给客户端'; 
+
+drop table if exists sys_feedback;
+create table sys_feedback(
+	userId int(16) comment '反馈人用户id',
+	content varchar(512) comment '反馈内容',
+	feedbackTime timestamp comment '反馈时间'
+) comment '用户反馈表';
 
 
 

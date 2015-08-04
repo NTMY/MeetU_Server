@@ -11,10 +11,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.meetu.model.LocationCurr;
 import org.meetu.util.TimeUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class LocationCurrDao {
 	private static final Log log = LogFactory.getLog(LocationCurrDao.class);
-
+	
+	@Autowired
 	private SessionFactory sessionFactory;
 
 	public void insert(LocationCurr loc) {
@@ -104,12 +108,5 @@ public class LocationCurrDao {
 	/**
 	 * getters and setters
 	 * */
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
 
 }
