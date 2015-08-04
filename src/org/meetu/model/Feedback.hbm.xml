@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.meetu.model">
+
+	<class name="Feedback" table="sys_feedback" dynamic-update="true">
+		<property  name="userId" column="userId" type="java.lang.Integer" />
+		<property name="friendId" column="friendId" type="java.lang.Integer" />
+		<property name="statusRel" column="statusRel" type="java.lang.String" />
+		<property name="happenTime" column="happenTime" type="java.lang.String" />
+	</class>
+
+</hibernate-mapping>
+
