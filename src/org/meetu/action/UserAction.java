@@ -12,8 +12,10 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 import org.meetu.dto.BaseDto;
 import org.meetu.dto.UserAccessDto;
+import org.meetu.model.DeviceInfo;
 import org.meetu.model.User;
-import org.meetu.service.impl.UserServiceImpl;
+import org.meetu.service.IDeviceInfoService;
+import org.meetu.service.IUserService;
 import org.meetu.util.BeanConverter;
 import org.meetu.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +34,12 @@ public class UserAction extends ActionSupport {
 	private static Log logger = LogFactory.getLog(UserAction.class);
 	
 	@Autowired
-	private UserServiceImpl userService;
+	private IUserService userService;
 
+	@Autowired
+	private IDeviceInfoService deviceService;
+	
+	
 	HttpServletRequest request = null;
 
 	HttpServletResponse response = null;
@@ -49,7 +55,10 @@ public class UserAction extends ActionSupport {
 	 * STRUTS2 传递参数对象
 	 * */
 	private User user;
-
+	/**
+	 * STRUTS2 传递参数对象
+	 * */
+	private DeviceInfo device;
 	/**
 	 * 用户注册/登录
 	 * 
@@ -107,6 +116,7 @@ public class UserAction extends ActionSupport {
 			accessDto.setErrMsg("用户接入异常");
 			logger.error(e);
 		} finally {
+			deviceService.saveOrUpdate(device);//用户设备信息
 			logger.warn("用户接入ACCESS接口返回XML");
 			logger.warn(retXml);
 			out.write(retXml);
@@ -163,5 +173,19 @@ public class UserAction extends ActionSupport {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	/**
+	 * @return the device
+	 */
+	public DeviceInfo getDevice() {
+		return device;
+	}
+
+	/**
+	 * @param device the device to set
+	 */
+	public void setDevice(DeviceInfo device) {
+		this.device = device;
 	}
 }

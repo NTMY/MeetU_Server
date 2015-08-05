@@ -1,1 +1,1 @@
-select * from U_USER
+select * from U_DEVICE

@@ -121,6 +121,9 @@ public interface Constant {
 
 	String URL = PROTOCAL_HTTP + "://" + IP + ":" + PORT + "/" + SERVER_NAME;
 
+	String OS_NAME_ANDROID = "ANDROID";
+	String OS_NAME_IOS = "IOS";
+	
 	/** 头像上传的路径 */
 	String PIC_PATH = "D:\\";
 }

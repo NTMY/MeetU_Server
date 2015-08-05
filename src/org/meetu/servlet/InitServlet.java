@@ -8,8 +8,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * MEETU工程服务器启动初始化资源启动类
+ * */
 public class InitServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 5443898246981950653L;
+
+	Log logger = LogFactory.getLog(InitServlet.class);
+	
 	/**
 	 * Constructor of the object.
 	 */
@@ -37,20 +47,7 @@ public class InitServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		
 	}
 
 	/**
@@ -66,28 +63,18 @@ public class InitServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the POST method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
 	}
 
 	/**
 	 * Initialization of the servlet. <br>
-	 *
+	 * <li>初始化缓存map</li>
+	 * <li>读取properties配置文件</li>
+	 * <li>刷新服务器参数map也调用此接口</li>
 	 * @throws ServletException if an error occurs
 	 */
 	public void init() throws ServletException {
-		// Put your code here
+		logger.info("InitServlet init初始化资源开始");
+		logger.info("InitServlet init初始化资源结束");
 	}
 
 }

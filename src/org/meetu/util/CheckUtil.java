@@ -23,4 +23,16 @@ public class CheckUtil {
 			return b;
 		}
 	}
+	
+	/**
+	 * 检查app版本
+	 * @param osName 操作系统名称
+	 * @param osVer 操作系统版本
+	 * @param appVer app版本
+	 * */
+	public static String checkAppVer(String osName , String osVer , String appVer) {
+		
+		return null;
+	}
+	
 }

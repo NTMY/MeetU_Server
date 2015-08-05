@@ -27,10 +27,11 @@ create table u_user(
 drop table if exists u_device; 
 create table u_device(
 	imei varchar(64) primary key comment '手机imei(主键)',
-	os_name varchar(64) comment '操作系统名称',
-	os_ver varchar(32) comment '操作系统版本',
-	device_company varchar(64) comment '设备制造厂商'
-
+	osName varchar(64) comment '操作系统名称',
+	osVer varchar(32) comment '操作系统版本',
+	deviceCompany varchar(64) comment '设备制造厂商',
+	addTime timestamp default CURRENT_TIMESTAMP  comment '设备添加时间',
+	lastTime timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '最后登陆时间' 
 ) comment = '用户设备表';
 
 

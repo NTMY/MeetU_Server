@@ -52,6 +52,9 @@ public class GeoCodeBaiduV2 {
 //		dom4j(xml);
 	}
 
+	/**
+	 * dom4j方式解析字段
+	 * */
 	static void dom4j(String xml) throws DocumentException,
 			UnsupportedEncodingException {
 		SAXReader reader = new SAXReader();
@@ -60,6 +63,9 @@ public class GeoCodeBaiduV2 {
 		org.dom4j.XPath xpath;
 	}
 
+	/**
+	 * jdom方式解析字段
+	 * */
 	static void jdom(String xml) throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
 		org.jdom.Document doc = builder.build(new ByteArrayInputStream(xml.getBytes("UTF8")));
