@@ -141,8 +141,6 @@ public class MeetuAction {
 			List list = currService.queryNear(curr);// 查询附近的人
 
 			beans.setList(list);
-			
-			throw new Exception();
 		} catch (Exception e) {
 			beans = new ListBean<>();
 			beans.setErrCode(STATUS_FAIL);

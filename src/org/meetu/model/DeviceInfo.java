@@ -15,9 +15,19 @@ import javax.persistence.Transient;
  * 设备信息
  * */
 @Entity
-@Table(name = "U_DEVICE", catalog = "MEETU")
+@Table(name = "u_device", catalog = "meetu")
 public class DeviceInfo {
 
+	/**设备IMEI*/
+	@Id
+	private String imei;
+	
+	/**
+	 * 用户id
+	 * */
+	@Column(name = "userId", nullable = false)
+	private Integer userId;
+	
 	/**操作系统名称*/
 	@Column(name = "osName", nullable = false)
 	private String osName;
@@ -30,9 +40,6 @@ public class DeviceInfo {
 	@Column(name = "deviceCompany")
 	private String deviceCompany;
 	
-	/**设备IMEI*/
-	@Id
-	private String imei;
 	
 	/**
 	 * 设备添加时间<br>
@@ -151,6 +158,18 @@ public class DeviceInfo {
 	 */
 	public void setLastTime(Date lastTime) {
 		this.lastTime = lastTime;
+	}
+
+
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	
 	

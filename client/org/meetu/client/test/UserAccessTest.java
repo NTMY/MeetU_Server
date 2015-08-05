@@ -16,11 +16,6 @@ public class UserAccessTest {
 		user.setMobile("15011448848");
 		user.setPwd("123123");
 		
-		DeviceInfo dev = new DeviceInfo();
-		dev.setImei("1");
-		dev.setDeviceCompany("ZTE");
-		dev.setOsName("ANDROID");
-		dev.setOsVer("5.0");
-		new UserHandler().onAccess(listener, user , dev);
+		new UserHandler().onAccess(listener, user);
 	}
 }

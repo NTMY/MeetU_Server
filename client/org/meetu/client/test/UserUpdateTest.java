@@ -18,12 +18,13 @@ public class UserUpdateTest {
 	public static void main(String[] args) {
 		UserUpdateListener listener = new UserUpdateListenerImpl();
 		User user = new User();
-		user.setId(99);
+		user.setId(1);
 		user.setMobile("15011448840");
 		user.setName("高文");
 		user.setQq("1053186456");
 		user.setEmail("giuge@aliyun.com");
 		user.setGender("MALE");
+		user.setMood("HelloWorld");
 		user.setBirthdate(TimeUtil.parseDate2Str(new Date()));
 		new UserHandler().onUpdate(listener, user);
 	}

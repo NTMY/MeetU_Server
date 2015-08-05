@@ -76,8 +76,10 @@ public class UserDao {
 		Query query = session.createQuery(sql);
 		List<User> userList = new ArrayList<User>();
 		userList = query.list();
-		if(userList == null || userList.size() != 1) {
+		if(userList == null || userList.size() > 1) {
 			throw new Exception("用户查询异常SELECT_BY_ID");
+		} else if(userList.size() == 0) {
+			throw new Exception("用户不存在");
 		} else {
 			user = userList.get(0);
 		}

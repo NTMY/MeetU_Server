@@ -23,16 +23,17 @@ public class UserHandler {
 	 * 用户接入(注册/登录)<br>
 	 * 此方法供客户端调用
 	 * */
-	public void onAccess(UserAccessListener listener, User user,
-			DeviceInfo device) {
+	public void onAccess(UserAccessListener listener, User user) {
 		String subUrl = "/userAction!access?";
 		StringBuffer param = new StringBuffer();
 		param.append("user.mobile=").append(user.getMobile())
-				.append("&user.pwd=").append(user.getPwd())
-				.append("&device.imei=").append(device.getImei())
-				.append("&device.osName=").append(device.getOsName())
-				.append("&device.osVer=").append(device.getOsVer())
-				.append("&device.deviceCompany=").append(device.getDeviceCompany());
+				.append("&user.pwd=").append(user.getPwd());
+		/*
+		.append("&device.imei=").append(device.getImei())
+		.append("&device.osName=").append(device.getOsName())
+		.append("&device.osVer=").append(device.getOsVer())
+		.append("&device.deviceCompany=").append(device.getDeviceCompany())
+		*/
 		String xml = sendPost(URL + subUrl, param.toString());
 		logger.info("xml == " + xml);
 		UserAccessDto bean = (UserAccessDto) BeanConverter.xmlToBean(xml);
@@ -78,7 +79,10 @@ public class UserHandler {
 		if (user.getEmail() != null && !user.getEmail().equals("")) {
 			param.append("&user.email=").append(user.getEmail());
 		}
-
+		//mood心情签名
+		if (user.getMood() != null && !user.getMood().equals("")) {
+			param.append("&user.mood=").append(user.getMood());
+		}
 		String xml = sendPost(URL + subUrl, param.toString());
 		logger.info("xml == " + xml);
 		BaseDto dto = (BaseDto) BeanConverter.xmlToBean(xml);

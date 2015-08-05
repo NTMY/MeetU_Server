@@ -48,4 +48,9 @@
 		<action name="feedbackAction" class="org.meetu.action.FeedbackAction">
 		</action>
 	</package>	
+	
+	<package name="device" extends="struts-default" namespace="/">
+		<action name="deviceAction" class="org.meetu.action.DeviceAction">
+		</action>
+	</package>		
 </struts>

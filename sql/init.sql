@@ -21,12 +21,14 @@ create table u_user(
 	company_addr varchar(256) comment '公司地址',
 	home_addr varchar(256) comment '家庭地址',
 	regtime varchar(64) comment '注册时间',
+	mood varchar(512) comment '心情签名',
 	status varchar(3) not null comment '状态 0:正常 1:冻结'
 ) comment = '用户表';
 
 drop table if exists u_device; 
 create table u_device(
 	imei varchar(64) primary key comment '手机imei(主键)',
+	userId int(15) not null comment '所属用户id',
 	osName varchar(64) comment '操作系统名称',
 	osVer varchar(32) comment '操作系统版本',
 	deviceCompany varchar(64) comment '设备制造厂商',
@@ -40,7 +42,7 @@ create table u_loc_his(
 	id int auto_increment primary key,
 	user_id int(16) comment '用户id',
 	longitude double comment '经度',
-	latitude double comment '纬度',on
+	latitude double comment '纬度',
 	address varchar(256) comment '地址信息',
 	business varchar(256) comment '商圈',
 	uploadtime timestamp comment '本次上传时间'

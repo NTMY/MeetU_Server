@@ -116,7 +116,7 @@ public class UserAction extends ActionSupport {
 			accessDto.setErrMsg("用户接入异常");
 			logger.error(e);
 		} finally {
-			deviceService.saveOrUpdate(device);//用户设备信息
+//			deviceService.saveOrUpdate(device);//用户设备信息
 			logger.warn("用户接入ACCESS接口返回XML");
 			logger.warn(retXml);
 			out.write(retXml);

@@ -1,9 +1,5 @@
 package org.meetu.constant;
 
-import static org.meetu.constant.Constant.BAIDU_LBS_OUTPUT;
-import static org.meetu.constant.Constant.BAIDU_LBS_POIS;
-import static org.meetu.constant.Constant.BAIDU_SN;
-
 /**
  * 常量类<br>
  * interface中属性默认为public static final
@@ -107,7 +103,7 @@ public interface Constant {
 	/**
 	 * SERVER_IP
 	 * */
-	String IP = "localhost";
+	String IP = "45.55.4.64";
 	/**
 	 * SERVER_PORT
 	 * */

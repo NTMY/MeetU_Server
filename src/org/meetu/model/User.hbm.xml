@@ -22,6 +22,7 @@
 		<property name="company_addr" column="company_addr" type="java.lang.String" />
 		<property name="home_addr" column="home_addr" type="java.lang.String" />
 		<property name="regtime" column="regtime" type="java.lang.String" />
+		<property name="mood" column="mood" type="java.lang.String" />
 		<property name="status" column="status" type="java.lang.String" />
 		<!-- 
 		<one-to-one name="locCurr" />

@@ -6,22 +6,24 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
  * 
 drop table if exists u_user;
 create table u_user(
-	id int(16) auto_increment primary key comment '主键',
+	id int(16) auto_increment primary key comment '用户主键',
 	mobile varchar(16) comment '手机号',
 	pwd varchar(64) comment '密码',
 	imei varchar(64) comment '手机imei',
 	name varchar(64) comment '真实姓名',
 	nickname varchar(64) comment '昵称',
 	birthdate varchar(64) comment '生日',
-	gender varchar(2) comment '性别 男/女',
+	gender varchar(4) comment '性别 男/女',
 	qq varchar(32) comment 'qq',
 	email varchar(64) comment 'email',
 	company varchar(128) comment '公司名称',
 	company_addr varchar(256) comment '公司地址',
 	home_addr varchar(256) comment '家庭地址',
 	regtime varchar(64) comment '注册时间',
+	mood varchar(512) comment '心情签名',
 	status varchar(3) not null comment '状态 0:正常 1:冻结'
 ) comment = '用户表';
+
  * 
  * */
 
@@ -70,6 +72,9 @@ public class User extends BaseModel {
 	/** 注册时间 */
 	private String regtime;
 	
+	/**心情签名*/
+	private String mood;
+	
 	/** 状态 */
 	private String status;
 
@@ -117,6 +122,10 @@ public class User extends BaseModel {
 		//Email
 		if (user.getEmail() != null && !user.getEmail().equals("")) {
 			this.email = user.getEmail();
+		}
+		//mood
+		if (user.getMood() != null && !user.getMood().equals("")) {
+			this.mood = user.getMood();
 		}
 	}
 	
@@ -272,6 +281,13 @@ public class User extends BaseModel {
 	public void setLocCurr(LocationCurr locCurr) {
 		this.locCurr = locCurr;
 	}
+	
+	public String getMood() {
+		return mood;
+	}
 
+	public void setMood(String mood) {
+		this.mood = mood;
+	}
 	
 }
