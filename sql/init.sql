@@ -30,8 +30,8 @@ create table u_device(
 	osName varchar(64) comment '操作系统名称',
 	osVer varchar(32) comment '操作系统版本',
 	deviceCompany varchar(64) comment '设备制造厂商',
-	addTime timestamp default CURRENT_TIMESTAMP  comment '设备添加时间',
-	lastTime timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '最后登陆时间' 
+	lastTime timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '最后登陆时间' ,
+	addTime timestamp comment '设备添加时间'
 ) comment = '用户设备表';
 
 
@@ -40,7 +40,7 @@ create table u_loc_his(
 	id int auto_increment primary key,
 	user_id int(16) comment '用户id',
 	longitude double comment '经度',
-	latitude double comment '纬度',
+	latitude double comment '纬度',on
 	address varchar(256) comment '地址信息',
 	business varchar(256) comment '商圈',
 	uploadtime timestamp comment '本次上传时间'
