@@ -83,6 +83,10 @@ public class UserHandler {
 		if (user.getMood() != null && !user.getMood().equals("")) {
 			param.append("&user.mood=").append(user.getMood());
 		}
+		//微信号
+		if (user.getWechat() != null && !user.getWechat().equals("")) {
+			param.append("&user.wechat=").append(user.getWechat());
+		}
 		String xml = sendPost(URL + subUrl, param.toString());
 		logger.info("xml == " + xml);
 		BaseDto dto = (BaseDto) BeanConverter.xmlToBean(xml);

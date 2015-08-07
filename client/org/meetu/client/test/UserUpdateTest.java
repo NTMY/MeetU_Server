@@ -25,6 +25,7 @@ public class UserUpdateTest {
 		user.setEmail("giuge@aliyun.com");
 		user.setGender("MALE");
 		user.setMood("HelloWorld");
+		user.setWechat("wechat");
 		user.setBirthdate(TimeUtil.parseDate2Str(new Date()));
 		new UserHandler().onUpdate(listener, user);
 	}
