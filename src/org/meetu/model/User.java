@@ -57,6 +57,9 @@ public class User extends BaseModel {
 	/** qq号 */
 	private String qq;
 	
+	/** 微信号 */
+	private String wechat;
+	
 	/** email */
 	private String email;
 	
@@ -126,6 +129,10 @@ public class User extends BaseModel {
 		//mood
 		if (user.getMood() != null && !user.getMood().equals("")) {
 			this.mood = user.getMood();
+		}
+		//wechat
+		if (user.getWechat() != null && !user.getWechat().equals("")) {
+			this.wechat = user.getWechat();
 		}
 	}
 	
@@ -288,6 +295,20 @@ public class User extends BaseModel {
 
 	public void setMood(String mood) {
 		this.mood = mood;
+	}
+
+	/**
+	 * @return the wechat
+	 */
+	public String getWechat() {
+		return wechat;
+	}
+
+	/**
+	 * @param wechat the wechat to set
+	 */
+	public void setWechat(String wechat) {
+		this.wechat = wechat;
 	}
 	
 }

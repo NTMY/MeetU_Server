@@ -17,6 +17,7 @@
 		<property name="birthdate" column="birthdate" type="java.lang.String" />
 		<property name="gender" column="gender" type="java.lang.String" />
 		<property name="qq" column="qq" type="java.lang.String" />
+		<property name="wechat" column="wechat" type="java.lang.String" />
 		<property name="email" column="email" type="java.lang.String" />
 		<property name="company" column="company" type="java.lang.String" />
 		<property name="company_addr" column="company_addr" type="java.lang.String" />

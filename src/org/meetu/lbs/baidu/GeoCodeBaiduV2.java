@@ -47,7 +47,7 @@ public class GeoCodeBaiduV2 {
 	// 39.983424, 116.322987
 	//39.589332 115.9019
 	public static void main(String[] args) throws Exception {
-		String xml = geocodeReverse("39.983424", "116.322987");
+		String xml = geocodeReverse("39.892748", "116.395908");
 		 jdom(xml);
 //		dom4j(xml);
 	}

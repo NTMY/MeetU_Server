@@ -17,6 +17,7 @@ create table u_user(
 	gender varchar(4) comment '性别 男/女',
 	qq varchar(32) comment 'qq',
 	email varchar(64) comment 'email',
+	wechat varchar(32) comment '微信号',
 	company varchar(128) comment '公司名称',
 	company_addr varchar(256) comment '公司地址',
 	home_addr varchar(256) comment '家庭地址',
