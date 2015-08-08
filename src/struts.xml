@@ -12,15 +12,9 @@
  	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
 	
 	<package name="forward" extends="struts-default" namespace="/">
-		<action name="login">
-			<result>/user-reg-login.jsp</result>
-		</action>
 		<action name="index">
-			<result>/user-index.jsp</result>
+			<result>/index.jsp</result>
 		</action>
-		<action name="calendar">
-			<result>/scripts/calendar/index1.jsp</result>
-		</action>		
 	</package>
 
 
@@ -53,4 +47,9 @@
 		<action name="deviceAction" class="org.meetu.action.DeviceAction">
 		</action>
 	</package>		
+	
+	<package name="help" extends="struts-default" namespace="/">
+		<action name="helpAction" class="org.meetu.action.CallForHelpAction">
+		</action>
+	</package>			
 </struts>

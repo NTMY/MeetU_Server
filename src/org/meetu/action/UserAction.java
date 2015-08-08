@@ -26,7 +26,7 @@ import static org.meetu.constant.Constant.*;
 import static org.meetu.util.CheckUtil.*;
 
 /**
- * 
+ * 用户
  * */
 public class UserAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
