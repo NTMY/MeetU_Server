@@ -107,13 +107,13 @@ public interface Constant {
 	/**
 	 * SERVER_PORT
 	 * */
-	String PORT = "8080";
+	String PORT = "";
 
 	String PROTOCAL_HTTP = "http";
 
 	String PROTOCAL_HTTPS = "https";
 
-	String SERVER_NAME = "meetu";
+	String SERVER_NAME = "";
 
 	String URL = PROTOCAL_HTTP + "://" + IP + ":" + PORT + "/" + SERVER_NAME;
 

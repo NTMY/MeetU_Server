@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.meetu.model.BaseModel;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 /**
  * bean list转xml中间类
  * @param <T>
