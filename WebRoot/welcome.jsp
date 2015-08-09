@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 
     <link rel="icon" href="../../favicon.ico">
  	-->
-    <title>Cover Template for Bootstrap</title>
+    <title>MeetU</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -45,23 +45,66 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
           <div class="masthead clearfix">
             <div class="inner">
-              <h3 class="masthead-brand">Cover</h3>
+              <h3 class="masthead-brand">MeetU  <font color="black">don't pass the beauty</font></h3>
+              <!-- navigator一级导航栏  -->
+              <!-- href="#"的意义在于 让鼠标变成小手 -->
               <nav>
                 <ul class="nav masthead-nav">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li><a href="#">Features</a></li>
-                  <li><a href="#">Contact</a></li>
+                  <li id="homeLi" class="active"><a href="#" onclick="onChange('home')">Home</a></li>
+                  <li id="developersLi"><a href="#" onclick="onChange('developers')">Developers</a></li>
+                  <li id="contactUsLi"><a href="#" onclick="onChange('contactUs')">Contact us</a></li>
                 </ul>
               </nav>
+              
             </div>
           </div>
 
-          <div class="inner cover">
-            <h1 class="cover-heading">Cover your page.</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+          <div id="homeDiv" class="inner cover">
+            <h1 class="cover-heading">MeetU</h1>
+            <h3 class="cover-heading" style="color:black">Don't pass the beauty</h3>
+            
             <p class="lead">
-              <a href="index.jsp" class="btn btn-lg btn-default">Learn more</a>
+            	Every day may not be good…but there's something good in every day.
             </p>
+            <p class="lead"> 
+            	Create good memories today, so that you can have a good past
+            </p>
+            <p class="lead">
+              <a href="index.jsp" class="btn btn-lg btn-default">Touch me</a>
+            </p>
+          </div>
+
+          <div id="developersDiv" class="inner cover" style="display:none">
+            <h1 class="cover-heading"><font size="7">Owners</font></h1>
+            <br>
+            <h1 class="cover-heading" style="color:black">chief android architect</h1>
+            <p class="lead"> 
+            	<font size="3">
+					Walfud
+				</font>
+            </p>            
+            <h1 class="cover-heading" style="color:black">chief system architect</h1>
+            <p class="lead">
+            	<font size="3">
+            		DirkMurphy
+            	</font>
+            </p>
+          </div>
+
+          <div id="contactUsDiv" class="inner cover" style="display:none">
+            <h1 class="cover-heading"><font size="7">contact us</font></h1>
+            <br>
+            <p class="lead"> 
+            	<font size="3">
+            		dirkmurphy@live.cn
+				</font>
+            </p> 
+            <p class="lead"> 
+            	<font size="3">
+            		giuge@aliyun.com
+				</font>
+            </p>              
+
           </div>
 
           <div class="mastfoot">
@@ -84,4 +127,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="res/js-lib/ie10-viewport-bug-workaround.js"></script>
   </body>
+  <script type="text/javascript">
+  	//定义navigator数组.以后要加的话在此维护一下
+  	var navs = new Array();
+	  	navs[0] = "home";
+	  	navs[1] = "developers"; 
+	  	navs[2] = "contactUs";
+	  	/**
+	  	navs["home"] = "home";
+	  	navs["developers"] = "developers"; 
+	  	navs["contactUs"] = "contactUs";
+	  	*/
+
+	/**
+  	当切换nav时的操作/while clickNavigator
+  	将当前li标签class设为active,其他标签的class设为""
+  	将当前div的style.display设为"",其他div的style.display设为"none"
+  	*/
+  	function onChange(flag) {
+		var currNavId = flag+"Li";
+		var currBodyDivId = flag+"Div";
+		//设置当前
+		document.getElementById(currNavId).setAttribute("class","active");
+		document.getElementById(currBodyDivId).style.display="";
+		//设置其他
+		for(var i=0 ; i< navs.length ; i++) {
+			var currFlag = navs[i];
+			if(currFlag != flag) {
+				document.getElementById(currFlag+"Li").setAttribute("class","");
+				document.getElementById(currFlag+"Div").style.display="none";
+			} 
+		}
+  	}
+  </script>
 </html>
