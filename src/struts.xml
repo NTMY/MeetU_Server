@@ -3,61 +3,68 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
-<struts>
 
+<struts>
+	
+	
 	<constant name="struts.devMode" value="true" />
 	<!-- <constant name="struts.multipart.saveDir" value="/tmpUploadFileFolder"/> -->
 	
+
+	
 	<!-- 设置编码格式 -->
  	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
-	
-	<package name="forward" extends="struts-default" namespace="/">
-		<action name="index">
-			<result>/index.jsp</result>
-		</action>
+ 		<!-- 
+		<global-results>
+		    <result name="notFound">/404_tencent.jsp</result>
+		</global-results>
+		 -->
+	<package name="global" extends="struts-default" namespace="/">
+
 	</package>
 
 
-	<package name="user" extends="struts-default" namespace="/">
+	<package name="user" extends="global" namespace="/">
 		<action name="userAction" class="org.meetu.action.UserAction">
 		</action>
 	</package>
 
-	<package name="pub" extends="struts-default" namespace="/">
+	<package name="pub" extends="global" namespace="/">
 		<action name="pubAction" class="org.meetu.action.PubAction">
 		</action>
 	</package>
 	
-	<package name="meetu" extends="struts-default" namespace="/">
+	<package name="meetu" extends="global" namespace="/">
 		<action name="meetuAction" class="org.meetu.action.MeetuAction">
 		</action>
 	</package>
 	
-	<package name="friend" extends="struts-default" namespace="/">
+	<package name="friend" extends="global" namespace="/">
 		<action name="friendAction" class="org.meetu.action.FriendAction">
 		</action>
 	</package>
 	
-	<package name="feedbak" extends="struts-default" namespace="/">
+	<package name="feedbak" extends="global" namespace="/">
 		<action name="feedbackAction" class="org.meetu.action.FeedbackAction">
 		</action>
 	</package>	
 	
-	<package name="device" extends="struts-default" namespace="/">
+	<package name="device" extends="global" namespace="/">
 		<action name="deviceAction" class="org.meetu.action.DeviceAction">
 		</action>
 	</package>		
 	
-	<package name="help" extends="struts-default" namespace="/">
+	<package name="help" extends="global" namespace="/">
 		<action name="helpAction" class="org.meetu.action.CallForHelpAction">
 		</action>
 	</package>		
 	
-	
+	<!-- 默认的package的特点就在于不定义namespace属性，这样所有未定义的namespace都会转向这里。name="default"是为了便于阅读，其实name是什么都可以，也可以为空：name="" 
 	<package name="default" extends="struts-default">
 	   <default-action-ref name="notFound" />
 	   <action name="notFound">
-	   	<result>/error/404.jsp</result>
+	   		<result>/404.jsp</result>
 	   </action>
 	</package>
+	 -->
 </struts>
