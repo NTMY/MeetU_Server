@@ -3,15 +3,12 @@ package org.meetu.bean2xml;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
 import org.meetu.model.User;
 import org.meetu.util.BeanConverter;
-import org.meetu.util.ListBean;
 
-import com.thoughtworks.xstream.XStream;
 
 public class BeanConverterTest {
-	@Test
+//	@Test
 	public void testBean2Xml() {
 		System.out.println("bean ------------ xml");
 		User bean = new User();
@@ -22,7 +19,7 @@ public class BeanConverterTest {
 		System.out.println(xml);
 	}
 
-	@Test
+//	@Test
 	public void testBeansListXml() {
 		System.out.println("bean list ------------- xml");
 		User bean = new User();
@@ -41,7 +38,7 @@ public class BeanConverterTest {
 	}
 
 	
-	@Test
+//	@Test
 	public void test() {
 		String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?><org.meetu.util.ListBean>  <list/></org.meetu.util.ListBean>";
 		

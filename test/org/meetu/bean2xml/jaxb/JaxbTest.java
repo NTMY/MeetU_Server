@@ -1,17 +1,13 @@
 package org.meetu.bean2xml.jaxb;
 
-import java.io.StringReader;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-
-import org.junit.Test;
 
 public class JaxbTest {  
 	  
-    @Test  
+//    @Test  
     public void beanToXML() {  
         Classroom classroom = new Classroom(1, "软件工程", 4);  
         Student student = new Student(101, "张三", 22, classroom);  

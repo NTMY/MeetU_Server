@@ -12,9 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.meetu.model.User;
 import org.meetu.util.ListBean;
 
@@ -50,7 +47,7 @@ public class XStreamTest {
      * @author hoojo
      * @createDate Nov 27, 2010 12:16:28 PM
      */
-    @Before
+//    @Before
     public void init() {
         try {
             xstream = new XStream();
@@ -68,7 +65,7 @@ public class XStreamTest {
      * @author hoojo
      * @createDate Nov 27, 2010 12:16:38 PM
      */
-    @After
+//    @After
     public void destory() {
         xstream = null;
         bean = null;
@@ -106,7 +103,7 @@ public class XStreamTest {
      * @author hoojo
      * @createDate Nov 27, 2010 12:19:01 PM
      */
-    @Test
+//    @Test
     public void writeBean2XML() {
         try {
             fail("------------Bean->XML------------");
@@ -137,7 +134,7 @@ public class XStreamTest {
      * @author hoojo
      * @createDate Nov 27, 2010 12:20:07 PM
      */
-    @Test
+//    @Test
     public void writeList2XML() {
         try {
             //修改元素名称
