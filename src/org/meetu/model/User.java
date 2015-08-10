@@ -1,5 +1,10 @@
 package org.meetu.model;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import org.apache.commons.beanutils.BeanUtils;
+
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 /**
@@ -91,6 +96,8 @@ public class User extends BaseModel {
 	public User() {
 		
 	}
+	
+
 	
 	/**
 	 * 融合User对象,将上传的用户信息merge到db中的用户信息后,执行update

@@ -9,7 +9,7 @@
 		<id name="reqId" column="reqId">
 			<generator class="identity" />
 		</id>
-		<property  name="reqUserId" column="reqUserId" type="java.lang.Integer" />
+		<property name="reqUserId" column="reqUserId" type="java.lang.Integer" />
 		<property name="reqFriendId" column="reqFriendId" type="java.lang.Integer" />
 		<property name="reqWay" column="reqWay" type="java.lang.String" />
 		<property name="reqFriendData" column="reqFriendData" type="java.lang.String" />
