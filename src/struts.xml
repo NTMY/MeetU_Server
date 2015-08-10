@@ -51,5 +51,13 @@
 	<package name="help" extends="struts-default" namespace="/">
 		<action name="helpAction" class="org.meetu.action.CallForHelpAction">
 		</action>
-	</package>			
+	</package>		
+	
+	
+	<package name="default" extends="struts-default">
+	   <default-action-ref name="notFound" />
+	   <action name="notFound">
+	   	<result>/error/404.jsp</result>
+	   </action>
+	</package>
 </struts>

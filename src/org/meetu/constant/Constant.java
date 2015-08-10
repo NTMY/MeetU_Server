@@ -104,8 +104,12 @@ public interface Constant {
 	 * SERVER_IP
 	 * */
 	String IP = "45.55.4.64";
+	
+	String domain = "www.gaowen.me";
+	
 	/**
 	 * SERVER_PORT
+	 * 8080
 	 * */
 	String PORT = "";
 
