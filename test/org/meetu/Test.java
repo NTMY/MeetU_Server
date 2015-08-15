@@ -1,9 +1,6 @@
 package org.meetu;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.meetu.model.User;
 
@@ -17,5 +14,9 @@ public class Test {
 		User u = new User();
 		u.copyFrom(user);
 		System.out.println(u.getId());
+		
+		
+		
+		System.out.println("/xE6/x92/x92/xE6/x92/x92");
 	}
 }

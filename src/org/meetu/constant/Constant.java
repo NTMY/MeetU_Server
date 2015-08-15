@@ -99,19 +99,19 @@ public interface Constant {
 	String REL_STATUS_DELETED = "3";
 
 	// 45.55.4.64
+	// 123.57.158.124
 	// localhost
 	/**
 	 * SERVER_IP
 	 * */
-	String IP = "45.55.4.64";
+	String IP = "123.57.158.124";
 	
-	String domain = "www.gaowen.me";
+	String domain = "meetu.gaowen.me";
 	
 	/**
 	 * SERVER_PORT
-	 * 8080
 	 * */
-	String PORT = "";
+	String PORT = "8081";
 
 	String PROTOCAL_HTTP = "http";
 
