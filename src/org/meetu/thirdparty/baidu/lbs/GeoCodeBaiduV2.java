@@ -1,4 +1,4 @@
-package org.meetu.lbs.baidu;
+package org.meetu.thirdparty.baidu.lbs;
 
 import static org.meetu.constant.Constant.*;
 
