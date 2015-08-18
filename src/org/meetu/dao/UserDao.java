@@ -87,17 +87,19 @@ public class UserDao {
 	}
 	
 	/**
-	 * 查询所有管理员
+	 * 根据用户LEVEL查询用户
+	 * @level 用户级别
+	 * @oper 操作符 < > >= <= =
 	 * */
-	public List<User> selectByLevel(int level) throws Exception
+	public List<User> selectByLevel(int level , String oper) throws Exception
 	{
 		Session session = sessionFactory.openSession();
-		String sql = "select U from User U where status >= 90 ";
+		String sql = "select U from User U where U.status " + oper  + level;
 		Query query = session.createQuery(sql);
 		List<User> userList = new ArrayList<User>();
 		userList = query.list();
 		if(userList == null) { 
-			throw new Exception("SELECT By LEVEL");
+			throw new Exception("SELECT BY LEVEL");
 		}
 		return userList;
 	}

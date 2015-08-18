@@ -10,7 +10,7 @@ create table u_user(
 	id int(16) auto_increment primary key comment '用户主键',
 	mobile varchar(16) comment '手机号',
 	pwd varchar(64) comment '密码',
-	imei varchar(64) comment '手机imei',
+	imei varchar(64) comment '当前设备手机imei',
 	name varchar(64) comment '真实姓名',
 	nickname varchar(64) comment '昵称',
 	birthdate varchar(64) comment '生日',
@@ -23,7 +23,7 @@ create table u_user(
 	home_addr varchar(256) comment '家庭地址',
 	regtime varchar(64) comment '注册时间',
 	mood varchar(512) comment '心情签名',
-	status varchar(3) not null comment '状态 0:正常 1:冻结'
+	status varchar(3) comment '状态 0:正常 10:冻结 90-98:admin 99:root'
 ) comment = '用户表';
 
 drop table if exists u_device; 
@@ -122,11 +122,12 @@ create table sys_feedback(
 
 drop table if exists push_info_baidu;
 create table push_info_baidu(
+	imei varchar(32) comment '硬件IMEI',
 	userId int(16) comment 'meetu系统用户id',
 	userId_push varchar(32) comment '推送系统userId',
 	channelId varchar(32) comment '推送系统channelId',
-	primary key(userId)
-) comment '推送信息表';
+	primary key(imei)
+) comment '百度推送用户信息表';
 
 
 

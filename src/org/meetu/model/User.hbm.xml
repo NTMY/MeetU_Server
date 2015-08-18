@@ -28,6 +28,8 @@
 		<!-- 
 		<one-to-one name="locCurr" />
 		 -->
+		 <!-- 推送信息-->
+		<one-to-one name="pushInfo"></one-to-one>  
 	</class>
 
 </hibernate-mapping>

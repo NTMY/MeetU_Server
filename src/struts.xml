@@ -57,7 +57,12 @@
 	<package name="help" extends="global" namespace="/">
 		<action name="helpAction" class="org.meetu.action.CallForHelpAction">
 		</action>
-	</package>		
+	</package>	
+	
+	<package name="push" extends="global" namespace="/">
+		<action name="pushAction" class="org.meetu.action.PushAction">
+		</action>
+	</package>			
 	
 	<!-- 默认的package的特点就在于不定义namespace属性，这样所有未定义的namespace都会转向这里。name="default"是为了便于阅读，其实name是什么都可以，也可以为空：name="" 
 	<package name="default" extends="struts-default">

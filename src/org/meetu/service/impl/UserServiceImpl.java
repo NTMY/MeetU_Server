@@ -27,9 +27,6 @@ public class UserServiceImpl implements IUserService {
 		userDao.update(u);
 	}
 	
-	/**
-	 * 查找附近的人具体信息
-	 * */
 	@Override
 	public List<User> queryList(User user) {
 		List<User> list = userDao.selectListAll(user);
@@ -52,6 +49,14 @@ public class UserServiceImpl implements IUserService {
 	public int queryNearUsersCount(BigDecimal longitude, BigDecimal latitude) {
 		return 0;
 	}
+	
+	@Override
+	public List<User> selectByLevel(int level , String oper) throws Exception {
+		List<User> list = userDao.selectByLevel(level, oper);
+		return list;
+	}
+	
+	
 	
 
 	public UserDao getUserDao() {

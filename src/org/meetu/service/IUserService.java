@@ -17,5 +17,11 @@ public interface IUserService {
 	
 	int queryNearUsersCount(BigDecimal longitude , BigDecimal latitude);
 	
+	/**
+	 * 通过level查询用户
+	 * @param level 用户级别
+	 * @oper 操作符 > < >= <= = ....
+	 * */
+	List<User> selectByLevel(int level , String oper) throws Exception;
 	
 }

@@ -16,16 +16,23 @@ public class PushInfoBaidu extends BaseModel {
 	private static final long serialVersionUID = 4083756193715742783L;
 
 	/**
-	 * meetu系统中的userId<br>
-	 * 表主键
+	 * 设备硬件IMEI
+	 * PK
 	 * */
 	@Id
+	@Column(name = "imei")
+	private String imei;
+	
+	/**
+	 * meetu系统中的userId<br>
+	 * */
+	@Column(name = "userId")
 	private int userId;
 
 	/**
 	 * 百度推送方userId
 	 * */
-	@Column(name = "userId_push", nullable = false)
+	@Column(name = "userId_push")
 	private String userId_push;
 
 	/**
@@ -94,6 +101,14 @@ public class PushInfoBaidu extends BaseModel {
 	 */
 	public void setChannelId(String channelId) {
 		this.channelId = channelId;
+	}
+
+	public String getImei() {
+		return imei;
+	}
+
+	public void setImei(String imei) {
+		this.imei = imei;
 	}
 
 }

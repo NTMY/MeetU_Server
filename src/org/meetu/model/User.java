@@ -89,6 +89,10 @@ public class User extends BaseModel {
 	/**关联*/
 	/** 当前地址 */
 	private LocationCurr locCurr;
+
+	/**关联*/
+	/** 百度推送信息 */
+	private PushInfoBaidu pushInfo;
 	
 	/**
 	 * constructor
@@ -316,6 +320,18 @@ public class User extends BaseModel {
 	 */
 	public void setWechat(String wechat) {
 		this.wechat = wechat;
+	}
+
+
+
+	public PushInfoBaidu getPushInfo() {
+		return pushInfo;
+	}
+
+
+
+	public void setPushInfo(PushInfoBaidu pushInfo) {
+		this.pushInfo = pushInfo;
 	}
 	
 }

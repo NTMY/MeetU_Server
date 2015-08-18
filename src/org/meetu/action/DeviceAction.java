@@ -7,9 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts2.ServletActionContext;
 import org.meetu.dto.BaseDto;
 import org.meetu.model.DeviceInfo;
+import org.meetu.model.User;
 import org.meetu.service.IDeviceInfoService;
+import org.meetu.service.IUserService;
 import org.meetu.util.BeanConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,6 +27,9 @@ public class DeviceAction {
 
 	@Autowired
 	private IDeviceInfoService service;
+	
+	@Autowired
+	private IUserService uService;
 
 	HttpServletRequest req;
 	HttpServletResponse resp;
@@ -40,13 +46,25 @@ public class DeviceAction {
 	private String xml = "";
 
 	/**
-	 * 上传设备信息(saveOrUpload)
+	 * 上传设备信息(saveOrUpload)<br>
+	 * 1.将设备信息入库<br>
+	 * 2.将user表中imei字段改为当前设备IMEI
 	 * */
 	public String uploadDeviceInfo() {
+		req = ServletActionContext.getRequest();
+		resp = ServletActionContext.getResponse();
+		
 		BaseDto dto = new BaseDto();
 		try {
 			out = resp.getWriter();
+			//
 			service.saveOrUpdate(device);
+			User u = new User();
+			u.setId(device.getUserId());
+			u = uService.queryById(u);//从db查出的对象,再修改imei属性,这样dynamic-update才会起效,但是为什么不起效....还是所有字段都会set一遍
+			u.setImei(device.getImei());
+			//更新user表中的IMEI字段
+			uService.update(u);
 		} catch (Exception e) {
 			logger.error(e);
 			dto.setErrCode(STATUS_FAIL);

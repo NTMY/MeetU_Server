@@ -2,6 +2,7 @@ package org.meetu.action;
 
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +13,9 @@ import org.apache.struts2.ServletActionContext;
 import org.meetu.dto.BaseDto;
 import org.meetu.dto.PushBaiduParam;
 import org.meetu.model.Feedback;
+import org.meetu.model.User;
 import org.meetu.service.IFeedbackService;
+import org.meetu.service.IUserService;
 import org.meetu.util.BeanConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,6 +32,9 @@ public class FeedbackAction {
 
 	@Autowired
 	private IFeedbackService service; 
+	
+	@Autowired
+	private IUserService userService;
 	
 	HttpServletRequest req;
 	HttpServletResponse resp;
@@ -59,7 +65,11 @@ public class FeedbackAction {
 			feed.setFeedbackTime(new Date());
 			service.insert(feed);
 			PushBaiduParam p = new PushBaiduParam();
-			p.setChannelId("4187121447171541963");
+			
+			//查询LEVEL >= 90的所有用户
+			List<User> adminList = userService.selectByLevel(90, ">=");
+
+			p.setChannelId("3545744288033740498");
 			p.setType(1);// 1推送通知 0透传消息
 			p.setTitle("有人反馈信息啦!");
 			p.setDesc(feed.getContent());
