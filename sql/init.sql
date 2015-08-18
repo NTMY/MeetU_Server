@@ -65,12 +65,16 @@ create table sys_param(
 	_key varchar(32) comment '参数名称',
 	_value varchar(128) comment '参数值',
 	description varchar(128) comment '描述',
-	primary key (_key, _value)
+	primary key (_key)
 ) comment '系统参数表';
 
 
 insert into sys_param values ('upload_freq','600','上传频率(单位秒)');
 insert into sys_param values ('meetu_freq','600','上传并查找频率(单位秒)');
+insert into sys_param values ('BAIDU_DEV_SN','F56034a118b5fedfc66f6e39498b9c2e','百度开发者SN');
+insert into sys_param values ('BAIDU_PUSH_APIKEY','CiiSrq7SctOXARW0GrxKU9VA','百度云推送apikey');
+insert into sys_param values ('BAIDU_PUSH_SECRETKEY','ZDtmKIqZ8rYDUx9n6VhikGOjVd3XOX6o','百度云推送密钥key');
+
 
 
 drop table if exists sys_client_info;
@@ -114,6 +118,22 @@ create table sys_feedback(
 	content varchar(512) comment '反馈内容',
 	feedbackTime timestamp comment '反馈时间'
 ) comment '用户反馈表';
+
+
+drop table if exists push_info_baidu;
+create table push_info_baidu(
+	userId int(16) comment 'meetu系统用户id',
+	userId_push varchar(32) comment '推送系统userId',
+	channelId varchar(32) comment '推送系统channelId',
+	primary key(userId)
+) comment '推送信息表';
+
+
+
+
+
+
+
 
 
 

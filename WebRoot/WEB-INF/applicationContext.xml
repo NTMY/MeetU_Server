@@ -16,7 +16,7 @@
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<!-- 45.55.4.64 -->
-		<property name="url" value="jdbc:mysql://localhost:3306/meetu" />
+		<property name="url" value="jdbc:mysql://123.57.158.124:3306/meetu" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 		<property name="maxActive" value="100" />

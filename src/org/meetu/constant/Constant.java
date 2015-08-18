@@ -9,11 +9,24 @@ public interface Constant {
 	/** XML头信息 */
 	String XML_HEAD = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>";
 
-	/** 百度API KEY/SN */
-	String BAIDU_SN = "F56034a118b5fedfc66f6e39498b9c2e";
+	String BAIDU_DEV_SN = "BAIDU_DEV_SN";
 
-	/** 百度LBS URL后缀 */
-
+	/** 访问令牌，可通过该值获得开发者app的信息 */
+	String BAIDU_PUSH_APIKEY = "BAIDU_PUSH_APIKEY";
+	
+	/** 与apiKey成对出现，用于app的合法身份验证 */
+	String BAIDU_PUSH_SECRETKEY = "BAIDU_PUSH_SECRETKEY";
+	
+	/**value为对象*/
+	String BAIDU_PUSH_PAIR = "BAIDU_PUSH_PAIR";
+	
+	/**value为对象*/
+	String BAIDU_PUSH_CLIENT = "BAIDU_PUSH_CLIENT";
+	
+	
+	/**PUSH CHANNELID临时测试用MOTO X PRO*/
+	String channelId = "3545744288033740498";
+	
 	/** 百度LBS服务输出数据格式 */
 	String BAIDU_LBS_OUTPUT = "xml";
 
@@ -24,7 +37,7 @@ public interface Constant {
 	/** 百度LBS URL前缀 */
 	String BAIDU_LBS_URL_PRE = "http://api.map.baidu.com/geocoder/v2/?";
 	/** 百度LBS URL后缀 */
-	String BAIDU_LBS_URL_SUFF = "ak=" + BAIDU_SN + "&output="
+	String BAIDU_LBS_URL_SUFF = "ak=" + BAIDU_DEV_SN + "&output="
 			+ BAIDU_LBS_OUTPUT + "&pois=" + BAIDU_LBS_POIS + "&location=";
 
 	/** HTTP超时时间(ms) */

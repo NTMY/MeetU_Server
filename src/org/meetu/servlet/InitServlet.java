@@ -1,8 +1,9 @@
 package org.meetu.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,15 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.meetu.cache.Cache;
+import org.meetu.dao.SysParamDao;
+import org.meetu.model.SysParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 /**
  * MEETU工程服务器启动初始化资源启动类
  * */
+//@Resource
 public class InitServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 5443898246981950653L;
 
-	Log logger = LogFactory.getLog(InitServlet.class);
+	private Log logger = LogFactory.getLog(InitServlet.class);
+	
+	@Autowired
+	private SysParamDao sysParamDao;
 	
 	/**
 	 * Constructor of the object.
@@ -28,6 +38,26 @@ public class InitServlet extends HttpServlet {
 	}
 
 	/**
+	 * Initialization of the servlet. <br>
+	 * <li>初始化缓存map</li>
+	 * <li>读取properties配置文件</li>
+	 * <li>刷新服务器参数map也调用此接口</li>
+	 * @throws ServletException if an error occurs
+	 */
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		logger.info("InitServlet init初始化资源开始");
+		// 让其获得@Autowired注入的对象,不需要getters/setters
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,config.getServletContext());
+		List<SysParam> sysParamList = sysParamDao.queryAll();
+		for(SysParam p : sysParamList) {
+			Cache.getCacheMap().put(p.getKey(), p.getValue());//全局缓存(单例)
+		}
+		logger.info("InitServlet init初始化资源结束");
+	}
+	
+	
+	/**
 	 * Destruction of the servlet. <br>
 	 */
 	public void destroy() {
@@ -35,46 +65,16 @@ public class InitServlet extends HttpServlet {
 		// Put your code here
 	}
 
-	/**
-	 * The doGet method of the servlet. <br>
-	 *
-	 * This method is called when a form has its tag value method equals to get.
-	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
-	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 	}
 
-	/**
-	 * The doPost method of the servlet. <br>
-	 *
-	 * This method is called when a form has its tag value method equals to post.
-	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
-	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 	}
 
-	/**
-	 * Initialization of the servlet. <br>
-	 * <li>初始化缓存map</li>
-	 * <li>读取properties配置文件</li>
-	 * <li>刷新服务器参数map也调用此接口</li>
-	 * @throws ServletException if an error occurs
-	 */
-	public void init() throws ServletException {
-		logger.info("InitServlet init初始化资源开始");
-		logger.info("InitServlet init初始化资源结束");
-	}
+
 
 }

@@ -29,7 +29,7 @@
     <display-name>initServlet</display-name>
     <servlet-name>InitServlet</servlet-name>
     <servlet-class>org.meetu.servlet.InitServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
+    <load-on-startup>9</load-on-startup>
   </servlet>
 
   <servlet-mapping>

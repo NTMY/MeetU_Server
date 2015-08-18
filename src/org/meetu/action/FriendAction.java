@@ -12,6 +12,7 @@ import org.apache.struts2.ServletActionContext;
 import org.meetu.dto.BaseDto;
 import org.meetu.model.FriendReq;
 import org.meetu.service.IFriendReqService;
+import org.meetu.service.IPushService;
 import org.meetu.util.BeanConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,6 +38,10 @@ public class FriendAction extends ActionSupport {
 //	@Resource(name="reqService")
 	@Autowired
 	private IFriendReqService reqService;
+
+	/** 推送服务 */
+	@Autowired
+	private IPushService pushService;
 	
 	/**
 	 * STRUTS2接收上传参数对象
