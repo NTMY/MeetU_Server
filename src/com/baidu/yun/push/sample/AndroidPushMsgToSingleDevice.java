@@ -1,10 +1,11 @@
 package com.baidu.yun.push.sample;
 
+import org.meetu.dto.PushBaiduParam;
+
 import net.sf.json.JSONObject;
 
 import com.baidu.yun.core.log.YunLogEvent;
 import com.baidu.yun.core.log.YunLogHandler;
-import com.baidu.yun.push.auth.PushKeyPair;
 import com.baidu.yun.push.client.BaiduPushClient;
 import com.baidu.yun.push.constants.BaiduPushConstants;
 import com.baidu.yun.push.exception.PushClientException;
@@ -19,7 +20,7 @@ import static org.meetu.constant.Constant.*;
  * 推送给单个客户端
  * */
 public class AndroidPushMsgToSingleDevice extends PushBaiduDef {
-	public static void main(String channelId, String title, String desc) throws PushClientException,
+	public static void push(PushBaiduParam p) throws PushClientException,
 			PushServerException {
 		// 1. get apiKey and secretKey from developer console
 
@@ -38,24 +39,28 @@ public class AndroidPushMsgToSingleDevice extends PushBaiduDef {
 
 		try {
 			// 4. specify request arguments
-			//创建 Android的通知
+			// 创建 Android的通知
 			JSONObject notification = new JSONObject();
-			notification.put("title", title);
-			notification.put("description",desc);
+			notification.put("title", p.getTitle());
+			notification.put("description", p.getDesc());
 			notification.put("notification_builder_id", 0);
 			notification.put("notification_basic_style", 4);
 			notification.put("open_type", 1);
 			notification.put("url", "http://push.baidu.com");
 			JSONObject jsonCustormCont = new JSONObject();
-			jsonCustormCont.put("key", "value"); //自定义内容，key-value
+			jsonCustormCont.put("key", "value"); // 自定义内容，key-value
 			notification.put("custom_content", jsonCustormCont);
 
 			PushMsgToSingleDeviceRequest request = new PushMsgToSingleDeviceRequest()
-					.addChannelId(channelId)
-					.addMsgExpires(new Integer(3600)). // message有效时间
-					addMessageType(1).// 1：通知,0:透传消息. 默认为0 注：IOS只有通知.
-					addMessage(notification.toString()).
-					addDeviceType(3);// deviceType => 3:android, 4:ios
+					// 设置channelId
+					.addChannelId(p.getChannelId())
+					// message有效时间
+					.addMsgExpires(new Integer(3600))
+					// 1：通知,0:透传消息. 默认为0 注：IOS只有通知.
+					.addMessageType(p.getType())
+					.addMessage(notification.toString())
+					.addDeviceType(3);// deviceType =>
+														// 3:android, 4:ios
 			// 5. http request
 			PushMsgToSingleDeviceResponse response = pushClient
 					.pushMsgToSingleDevice(request);

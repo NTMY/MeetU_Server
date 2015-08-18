@@ -10,10 +10,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 import org.meetu.dto.BaseDto;
+import org.meetu.dto.PushBaiduParam;
 import org.meetu.model.Feedback;
 import org.meetu.service.IFeedbackService;
 import org.meetu.util.BeanConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.baidu.yun.push.sample.AndroidPushMsgToSingleDevice;
 
 import static org.meetu.constant.Constant.*;
 
@@ -55,6 +58,12 @@ public class FeedbackAction {
 			out = resp.getWriter();
 			feed.setFeedbackTime(new Date());
 			service.insert(feed);
+			PushBaiduParam p = new PushBaiduParam();
+			p.setChannelId("4187121447171541963");
+			p.setType(1);// 1推送通知 0透传消息
+			p.setTitle("有人反馈信息啦!");
+			p.setDesc(feed.getContent());
+			AndroidPushMsgToSingleDevice.push(p);
 		} catch (Exception e) {
 			logger.error(e);
 			dto = new BaseDto(STATUS_FAIL,"用户反馈信息失败,请重试");

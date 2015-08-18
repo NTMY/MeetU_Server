@@ -87,6 +87,23 @@ public class UserDao {
 	}
 	
 	/**
+	 * 查询所有管理员
+	 * */
+	public List<User> selectByLevel(int level) throws Exception
+	{
+		Session session = sessionFactory.openSession();
+		String sql = "select U from User U where status >= 90 ";
+		Query query = session.createQuery(sql);
+		List<User> userList = new ArrayList<User>();
+		userList = query.list();
+		if(userList == null) { 
+			throw new Exception("SELECT By LEVEL");
+		}
+		return userList;
+	}
+	
+	
+	/**
 	 * getters and setters
 	 * */
 	public SessionFactory getSessionFactory() {

@@ -1,5 +1,7 @@
 package com.baidu.yun.push.sample;
 
+import org.meetu.dto.PushBaiduParam;
+
 import com.baidu.yun.core.log.YunLogEvent;
 import com.baidu.yun.core.log.YunLogHandler;
 import com.baidu.yun.push.auth.PushKeyPair;
@@ -14,7 +16,7 @@ import com.baidu.yun.push.sample.base.PushBaiduDef;
 import static org.meetu.constant.Constant.*;
 
 public class AndroidPushMsgToAll extends PushBaiduDef {
-	public static void main(String[] args) 
+	public static void push(PushBaiduParam p) 
 			throws PushClientException,PushServerException {
 		// 1. get apiKey and secretKey from developer console
 //		String apiKey = "xxxxxxxxxxxxxxxxxxxx";
@@ -37,8 +39,9 @@ public class AndroidPushMsgToAll extends PushBaiduDef {
 		try {
 			// 4. specify request arguments
 			PushMsgToAllRequest request = new PushMsgToAllRequest()
-					.addMsgExpires(new Integer(3600)).addMessageType(0)
-					.addMessage("Hello Baidu push") //添加透传消息
+					.addMsgExpires(new Integer(3600))
+					.addMessageType(0) //0:透传消息 1:推送通知
+					.addMessage("Hello Baidu push") 
 					.addSendTime(System.currentTimeMillis() / 1000 + 120) // 设置定时推送时间，必需超过当前时间一分钟，单位秒.实例2分钟后推送
 					.addDeviceType(3);
 			// 5. http request

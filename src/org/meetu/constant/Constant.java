@@ -44,15 +44,16 @@ public interface Constant {
 	int TIMEOUT_HTTP = 10000;
 
 	/** DATA状态 */
-	/** 
-	 * 正常状态
-	 */
+	/** 正常状态 */ 
 	String USER_STATUS_COMMON = "0";
-	/** 
-	 * 冻结状态 
-	 */
-	String USER_STATUS_FROZEN = "1";
 
+	/** 冻结状态 */ 
+	String USER_STATUS_FROZEN = "10";
+
+	/** 管理员级别 90-98*/
+	String USER_STATUS_ADMIN = "90";
+	/** ROOT用户级别(最高) */
+	String USER_STATUS_ROOT = "99";
 	/** 成功状态码 */
 	String STATUS_SUCCESS = "0";
 	/** 失败状态码 */
