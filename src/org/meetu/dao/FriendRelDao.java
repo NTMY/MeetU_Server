@@ -49,6 +49,7 @@ public class FriendRelDao {
 		Query query = session.createQuery(hql.toString());
 		List<FriendRel> list = new ArrayList<FriendRel>();
 		list = query.list();
+		session.close();
 		return list;
 	}
 
@@ -64,6 +65,7 @@ public class FriendRelDao {
 //		}
 		List<FriendRel> list = new ArrayList<FriendRel>();
 		list = query.list();
+		session.close();
 		return list;
 	}
 

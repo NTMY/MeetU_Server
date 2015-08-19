@@ -55,7 +55,9 @@ public class FriendAction extends ActionSupport {
 	
 	
 	/**
-	 * 发送好友申请 
+	 * 发送好友申请<br>
+	 * 1.好友申请 数据入库<br>
+	 * 2.给对方发送推送<br>
 	 * */
 	public String sendFriendReq() {
 		request = ServletActionContext.getRequest();

@@ -59,15 +59,5 @@ public class LocationHisDao {
 	}
 
 	
-	/**
-	 * getters and setters
-	 * */
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
 
 }

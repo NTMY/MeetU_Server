@@ -140,4 +140,9 @@ public interface Constant {
 	
 	/** 头像上传的路径 */
 	String PIC_PATH = "D:\\";
+	
+	/** 推送 */
+	int PUSHTYPE_PUSH = 1;
+	/** 透传消息 */
+	int PUSHTYPE_MSG = 0;
 }

@@ -60,12 +60,10 @@ public class UserLocationDao {
 		Query query = session.createQuery(sql);
 		List<User> userList = new ArrayList<User>();
 		userList = query.list();
+		session.close();
 		return userList;
 	}
 	
 	
-	/**
-	 * getters and setters
-	 * */
 
 }

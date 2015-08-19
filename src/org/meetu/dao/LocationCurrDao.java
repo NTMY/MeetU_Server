@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class LocationCurrDao {
 	private static final Log log = LogFactory.getLog(LocationCurrDao.class);
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -46,17 +46,17 @@ public class LocationCurrDao {
 		session.getTransaction().commit();
 		session.close();
 	}
-	
-	 public void deleteByUserId(Integer id) {  
-	        Session session = sessionFactory.openSession();  
-	        session.beginTransaction();  
-	        String hql = "delete from LocationCurr where userId = ?";  
-	        Query query = session.createQuery(hql);  
-	        query.setInteger(0, id);  
-	        query.executeUpdate();  
-	        session.getTransaction().commit();
-	        session.close();  
-	    }  
+
+	public void deleteByUserId(Integer id) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		String hql = "delete from LocationCurr where userId = ?";
+		Query query = session.createQuery(hql);
+		query.setInteger(0, id);
+		query.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
+	}
 
 	/**
 	 * 查询附近的人(正方形)
@@ -64,38 +64,38 @@ public class LocationCurrDao {
 	public List<LocationCurr> queryNear(LocationCurr curr) {
 		Session session = sessionFactory.openSession();
 		String sql = "select Loc from LocationCurr Loc where 1= 1 ";
-		if (null != curr.getUserId() && !"".equals(curr.getUserId())){
-			sql += " and Loc.userId <> '" + curr.getUserId() + "'";//不是自己 
+		if (null != curr.getUserId() && !"".equals(curr.getUserId())) {
+			sql += " and Loc.userId <> '" + curr.getUserId() + "'";// 不是自己
 		}
-		if (null != curr.getUploadTime() && !"".equals(curr.getUploadTime())){
-			sql += " and Loc.uploadTime > '" + TimeUtil.parseDate2Str(TimeUtil.calcTime(new Date(), "-", 2, "hour")) + "'";// 2小时以内
+		if (null != curr.getUploadTime() && !"".equals(curr.getUploadTime())) {
+			sql += " and Loc.uploadTime > '"
+					+ TimeUtil.parseDate2Str(TimeUtil.calcTime(new Date(), "-",
+							2, "hour")) + "'";// 2小时以内
 		}
-		if (null != curr.getMinLat() && !"".equals(curr.getMinLat())){
+		if (null != curr.getMinLat() && !"".equals(curr.getMinLat())) {
 			sql += " and Loc.latitude >= '" + curr.getMinLat() + "'";//
 		}
-		if (null != curr.getMaxLat() && !"".equals(curr.getMaxLat())){
+		if (null != curr.getMaxLat() && !"".equals(curr.getMaxLat())) {
 			sql += " and Loc.latitude <= '" + curr.getMaxLat() + "'";//
 		}
-		if (null != curr.getMinLong() && !"".equals(curr.getMinLong())){
+		if (null != curr.getMinLong() && !"".equals(curr.getMinLong())) {
 			sql += " and Loc.longitude >= '" + curr.getMinLong() + "'";//
 		}
-		if (null != curr.getMaxLong() && !"".equals(curr.getMaxLong())){
+		if (null != curr.getMaxLong() && !"".equals(curr.getMaxLong())) {
 			sql += " and Loc.longitude <= '" + curr.getMaxLong() + "'";//
 		}
 		Query query = session.createQuery(sql);
-		List<LocationCurr> userList = new ArrayList<LocationCurr>();
-		userList = query.list();
+		List<LocationCurr> locList = new ArrayList<LocationCurr>();
+		locList = query.list();
 		session.close();
-		return userList;
+		return locList;
 	}
-	
 
-	public List<LocationCurr> queryAll(LocationCurr curr)
-	{
+	public List<LocationCurr> queryAll(LocationCurr curr) {
 		Session session = sessionFactory.openSession();
 		String sql = "select Loc from LocationCurr Loc where 1= 1 ";
-		if (null != curr.getUserId() && !"".equals(curr.getUserId())){
-			sql += " and Loc.userId = '" + curr.getUserId() + "'";// 
+		if (null != curr.getUserId() && !"".equals(curr.getUserId())) {
+			sql += " and Loc.userId = '" + curr.getUserId() + "'";//
 		}
 		Query query = session.createQuery(sql);
 		List<LocationCurr> userList = new ArrayList<LocationCurr>();
@@ -104,7 +104,6 @@ public class LocationCurrDao {
 		return userList;
 	}
 
-	
 	/**
 	 * getters and setters
 	 * */

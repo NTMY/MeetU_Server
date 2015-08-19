@@ -25,11 +25,9 @@
 		<property name="regtime" column="regtime" type="java.lang.String" />
 		<property name="mood" column="mood" type="java.lang.String" />
 		<property name="status" column="status" type="java.lang.String" />
-		<!-- 
-		<one-to-one name="locCurr" />
-		 -->
-		 <!-- 推送信息-->
-		<one-to-one name="pushInfo"></one-to-one>  
+		 <!-- 关联推送信息 
+		<one-to-one name="pushInfo" class="PushInfoBaidu" constrained="true"></one-to-one>
+		-->
 	</class>
 
 </hibernate-mapping>

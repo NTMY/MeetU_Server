@@ -86,4 +86,5 @@ public class AndroidPushMsgToSingleDevice extends PushBaiduDef {
 			}
 		}
 	}
+	
 }

@@ -15,7 +15,7 @@ public class BaseModel implements Serializable,Cloneable {
 	/**
 	 * logger
 	 * */
-	Log logger = LogFactory.getLog(getClass());
+	private Log logger = LogFactory.getLog(getClass());
 	
 	/**
 	 * 错误码

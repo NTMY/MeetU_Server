@@ -1,7 +1,0 @@
-org.meetu.client.handler
-org.meetu.client.listener
-org.meetu.client.util
-org.meetu.constant
-org.meetu.dto
-org.meetu.model
-org.meetu.util

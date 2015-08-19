@@ -1,7 +1,10 @@
 package org.meetu.dao;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.meetu.model.PushInfoBaidu;
@@ -25,5 +28,18 @@ public class PushBaiduDao {
 		session.getTransaction().commit();
 		session.close();
 	}
-	
+
+	public List queryPushInfo(List userIdList) {
+		Session session = sessionFactory.openSession();
+		String param = userIdList.toString().replace("[","").replace("]","");
+		String sql = "select u.id , u.mobile , p.channelId from u_user u join push_info_baidu p on u.id = p.userId where u.id in ("
+				+ param + ")";
+		List list = null;
+		Query query = session.createSQLQuery(sql);
+		list = query.list();
+		session.close();
+		return list;
+		
+	}
+
 }

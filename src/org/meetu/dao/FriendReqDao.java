@@ -58,6 +58,7 @@ public class FriendReqDao {
 		Query query = session.createQuery(hql.toString());
 		List<FriendReq> list = new ArrayList<FriendReq>();
 		list = query.list();
+		session.close();
 		return list;
 	}
 
@@ -78,6 +79,7 @@ public class FriendReqDao {
 		} else {
 			req = list.get(0);
 		}
+		session.close();
 		return req;
 	}
 

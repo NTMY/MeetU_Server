@@ -13,7 +13,7 @@
  		<property name="business" column="business" type="java.lang.String"/>
  		<property name="uploadTime" column="uploadTime" type="java.util.Date"/>
  		
- 		<one-to-one name="u"></one-to-one>
+ 		<one-to-one name="u" class="User" cascade="none"></one-to-one>
     </class>
 
 </hibernate-mapping>

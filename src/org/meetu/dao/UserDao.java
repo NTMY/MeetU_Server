@@ -62,6 +62,7 @@ public class UserDao {
 		Query query = session.createQuery(sql);
 		List<User> userList = new ArrayList<User>();
 		userList = query.list();
+		session.close();
 		return userList;
 	}
 	
@@ -83,6 +84,7 @@ public class UserDao {
 		} else {
 			user = userList.get(0);
 		}
+		session.close();
 		return user;
 	}
 	
@@ -101,19 +103,10 @@ public class UserDao {
 		if(userList == null) { 
 			throw new Exception("SELECT BY LEVEL");
 		}
+		session.close();
 		return userList;
 	}
 	
 	
-	/**
-	 * getters and setters
-	 * */
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
 
 }

@@ -27,7 +27,7 @@ public class PushInfoBaidu extends BaseModel {
 	 * meetu系统中的userId<br>
 	 * */
 	@Column(name = "userId")
-	private int userId;
+	private Integer userId;
 
 	/**
 	 * 百度推送方userId
@@ -58,20 +58,6 @@ public class PushInfoBaidu extends BaseModel {
 		this.channelId = channelId;
 	}
 
-	/**
-	 * @return the userId
-	 */
-	public int getUserId() {
-		return userId;
-	}
-
-	/**
-	 * @param userId
-	 *            the userId to set
-	 */
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 
 	/**
 	 * @return the userId_push
@@ -109,6 +95,20 @@ public class PushInfoBaidu extends BaseModel {
 
 	public void setImei(String imei) {
 		this.imei = imei;
+	}
+
+	/**
+	 * @return the userId
+	 */
+	public Integer getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 }

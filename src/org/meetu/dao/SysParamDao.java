@@ -30,6 +30,7 @@ public class SysParamDao {
 		Query query = session.createQuery(sql);
 		List<SysParam> list = new ArrayList<SysParam>();
 		list = query.list();
+		session.close();
 		return list;
 	}
 	

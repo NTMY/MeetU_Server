@@ -1,34 +1,11 @@
 package org.meetu.model;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import org.apache.commons.beanutils.BeanUtils;
+import javax.persistence.JoinColumn;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 /**
  * 
-drop table if exists u_user;
-create table u_user(
-	id int(16) auto_increment primary key comment '用户主键',
-	mobile varchar(16) comment '手机号',
-	pwd varchar(64) comment '密码',
-	imei varchar(64) comment '手机imei',
-	name varchar(64) comment '真实姓名',
-	nickname varchar(64) comment '昵称',
-	birthdate varchar(64) comment '生日',
-	gender varchar(4) comment '性别 男/女',
-	qq varchar(32) comment 'qq',
-	email varchar(64) comment 'email',
-	company varchar(128) comment '公司名称',
-	company_addr varchar(256) comment '公司地址',
-	home_addr varchar(256) comment '家庭地址',
-	regtime varchar(64) comment '注册时间',
-	mood varchar(512) comment '心情签名',
-	status varchar(3) not null comment '状态 0:正常 1:冻结'
-) comment = '用户表';
-
  * 
  * */
 
@@ -45,6 +22,7 @@ public class User extends BaseModel {
 	private String pwd;
 	
 	/** 手机串号 */
+	@JoinColumn(name = "imei", referencedColumnName = "imei")
 	private String imei;
 	
 	/** 用户姓名 */
@@ -86,13 +64,13 @@ public class User extends BaseModel {
 	/** 状态 */
 	private String status;
 
-	/**关联*/
-	/** 当前地址 */
-	private LocationCurr locCurr;
 
-	/**关联*/
+	/**
+	 * 关联<br>
+	 * 虽然数据上的关系是一对多,但是只读取那个当前使用的1v1的关系就够了
+	 * */
 	/** 百度推送信息 */
-	private PushInfoBaidu pushInfo;
+//	private PushInfoBaidu pushInfo;
 	
 	/**
 	 * constructor
@@ -291,14 +269,6 @@ public class User extends BaseModel {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-
-	public LocationCurr getLocCurr() {
-		return locCurr;
-	}
-
-	public void setLocCurr(LocationCurr locCurr) {
-		this.locCurr = locCurr;
-	}
 	
 	public String getMood() {
 		return mood;
@@ -324,14 +294,12 @@ public class User extends BaseModel {
 
 
 
-	public PushInfoBaidu getPushInfo() {
-		return pushInfo;
-	}
-
-
-
-	public void setPushInfo(PushInfoBaidu pushInfo) {
-		this.pushInfo = pushInfo;
-	}
+//	public PushInfoBaidu getPushInfo() {
+//		return pushInfo;
+//	}
+//
+//	public void setPushInfo(PushInfoBaidu pushInfo) {
+//		this.pushInfo = pushInfo;
+//	}
 	
 }
