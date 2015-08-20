@@ -22,47 +22,36 @@ public class LocationCurrDao {
 	private SessionFactory sessionFactory;
 
 	public void insert(LocationCurr loc) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		// 2 ways : Serializable save()/void persist()
 		Object obj = session.save(loc);
 		log.info("insert return object = " + obj.getClass() + " ===== " + obj);
-		session.getTransaction().commit();
-		session.close();
 	}
 
 	public void update(LocationCurr loc) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		session.update(loc);
-		session.getTransaction().commit();
-		session.close();
 	}
 
 	public void delete(LocationCurr loc) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
+		log.warn("CURR SESS " + session.hashCode());
 		session.delete(loc);
-		session.getTransaction().commit();
-		session.close();
 	}
 
 	public void deleteByUserId(Integer id) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		String hql = "delete from LocationCurr where userId = ?";
 		Query query = session.createQuery(hql);
 		query.setInteger(0, id);
 		query.executeUpdate();
-		session.getTransaction().commit();
-		session.close();
 	}
 
 	/**
 	 * 查询附近的人(正方形)
 	 * */
 	public List<LocationCurr> queryNear(LocationCurr curr) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		StringBuffer hql = new StringBuffer("select Loc from LocationCurr Loc where 1= 1 ");
 		hql.append(" and Loc.userId <> '").append(curr.getUserId()).append("'");// 不能查询出自己
 		hql.append(" and Loc.uploadTime > '").append(TimeUtil.parseDate2Str(TimeUtil.calcTime(new Date(), "-",2, "hour"))).append("'");// 2小时以内
@@ -74,12 +63,11 @@ public class LocationCurrDao {
 		Query query = session.createQuery(hql.toString());
 		List<LocationCurr> locList = new ArrayList<LocationCurr>();
 		locList = query.list();
-		session.close();
 		return locList;
 	}
 
 	public List<LocationCurr> queryAll(LocationCurr curr) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select Loc from LocationCurr Loc where 1= 1 ";
 		if (null != curr.getUserId() && !"".equals(curr.getUserId())) {
 			sql += " and Loc.userId = '" + curr.getUserId() + "'";//
@@ -87,7 +75,6 @@ public class LocationCurrDao {
 		Query query = session.createQuery(sql);
 		List<LocationCurr> userList = new ArrayList<LocationCurr>();
 		userList = query.list();
-		session.close();
 		return userList;
 	}
 

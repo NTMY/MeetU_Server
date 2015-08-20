@@ -22,22 +22,18 @@ public class PushBaiduDao {
 	private SessionFactory sessionFactory;
 
 	public void insertOrUpdate(PushInfoBaidu push) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(push);
-		session.getTransaction().commit();
-		session.close();
 	}
 
 	public List queryPushInfo(List userIdList) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String param = userIdList.toString().replace("[","").replace("]","");
 		String sql = "select u.id , u.mobile , p.channelId from u_user u join push_info_baidu p on u.id = p.userId where u.id in ("
 				+ param + ")";
 		List list = null;
 		Query query = session.createSQLQuery(sql);
 		list = query.list();
-		session.close();
 		return list;
 		
 	}

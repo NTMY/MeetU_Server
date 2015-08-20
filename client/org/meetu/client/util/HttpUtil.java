@@ -42,8 +42,8 @@ public class HttpUtil {
 			URL realUrl = new URL(url);
 			// 打开和URL之间的连接
 			URLConnection conn = realUrl.openConnection();
-			conn.setConnectTimeout(TIMEOUT_HTTP);// 设置连接超时时间
-			conn.setReadTimeout(TIMEOUT_HTTP);// 设置read超时时间
+//			conn.setConnectTimeout(TIMEOUT_HTTP);// 设置连接超时时间
+//			conn.setReadTimeout(TIMEOUT_HTTP);// 设置read超时时间
 			// 设置通用的请求属性
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
@@ -86,18 +86,4 @@ public class HttpUtil {
 		return result;
 	}
 
-	public static void main(String[] args) {
-		// String xml = sendPost(
-		// "http://45.55.4.64:8080/meetu/userAction!access?",
-		// "user.mobile=13911592475&user.pwd=abc");
-
-		User user = new User();
-		user.setId(0);
-		user.setName("高文");
-		String str = "";
-		String xmlObj = sendPost(
-				"http://localhost:8080/meetu/userAction!update?",
-				str);
-		System.out.println(xmlObj);
-	}
 }

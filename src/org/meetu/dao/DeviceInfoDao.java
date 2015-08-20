@@ -16,11 +16,8 @@ public class DeviceInfoDao {
 	private SessionFactory sessionFactory;
 	
 	public void insert(DeviceInfo device){
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(device);
-		session.getTransaction().commit();
-		session.close();
 	}
 	
 

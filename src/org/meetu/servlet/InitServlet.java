@@ -14,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import org.meetu.cache.Cache;
 import org.meetu.dao.SysParamDao;
 import org.meetu.model.SysParam;
+import org.meetu.service.ISysParamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -28,7 +29,7 @@ public class InitServlet extends HttpServlet {
 	private Log logger = LogFactory.getLog(InitServlet.class);
 	
 	@Autowired
-	private SysParamDao sysParamDao;
+	private ISysParamService sysService;
 	
 	/**
 	 * Constructor of the object.
@@ -49,7 +50,7 @@ public class InitServlet extends HttpServlet {
 		logger.info("InitServlet init初始化资源开始");
 		// 让其获得@Autowired注入的对象,不需要getters/setters
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,config.getServletContext());
-		List<SysParam> sysParamList = sysParamDao.queryAll();
+		List<SysParam> sysParamList = sysService.queryAll();
 		for(SysParam p : sysParamList) {
 			Cache.getCacheMap().put(p.getKey(), p.getValue());//全局缓存(单例)
 		}

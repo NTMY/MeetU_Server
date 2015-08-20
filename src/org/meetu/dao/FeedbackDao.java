@@ -25,11 +25,8 @@ public class FeedbackDao {
 	private SessionFactory sessionFactory;
 	
 	public void insert(Feedback feed) throws Exception {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		session.save(feed);
-		session.getTransaction().commit();
-		session.close();
 	}
 
 		

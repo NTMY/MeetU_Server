@@ -112,13 +112,13 @@ public interface Constant {
 	 */
 	String REL_STATUS_DELETED = "3";
 
-	// 45.55.4.64
-	// 123.57.158.124
+	// 45.55.4.64  digitalocean
+	// 123.57.158.124 aliyun
 	// localhost
 	/**
 	 * SERVER_IP
 	 * */
-	String IP = "123.57.158.124";
+	String IP = "localhost";
 	
 	/**域名*/
 	String DOMAIN = "http://123.57.158.124:8081";
@@ -129,7 +129,7 @@ public interface Constant {
 	/**
 	 * SERVER_PORT
 	 * */
-	String PORT = "8081";
+	String PORT = "8080";
 
 	String PROTOCAL_HTTP = "http";
 

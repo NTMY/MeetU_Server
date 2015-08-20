@@ -19,6 +19,7 @@ import org.meetu.service.IUserService;
 import org.meetu.util.BeanConverter;
 import org.meetu.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -116,7 +117,6 @@ public class UserAction extends ActionSupport {
 			accessDto.setErrMsg("用户接入异常");
 			logger.error(e);
 		} finally {
-//			deviceService.saveOrUpdate(device);//用户设备信息
 			logger.warn("用户接入ACCESS接口返回XML");
 			logger.warn(retXml);
 			out.write(retXml);

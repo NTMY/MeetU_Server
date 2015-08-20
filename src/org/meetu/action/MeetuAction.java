@@ -14,6 +14,8 @@ import org.apache.struts2.ServletActionContext;
 import org.meetu.dto.BaseDto;
 import org.meetu.model.LocationCurr;
 import org.meetu.model.LocationHis;
+import org.meetu.service.ILocationCurrService;
+import org.meetu.service.ILocationHisService;
 import org.meetu.service.impl.LocationCurrServiceImpl;
 import org.meetu.service.impl.LocationHisServiceImpl;
 import org.meetu.util.BeanConverter;
@@ -28,11 +30,14 @@ public class MeetuAction {
 
 	private static Log logger = LogFactory.getLog(MeetuAction.class);
 	
+	/**
+	 * 当使用aop时,必须定义注入接口?定义为实现类时无法注入
+	 * */
 	@Autowired
-	private LocationCurrServiceImpl currService;
+	private ILocationCurrService currService;
 	
 	@Autowired
-	private LocationHisServiceImpl hisService;
+	private ILocationHisService hisService;
 
 	HttpServletRequest request = null;
 
@@ -60,32 +65,10 @@ public class MeetuAction {
 		response = ServletActionContext.getResponse();
 		BaseDto dto = new BaseDto();// 返回的对象(转xml)
 
-		LocationCurr oldCurr = new LocationCurr();
-		oldCurr.setUserId(curr.getUserId());
-
-		List<LocationCurr> isExistList = currService.queryAll(oldCurr);
 		try {
 			out = response.getWriter();
-			if (isExistList == null) {
-				dto.setErrCode(STATUS_FAIL);
-				dto.setErrMsg("DB查询异常");
-				return null;
-			}
-			// 如果在curr当前表中有1条此用户记录,则将老数据迁入his历史表,(这是正常的流程)
-			if (isExistList.size() == 1) {
-				oldCurr = isExistList.get(0);
-				currService.delete(oldCurr);// 在curr当前表中删除
-				LocationHis his = new LocationHis(oldCurr);
-				hisService.insert(his);// 在his历史表中添加
-				// 如果在curr当前表中有多条此用户数据,则不将老数据迁入历史表,直接在当前表删除(这种情况说明有问题)
-			} else if (isExistList.size() > 1) {
-				currService.deleteByUserId(curr.getUserId());
-			}
-			// 在curr当前表中插入新数据
-			currService.insert(curr);
-		} catch (Exception e) {
-			dto.setErrCode(STATUS_FAIL);
-			dto.setErrMsg("上传用户LOCATION信息,SERVER端处理异常");
+			dto = currService.upload(curr);
+		} catch(Exception e) {
 			logger.error(e);
 		} finally {
 			retXml = BeanConverter.bean2xml(dto);
@@ -159,21 +142,6 @@ public class MeetuAction {
 	/**
 	 * getters and setters
 	 * */
-	public LocationCurrServiceImpl getCurrService() {
-		return currService;
-	}
-
-	public void setCurrService(LocationCurrServiceImpl currService) {
-		this.currService = currService;
-	}
-
-	public LocationHisServiceImpl getHisService() {
-		return hisService;
-	}
-
-	public void setHisService(LocationHisServiceImpl hisService) {
-		this.hisService = hisService;
-	}
 
 	public LocationCurr getCurr() {
 		return curr;

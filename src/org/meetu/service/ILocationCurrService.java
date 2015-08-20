@@ -2,6 +2,7 @@ package org.meetu.service;
 
 import java.util.List;
 
+import org.meetu.dto.BaseDto;
 import org.meetu.model.LocationCurr;
 
 public interface ILocationCurrService {
@@ -16,4 +17,14 @@ public interface ILocationCurrService {
 
 	List<LocationCurr> queryNear(LocationCurr curr);
 
+	
+	/**
+	 * MEETU service层处理
+	 * */
+	BaseDto meetu(LocationCurr curr);
+
+	/**
+	 * upload service层处理
+	 * */
+	BaseDto upload(LocationCurr curr);
 }

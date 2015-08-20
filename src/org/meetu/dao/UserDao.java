@@ -21,35 +21,29 @@ public class UserDao {
 
 
 	public int insert(User u) throws Exception {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		// 2 ways : Serializable save()/void persist()
 		int pk = (Integer)session.save(u);
 		log.info("return PK = " + pk);
-		session.getTransaction().commit();
-		session.close();
+//		session.close();
 		return pk;
 	}
 
 	public void update(User u) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		session.update(u);
-		session.getTransaction().commit();
-		session.close();
+//		session.close();
 	}
 
 	public void delete(User u) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		session.delete(u);
-		session.getTransaction().commit();
-		session.close();
+//		session.close();
 	}
 
 	public List<User> selectListAll(User user)
 	{
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select U from User U where 1= 1 ";
 		if (null != user.getId() && !"".equals(user.getId()))
 		{
@@ -62,13 +56,12 @@ public class UserDao {
 		Query query = session.createQuery(sql);
 		List<User> userList = new ArrayList<User>();
 		userList = query.list();
-		session.close();
 		return userList;
 	}
 	
 	public User selectById(User user) throws Exception
 	{
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select U from User U where 1= 1 ";
 		if (null != user.getId() && !"".equals(user.getId()))
 		{
@@ -84,7 +77,7 @@ public class UserDao {
 		} else {
 			user = userList.get(0);
 		}
-		session.close();
+//		session.close();
 		return user;
 	}
 	
@@ -95,7 +88,7 @@ public class UserDao {
 	 * */
 	public List<User> selectByLevel(int level , String oper) throws Exception
 	{
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select U from User U where U.status " + oper  + level;
 		Query query = session.createQuery(sql);
 		List<User> userList = new ArrayList<User>();
@@ -103,7 +96,7 @@ public class UserDao {
 		if(userList == null) { 
 			throw new Exception("SELECT BY LEVEL");
 		}
-		session.close();
+//		session.close();
 		return userList;
 	}
 	

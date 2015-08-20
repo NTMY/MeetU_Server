@@ -20,33 +20,25 @@ public class LocationHisDao {
 	private SessionFactory sessionFactory;
 
 	public void insert(LocationHis his) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
+		log.warn("His Sess  " + session.hashCode());
 		Object obj = session.save(his);
 		log.info("insert return object = " + obj.getClass() + " ===== " + obj);
-		session.getTransaction().commit();
-		session.close();
 	}
 
 	public void update(LocationHis his) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		session.update(his);
-		session.getTransaction().commit();
-		session.close();
 	}
 
 	public void delete(LocationHis his) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		session.delete(his);
-		session.getTransaction().commit();
-		session.close();
 	}
 
 	public List<LocationHis> queryAll(LocationHis his)
 	{
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select HIS from LocationHis HIS where 1= 1 ";
 		if (null != his.getUserId() && !"".equals(his.getUserId())){
 			sql += " and HIS.imei = '" + his.getUserId() + "'";// 
@@ -54,7 +46,6 @@ public class LocationHisDao {
 		Query query = session.createQuery(sql);
 		List<LocationHis> userList = new ArrayList<LocationHis>();
 		userList = query.list();
-		session.close();
 		return userList;
 	}
 

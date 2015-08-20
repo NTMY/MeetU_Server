@@ -24,33 +24,24 @@ public class FriendReqDao {
 	private SessionFactory sessionFactory;
 	
 	public int insert(FriendReq req) throws Exception {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		int pk = (Integer) session.save(req);
 		logger.info("return PK = " + pk);
-		session.getTransaction().commit();
-		session.close();
 		return pk;
 	}
 
 	public void update(FriendReq req) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		session.update(req);
-		session.getTransaction().commit();
-		session.close();
 	}
 
 	public void delete(FriendReq req) {
 		Session session = sessionFactory.openSession();
-		session.beginTransaction();
 		session.delete(req);
-		session.getTransaction().commit();
-		session.close();
 	}
 
 	public List<FriendReq> selectListAll(FriendReq req) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		StringBuffer hql = new StringBuffer("select R from FriendReq R where 1 = 1 ");
 		if (null != req.getReqId() && !"".equals(req.getReqId())) {
 			hql.append(" and R.reqId = '" + req.getReqId() + "'");// id
@@ -58,12 +49,11 @@ public class FriendReqDao {
 		Query query = session.createQuery(hql.toString());
 		List<FriendReq> list = new ArrayList<FriendReq>();
 		list = query.list();
-		session.close();
 		return list;
 	}
 
 	public FriendReq selectById(FriendReq req) throws Exception {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		// from后面是类名，不是表名
 		String hql = "from FriendReq R where R.reqId = :reqId";// 使用命名参数，推荐使用，易读。
 		Query query = session.createQuery(hql);
@@ -79,7 +69,6 @@ public class FriendReqDao {
 		} else {
 			req = list.get(0);
 		}
-		session.close();
 		return req;
 	}
 

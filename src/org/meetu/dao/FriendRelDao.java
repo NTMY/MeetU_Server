@@ -24,24 +24,18 @@ public class FriendRelDao {
 	private SessionFactory sessionFactory;
 	
 	public void insert(FriendRel rel) throws Exception {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Object pk =  session.save(rel);
 		logger.info("return PK = " + pk);
-		session.getTransaction().commit();
-		session.close();
 	}
 
 	public void update(FriendRel rel) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		session.update(rel);
-		session.getTransaction().commit();
-		session.close();
 	}
 
 	public List<FriendRel> selectListAll(FriendRel rel) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		StringBuffer hql = new StringBuffer("select R from FriendReq R where 1 = 1 ");
 //		if (null != rel.getReqId() && !"".equals(rel.getReqId())) {
 //			hql.append(" and R.reqId = '" + rel.getReqId() + "'");// id
@@ -49,12 +43,11 @@ public class FriendRelDao {
 		Query query = session.createQuery(hql.toString());
 		List<FriendRel> list = new ArrayList<FriendRel>();
 		list = query.list();
-		session.close();
 		return list;
 	}
 
 	public List<FriendRel> selectByUserId(Integer userId) throws Exception {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		// from后面是类名，不是表名
 		String hql = "from FriendReq R where R.reqId = :reqId";// 使用命名参数，推荐使用，易读。
 		Query query = session.createQuery(hql);
@@ -65,7 +58,6 @@ public class FriendRelDao {
 //		}
 		List<FriendRel> list = new ArrayList<FriendRel>();
 		list = query.list();
-		session.close();
 		return list;
 	}
 

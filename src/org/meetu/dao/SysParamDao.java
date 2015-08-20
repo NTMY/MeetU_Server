@@ -25,12 +25,11 @@ public class SysParamDao {
 	 * @return 所有数据
 	 * */
 	public List<SysParam> queryAll() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "from SysParam P";
 		Query query = session.createQuery(sql);
 		List<SysParam> list = new ArrayList<SysParam>();
 		list = query.list();
-		session.close();
 		return list;
 	}
 	
