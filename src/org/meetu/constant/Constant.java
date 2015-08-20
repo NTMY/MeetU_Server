@@ -120,7 +120,11 @@ public interface Constant {
 	 * */
 	String IP = "123.57.158.124";
 	
-	String domain = "meetu.gaowen.me";
+	/**域名*/
+	String DOMAIN = "http://123.57.158.124:8081";
+	
+	/**FEEDBACK反馈页面成功提示*/
+	String FEEDBACK_URL = "http://123.57.158.124:8081/feedback/index.html";
 	
 	/**
 	 * SERVER_PORT
