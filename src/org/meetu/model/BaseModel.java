@@ -15,7 +15,7 @@ public class BaseModel implements Serializable,Cloneable {
 	/**
 	 * logger
 	 * */
-	private Log logger = LogFactory.getLog(getClass());
+//	private Log logger = LogFactory.getLog(getClass());
 	
 	/**
 	 * 错误码
@@ -50,7 +50,8 @@ public class BaseModel implements Serializable,Cloneable {
 		try {
 			BeanUtils.copyProperties(this, origin);
 		} catch (IllegalAccessException | InvocationTargetException e) {
-			logger.error(e);
+			e.printStackTrace();
+//			logger.error(e);
 		}
 	}
 	

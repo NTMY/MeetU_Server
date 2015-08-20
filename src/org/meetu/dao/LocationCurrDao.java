@@ -63,28 +63,15 @@ public class LocationCurrDao {
 	 * */
 	public List<LocationCurr> queryNear(LocationCurr curr) {
 		Session session = sessionFactory.openSession();
-		String sql = "select Loc from LocationCurr Loc where 1= 1 ";
-		if (null != curr.getUserId() && !"".equals(curr.getUserId())) {
-			sql += " and Loc.userId <> '" + curr.getUserId() + "'";// 不是自己
-		}
-		if (null != curr.getUploadTime() && !"".equals(curr.getUploadTime())) {
-			sql += " and Loc.uploadTime > '"
-					+ TimeUtil.parseDate2Str(TimeUtil.calcTime(new Date(), "-",
-							2, "hour")) + "'";// 2小时以内
-		}
-		if (null != curr.getMinLat() && !"".equals(curr.getMinLat())) {
-			sql += " and Loc.latitude >= '" + curr.getMinLat() + "'";//
-		}
-		if (null != curr.getMaxLat() && !"".equals(curr.getMaxLat())) {
-			sql += " and Loc.latitude <= '" + curr.getMaxLat() + "'";//
-		}
-		if (null != curr.getMinLong() && !"".equals(curr.getMinLong())) {
-			sql += " and Loc.longitude >= '" + curr.getMinLong() + "'";//
-		}
-		if (null != curr.getMaxLong() && !"".equals(curr.getMaxLong())) {
-			sql += " and Loc.longitude <= '" + curr.getMaxLong() + "'";//
-		}
-		Query query = session.createQuery(sql);
+		StringBuffer hql = new StringBuffer("select Loc from LocationCurr Loc where 1= 1 ");
+		hql.append(" and Loc.userId <> '").append(curr.getUserId()).append("'");// 不能查询出自己
+		hql.append(" and Loc.uploadTime > '").append(TimeUtil.parseDate2Str(TimeUtil.calcTime(new Date(), "-",2, "hour"))).append("'");// 2小时以内
+		//筛选经纬度,画个正方形
+		hql.append(" and Loc.latitude >= '").append(curr.getMinLat()).append("'");//
+		hql.append(" and Loc.latitude <= '").append(curr.getMaxLat()).append("'");//
+		hql.append(" and Loc.longitude >= '").append(curr.getMinLong()).append("'");//
+		hql.append(" and Loc.longitude <= '").append(curr.getMaxLong()).append("'");//
+		Query query = session.createQuery(hql.toString());
 		List<LocationCurr> locList = new ArrayList<LocationCurr>();
 		locList = query.list();
 		session.close();
