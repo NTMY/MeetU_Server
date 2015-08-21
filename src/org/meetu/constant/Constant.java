@@ -41,7 +41,7 @@ public interface Constant {
 			+ BAIDU_LBS_OUTPUT + "&pois=" + BAIDU_LBS_POIS + "&location=";
 
 	/** HTTP超时时间(ms) */
-	int TIMEOUT_HTTP = 10000;
+	int TIMEOUT_HTTP = 30000;
 
 	/** DATA状态 */
 	/** 正常状态 */ 
@@ -118,10 +118,10 @@ public interface Constant {
 	/**
 	 * SERVER_IP
 	 * */
-	String IP = "localhost";
+	String IP = "123.57.158.124";
 	
 	/**域名*/
-	String DOMAIN = "http://123.57.158.124:8081";
+	String DOMAIN = "gaowen.me";
 	
 	/**FEEDBACK反馈页面成功提示*/
 	String FEEDBACK_URL = "http://123.57.158.124:8081/feedback/index.html";
