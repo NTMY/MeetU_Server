@@ -90,45 +90,14 @@ public class MeetuAction {
 	public String meetu() {
 		request = ServletActionContext.getRequest();
 		response = ServletActionContext.getResponse();
-		ListBean<LocationCurr> beans = new ListBean<LocationCurr>();// 返回的对象(转xml)
-
-		LocationCurr oldCurr = new LocationCurr();
-		oldCurr.setUserId(curr.getUserId());
-		
+		ListBean beans = new ListBean();
 		try {
 			out = response.getWriter();
-			List<LocationCurr> isExistList = currService.queryAll(oldCurr);
-			if (isExistList == null) {
-				beans.setErrCode(STATUS_FAIL);
-				beans.setErrMsg("DB查询异常");
-				return null;
-			}
-
-			// 如果在curr当前表中有1条此用户记录,则将老数据迁入his历史表,
-			if (isExistList.size() == 1) {
-				oldCurr = isExistList.get(0);
-				currService.delete(oldCurr);// 在curr当前表中删除
-				LocationHis his = new LocationHis(oldCurr);
-				hisService.insert(his);// 在his历史表中添加
-				// 如果curr当前表中有多条此人记录,则全部删除
-			} else if (isExistList.size() > 1) {
-				currService.deleteByUserId(curr.getUserId());
-			}
-
-			// 在curr当前表中插入新数据
-			currService.insert(curr);
-			// 查找附近的好友(利用当前表)
-			double[] range = RangeCalculator.getSquare(curr.getLatitude(),
-					curr.getLongitude(), 3000);
-			curr.setRange(range);// 设置边界值(查询条件)
-			List list = currService.queryNear(curr);// 查询附近的人
-
-			beans.setList(list);
+			beans = currService.meetu(curr);
 		} catch (Exception e) {
-			beans = new ListBean<>();
-			beans.setErrCode(STATUS_FAIL);
-			beans.setErrMsg("查询附近的人出现异常");
 			logger.error(e);
+			beans.setErrCode(STATUS_FAIL);
+			beans.setErrMsg(e.getCause().toString());
 		} finally {
 			retXml = BeanConverter.bean2xml(beans); // detail数据
 			logger.warn("用户相遇MEETU接口返回XML");

@@ -13,6 +13,9 @@ import org.meetu.dto.BaseDto;
 import org.meetu.model.LocationCurr;
 import org.meetu.model.LocationHis;
 import org.meetu.service.ILocationCurrService;
+import org.meetu.util.BeanConverter;
+import org.meetu.util.ListBean;
+import org.meetu.util.RangeCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -56,13 +59,58 @@ public class LocationCurrServiceImpl implements ILocationCurrService {
 		return list;
 	}
 
+	/**
+	 * 
+	 * */
 	@Override
-	public BaseDto meetu(LocationCurr curr) {
-		return null;
+	public ListBean meetu(LocationCurr curr) {
+		ListBean<LocationCurr> beans = new ListBean<LocationCurr>();// 返回的对象(转xml)
+
+		LocationCurr oldCurr = new LocationCurr();
+		oldCurr.setUserId(curr.getUserId());
+		
+		try {
+			List<LocationCurr> isExistList = currDao.queryAll(oldCurr);
+			if (isExistList == null) {
+				beans.setErrCode(STATUS_FAIL);
+				beans.setErrMsg("DB查询异常");
+				return null;
+			}
+
+			// 如果在curr当前表中有1条此用户记录,则将老数据迁入his历史表,
+			if (isExistList.size() == 1) {
+				oldCurr = isExistList.get(0);
+				currDao.delete(oldCurr);// 在curr当前表中删除
+				LocationHis his = new LocationHis(oldCurr);
+				hisDao.insert(his);// 在his历史表中添加
+				// 如果curr当前表中有多条此人记录,则全部删除
+			} else if (isExistList.size() > 1) {
+				currDao.deleteByUserId(curr.getUserId());
+			}
+
+			// 在curr当前表中插入新数据
+			currDao.insert(curr);
+			// 查找附近的好友(利用当前表)
+			double[] range = RangeCalculator.getSquare(curr.getLatitude(),
+					curr.getLongitude(), 3000);
+			curr.setRange(range);// 设置边界值(查询条件)
+			List list = currDao.queryNear(curr);// 查询附近的人
+
+			beans.setList(list);
+		} catch (Exception e) {
+			beans = new ListBean<>();
+			beans.setErrCode(STATUS_FAIL);
+			beans.setErrMsg("查询附近的人出现异常");
+			logger.error(e);
+		}
+		return beans;
 	}
 
 	
 	
+	/**
+	 * 
+	 * */
 	@Override
 	public BaseDto upload(LocationCurr curr) {
 		BaseDto dto = new BaseDto();// 返回的对象(转xml)

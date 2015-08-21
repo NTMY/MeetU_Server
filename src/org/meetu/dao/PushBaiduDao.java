@@ -26,8 +26,15 @@ public class PushBaiduDao {
 		session.saveOrUpdate(push);
 	}
 
+	/**
+	 * 通过用户查询用户推送信息
+	 * */
 	public List queryPushInfo(List userIdList) {
+		if(userIdList == null || userIdList.size() == 0) {
+			return null;
+		}
 		Session session = sessionFactory.getCurrentSession();
+		//list.toString()之后 带[],要去掉
 		String param = userIdList.toString().replace("[","").replace("]","");
 		String sql = "select u.id , u.mobile , p.channelId from u_user u join push_info_baidu p on u.id = p.userId where u.id in ("
 				+ param + ")";

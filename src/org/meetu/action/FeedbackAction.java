@@ -22,7 +22,9 @@ import org.meetu.model.Feedback;
 import org.meetu.model.PushInfoBaidu;
 import org.meetu.model.User;
 import org.meetu.service.IFeedbackService;
+import org.meetu.service.IPushService;
 import org.meetu.service.IUserService;
+import org.meetu.service.impl.PushBaiduServiceImpl;
 import org.meetu.util.BeanConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -42,7 +44,9 @@ public class FeedbackAction {
 	private IUserService userService;
 
 	@Autowired
-	private PushBaiduDao pushDao;
+	private IPushService pushService;
+	
+	
 	
 	
 	HttpServletRequest req;
@@ -81,7 +85,12 @@ public class FeedbackAction {
 			while(idIt.hasNext()) {
 				ids.add(idIt.next().getId());
 			}
-			List pushList = pushDao.queryPushInfo(ids);
+			//查询出所有root管理员的推送用户信息,准备给他们推送
+			List pushList = pushService.queryPushInfo(ids);
+			//如果查询不到root级别管理员,直接返回
+			if(pushList == null || pushList.size() ==0) {
+				return null;
+			}
 			Iterator<Object[]> it = pushList.iterator();
 			int count = 0;
 			while (it.hasNext()) {

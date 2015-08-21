@@ -1,5 +1,7 @@
 package org.meetu.service.impl;
 
+import java.util.List;
+
 import org.meetu.dao.PushBaiduDao;
 import org.meetu.model.PushInfoBaidu;
 import org.meetu.service.IPushService;
@@ -18,6 +20,11 @@ public class PushBaiduServiceImpl implements IPushService {
 		dao.insertOrUpdate(push);
 	}
 
+	@Override
+	public List<PushInfoBaidu> queryPushInfo(List userIdList) {
+		List<PushInfoBaidu> list = dao.queryPushInfo(userIdList);
+		return list;
+	}
 	
 	@Override
 	public void push(String[] channelIds) {
@@ -29,4 +36,7 @@ public class PushBaiduServiceImpl implements IPushService {
 	public void pushToAll() {
 		
 	}
+
+
+
 }
