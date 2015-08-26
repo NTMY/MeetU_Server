@@ -1,13 +1,8 @@
 package org.meetu.client.handler;
 
 import static org.meetu.client.util.HttpUtil.sendPost;
-import static org.meetu.constant.Constant.URL;
+import static org.meetu.constant.Constant.*;
 
-
-
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.meetu.client.listener.FeedbackListener;
 import org.meetu.dto.BaseDto;
 import org.meetu.model.Feedback;
@@ -19,7 +14,6 @@ import org.meetu.util.BeanConverter;
  * */
 public class FeedbackHandler {
 	
-	Log logger = LogFactory.getLog(FeedbackHandler.class);
 	/**
 	 * 用户提交反馈信息
 	 * */
@@ -28,7 +22,6 @@ public class FeedbackHandler {
 		StringBuffer param = new StringBuffer();
 		param.append("feed.userId=").append(feed.getUserId()).append("&feed.content=").append(feed.getContent());
 		String xml = sendPost(URL + subUrl, param.toString());
-		logger.info("xml == " + xml);
 		BaseDto dto = (BaseDto) BeanConverter.xmlToBean(xml);
 		if (listener != null) {
 			listener.feedback(dto);

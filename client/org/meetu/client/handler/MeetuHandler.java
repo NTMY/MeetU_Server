@@ -1,9 +1,5 @@
 package org.meetu.client.handler;
 
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.meetu.client.listener.MeetuListener;
 import org.meetu.client.listener.MeetuUploadListener;
 import org.meetu.dto.BaseDto;
@@ -18,7 +14,6 @@ import static org.meetu.constant.Constant.*;
  * 处理meetu过程 供客户端调用
  * */
 public class MeetuHandler {
-	private static Log logger = LogFactory.getLog(MeetuHandler.class);
 
 	/**
 	 * 上报用户地理位置信息,并查找附近的人<br>
@@ -34,7 +29,6 @@ public class MeetuHandler {
 				.append(curr.getAddress()).append("&curr.business=")
 				.append(curr.getBusiness());
 		String xml = sendPost(URL + subUrl, param.toString());
-		logger.info("xml == " + xml);
 		ListBean<LocationCurr> beans = (ListBean<LocationCurr>) BeanConverter.xmlToBean(xml);
 		
 		if (listener != null) {
@@ -56,7 +50,6 @@ public class MeetuHandler {
 				.append(curr.getAddress()).append("&curr.business=")
 				.append(curr.getBusiness());
 		String xml = sendPost(URL + subUrl, param.toString());
-		logger.info("xml == " + xml);
 		BaseDto dto = (BaseDto) BeanConverter.xmlToBean(xml);
 		if (listener != null) {
 			listener.upload(dto);

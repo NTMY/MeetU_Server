@@ -22,38 +22,57 @@ public class UserDao {
 
 	public int insert(User u) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
-		// 2 ways : Serializable save()/void persist()
 		int pk = (Integer)session.save(u);
 		log.info("return PK = " + pk);
-//		session.close();
 		return pk;
 	}
 
 	public void update(User u) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(u);
-//		session.close();
 	}
 
 	public void delete(User u) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(u);
-//		session.close();
 	}
 
 	public List<User> selectListAll(User user)
 	{
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select U from User U where 1= 1 ";
+		StringBuffer hql = new StringBuffer("select U from User U where 1= 1 ");
+		//通过id查询
 		if (null != user.getId() && !"".equals(user.getId()))
 		{
-			sql += " and U.id = '" + user.getId() + "'";// id
+			hql.append(" and U.id = '").append(user.getId()).append("'");
 		}
+		//通过手机号查询
 		if (null != user.getMobile() && !"".equals(user.getMobile()))
 		{
-			sql += " and U.mobile = '" + user.getMobile() + "'";// id
+			hql.append(" and U.mobile = '").append(user.getMobile()).append("'");
 		}
-		Query query = session.createQuery(sql);
+		//通过姓名查询
+		if(null != user.getName() && !"".equals(user.getName())) 
+		{
+			hql.append(" and U.name = '").append(user.getName()).append("'");
+		}
+		//通过昵称查询
+		if(null != user.getNickname() && !"".equals(user.getNickname())) 
+		{
+			hql.append(" and U.nickname = ").append(user.getNickname()).append("'");
+		}
+		//通过QQ查询
+		if(null != user.getQq() && !"".equals(user.getQq())) 
+		{
+			hql.append(" and U.qq = '").append(user.getQq()).append("'");
+		}
+		//通过微信号查询
+		if(null != user.getWechat() && !"".equals(user.getWechat()))
+		{
+			hql.append(" and U.wechat = '").append(user.getWechat()).append("'");
+		}
+		
+		Query query = session.createQuery(hql.toString());
 		List<User> userList = new ArrayList<User>();
 		userList = query.list();
 		return userList;
@@ -100,6 +119,6 @@ public class UserDao {
 		return userList;
 	}
 	
-	
 
+	
 }

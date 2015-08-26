@@ -28,6 +28,8 @@ import org.meetu.service.impl.PushBaiduServiceImpl;
 import org.meetu.util.BeanConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.baidu.yun.push.exception.PushClientException;
+import com.baidu.yun.push.exception.PushServerException;
 import com.baidu.yun.push.sample.AndroidPushMsgToSingleDevice;
 
 /**
@@ -89,10 +91,12 @@ public class FeedbackAction {
 			List pushList = pushService.queryPushInfo(ids);
 			//如果查询不到root级别管理员,直接返回
 			if(pushList == null || pushList.size() ==0) {
+				logger.warn("查询不到ROOT级别管理员(NO ROOT)");
 				return null;
 			}
 			Iterator<Object[]> it = pushList.iterator();
 			int count = 0;
+			PushBaiduParam[] params = new PushBaiduParam[pushList.size()];
 			while (it.hasNext()) {
 				Object[] obj = it.next();
 				PushBaiduParam p = new PushBaiduParam();//构造推送参数对象
@@ -100,13 +104,15 @@ public class FeedbackAction {
 //				p.setChannelId("3545744288033740498"); //zte 3605930564105372081  //moto 3545744288033740498
 				p.setType(Constant.PUSHTYPE_PUSH);// 1推送通知 0透传消息
 				p.setTitle("有人反馈信息啦!");
-				p.setDeviceType(3);
+				p.setDeviceType(3);//3android 4ios
 				p.setDesc("反馈人 : " + feed.getUserId() + "反馈内容 : " + feed.getContent());
-				logger.info("---------- push to      " + ids.get(count));
-				logger.info("---------- push content " + p.getDesc());
-				AndroidPushMsgToSingleDevice.push(p);
+				params[count] = p;
 				count ++;
 			}
+			pushService.pushToTarget(params);//调用百度推送
+		} catch(PushClientException | PushServerException pushEx) {
+			logger.error(pushEx);
+			dto = new BaseDto(STATUS_FAIL, "反馈信息提交成功,推送失败");
 		} catch (Exception e) {
 			logger.error(e);
 			dto = new BaseDto(STATUS_FAIL, "用户反馈信息失败,请重试");

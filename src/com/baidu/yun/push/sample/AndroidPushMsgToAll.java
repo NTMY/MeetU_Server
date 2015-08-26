@@ -32,7 +32,7 @@ public class AndroidPushMsgToAll extends PushBaiduDef {
 		pushClient.setChannelLogHandler(new YunLogHandler() {
 			@Override
 			public void onHandle(YunLogEvent event) {
-				System.out.println(event.getMessage());
+				logger.info(event.getMessage());
 			}
 		});
 
@@ -40,14 +40,14 @@ public class AndroidPushMsgToAll extends PushBaiduDef {
 			// 4. specify request arguments
 			PushMsgToAllRequest request = new PushMsgToAllRequest()
 					.addMsgExpires(new Integer(3600))
-					.addMessageType(0) //0:透传消息 1:推送通知
-					.addMessage("Hello Baidu push") 
+					.addMessageType(1) //0:透传消息 1:推送通知
+					.addMessage("Content")//内容 
 					.addSendTime(System.currentTimeMillis() / 1000 + 120) // 设置定时推送时间，必需超过当前时间一分钟，单位秒.实例2分钟后推送
-					.addDeviceType(3);
+					.addDeviceType(3);//3:android 4:ios
 			// 5. http request
 			PushMsgToAllResponse response = pushClient.pushMsgToAll(request);
 			// Http请求结果解析打印
-			System.out.println("msgId: " + response.getMsgId() + ",sendTime: "
+			logger.info("msgId: " + response.getMsgId() + ",sendTime: "
 					+ response.getSendTime() + ",timerId: "
 					+ response.getTimerId());
 		} catch (PushClientException e) {
@@ -60,7 +60,7 @@ public class AndroidPushMsgToAll extends PushBaiduDef {
 			if (BaiduPushConstants.ERROROPTTYPE) {
 				throw e;
 			} else {
-				System.out.println(String.format(
+				logger.info(String.format(
 						"requestId: %d, errorCode: %d, errorMessage: %s",
 						e.getRequestId(), e.getErrorCode(), e.getErrorMsg()));
 			}

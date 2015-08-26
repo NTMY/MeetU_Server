@@ -124,15 +124,22 @@ drop table if exists push_info_baidu;
 create table push_info_baidu(
 	imei varchar(32) comment '硬件IMEI',
 	userId int(16) comment 'meetu系统用户id',
-	userId_push varchar(32) comment '推送系统userId',
 	channelId varchar(32) comment '推送系统channelId',
 	primary key(imei)
 ) comment '百度推送用户信息表';
 
 
+insert into push_info_baidu values('motoXpro',1,'3545744288033740498');
+insert into push_info_baidu values('zte',2,'3605930564105372081');
 
 
-
+drop table if exists u_friend_msg;
+create table u_friend_msg(
+	reqId int(16) primary key comment '关联好友申请表的主键',
+	userId int(16) comment '留言人id', 
+	msg varchar(512) comment '留言内容',
+	msgDate timestamp
+) comment '好友申请相互留言表';
 
 
 

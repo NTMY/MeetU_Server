@@ -1,6 +1,8 @@
 package org.meetu.action;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,9 +19,9 @@ import org.meetu.model.User;
 import org.meetu.service.IDeviceInfoService;
 import org.meetu.service.IUserService;
 import org.meetu.util.BeanConverter;
+import org.meetu.util.ListBean;
 import org.meetu.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -37,9 +39,6 @@ public class UserAction extends ActionSupport {
 	@Autowired
 	private IUserService userService;
 
-	@Autowired
-	private IDeviceInfoService deviceService;
-	
 	
 	HttpServletRequest request = null;
 
@@ -56,10 +55,7 @@ public class UserAction extends ActionSupport {
 	 * STRUTS2 传递参数对象
 	 * */
 	private User user;
-	/**
-	 * STRUTS2 传递参数对象
-	 * */
-	private DeviceInfo device;
+	
 	/**
 	 * 用户注册/登录
 	 * 
@@ -163,6 +159,36 @@ public class UserAction extends ActionSupport {
 	}
 
 	
+	/**
+	 * 查询用户
+	 * */
+	public String query() {
+		request = ServletActionContext.getRequest();
+		response = ServletActionContext.getResponse();
+		List<User> list = new ArrayList<>();
+		ListBean<User> beans = new ListBean<>();//返回的对象
+		try {
+			out = response.getWriter();
+			//查询用户
+			list = userService.queryList(user);
+			beans.setList(list);
+		} catch (IOException e) {
+			logger.error(e);
+			beans.setErrCode(STATUS_FAIL);
+			beans.setErrMsg("查询用户失败");
+		} finally {
+			retXml = BeanConverter.bean2xml(beans);
+			logger.warn("查询用户QUERY接口返回XML");
+			logger.warn(retXml);
+			out.write(retXml);
+			out.close();
+		}
+		
+		return null;
+		
+	}
+	
+	
 	/************************************************************
 	 * getters and setters
 	 *************************************************************/
@@ -175,17 +201,4 @@ public class UserAction extends ActionSupport {
 		this.user = user;
 	}
 
-	/**
-	 * @return the device
-	 */
-	public DeviceInfo getDevice() {
-		return device;
-	}
-
-	/**
-	 * @param device the device to set
-	 */
-	public void setDevice(DeviceInfo device) {
-		this.device = device;
-	}
 }

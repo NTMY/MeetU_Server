@@ -2,6 +2,8 @@ package org.meetu.model;
 
 import java.util.Date;
 
+import org.meetu.model.key.FriendRelPK;
+
 /**
  * 好友关系实体类
  * 
@@ -17,12 +19,11 @@ public class FriendRel extends BaseModel {
 
 	private static final long serialVersionUID = -7425004151481819899L;
 
-	/** 用户id */
-	private Integer userId;
-
-	/** 好友id */
-	private Integer friendId;
-
+	/**
+	 * 此表联合主键
+	 * */
+	private FriendRelPK pk;
+	
 	/** 好友状态 0:正常 1:黑名单 2:已删除 */
 	private String statusRel;
 
@@ -34,36 +35,6 @@ public class FriendRel extends BaseModel {
 	 * */
 	public FriendRel() {
 
-	}
-
-	/**
-	 * @return the userId
-	 */
-	public Integer getUserId() {
-		return userId;
-	}
-
-	/**
-	 * @param userId
-	 *            the userId to set
-	 */
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	/**
-	 * @return the friendId
-	 */
-	public Integer getFriendId() {
-		return friendId;
-	}
-
-	/**
-	 * @param friendId
-	 *            the friendId to set
-	 */
-	public void setFriendId(Integer friendId) {
-		this.friendId = friendId;
 	}
 
 	/**
@@ -101,6 +72,20 @@ public class FriendRel extends BaseModel {
 	 */
 	public void setStatusRel(String statusRel) {
 		this.statusRel = statusRel;
+	}
+
+	/**
+	 * @return the pk
+	 */
+	public FriendRelPK getPk() {
+		return pk;
+	}
+
+	/**
+	 * @param pk the pk to set
+	 */
+	public void setPk(FriendRelPK pk) {
+		this.pk = pk;
 	}
 
 }

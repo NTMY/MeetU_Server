@@ -36,7 +36,7 @@ public class FriendRelDao {
 
 	public List<FriendRel> selectListAll(FriendRel rel) {
 		Session session = sessionFactory.getCurrentSession();
-		StringBuffer hql = new StringBuffer("select R from FriendReq R where 1 = 1 ");
+		StringBuffer hql = new StringBuffer("select R from FriendRel R where 1 = 1 ");
 //		if (null != rel.getReqId() && !"".equals(rel.getReqId())) {
 //			hql.append(" and R.reqId = '" + rel.getReqId() + "'");// id
 //		}
@@ -49,7 +49,7 @@ public class FriendRelDao {
 	public List<FriendRel> selectByUserId(Integer userId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		// from后面是类名，不是表名
-		String hql = "from FriendReq R where R.reqId = :reqId";// 使用命名参数，推荐使用，易读。
+		String hql = "from FriendRel R where R.userId = :userId";// 使用命名参数，推荐使用，易读。
 		Query query = session.createQuery(hql);
 //		if (rel.getReqId() != null && !rel.getReqStatus().equals("")) {
 //			query.setInteger("reqId", rel.getReqId());

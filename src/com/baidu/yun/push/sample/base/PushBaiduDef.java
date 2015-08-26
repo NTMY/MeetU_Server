@@ -1,5 +1,7 @@
 package com.baidu.yun.push.sample.base;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.meetu.cache.Cache;
 import org.meetu.constant.Constant;
 
@@ -10,6 +12,7 @@ import com.baidu.yun.push.auth.PushKeyPair;
  * */
 public class PushBaiduDef {
 
+	public static Log logger = LogFactory.getLog(PushBaiduDef.class);
 	/**
 	 * 定义参数对象,不用每个类都定义一遍了,太多了
 	 * */

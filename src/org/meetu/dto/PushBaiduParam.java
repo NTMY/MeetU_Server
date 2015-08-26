@@ -1,14 +1,23 @@
 package org.meetu.dto;
 
 /**
- * 推送参数
+ * 封装推送参数
  * */
 public class PushBaiduParam {
 	
+	/**
+	 * 绑定的channelId
+	 * */
 	private String channelId;
 	
+	/**
+	 * 推送标题
+	 * */
 	private String title;
 	
+	/**
+	 * 推送详细内容
+	 * */
 	private String desc;
 
 	/**
@@ -16,7 +25,8 @@ public class PushBaiduParam {
 	 * */
 	private int type;
 	
-	/**deviceType => 3:android, 4:ios*/
+	/**deviceType设备类型
+	 * 3:android 4:ios*/
 	private int deviceType;
 	
 	

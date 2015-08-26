@@ -13,20 +13,19 @@ public interface Constant {
 
 	/** 访问令牌，可通过该值获得开发者app的信息 */
 	String BAIDU_PUSH_APIKEY = "BAIDU_PUSH_APIKEY";
-	
+
 	/** 与apiKey成对出现，用于app的合法身份验证 */
 	String BAIDU_PUSH_SECRETKEY = "BAIDU_PUSH_SECRETKEY";
-	
-	/**value为对象*/
+
+	/** value为对象 */
 	String BAIDU_PUSH_PAIR = "BAIDU_PUSH_PAIR";
-	
-	/**value为对象*/
+
+	/** value为对象 */
 	String BAIDU_PUSH_CLIENT = "BAIDU_PUSH_CLIENT";
-	
-	
-	/**PUSH CHANNELID临时测试用MOTO X PRO*/
+
+	/** PUSH CHANNELID临时测试用MOTO X PRO */
 	String channelId = "3545744288033740498";
-	
+
 	/** 百度LBS服务输出数据格式 */
 	String BAIDU_LBS_OUTPUT = "xml";
 
@@ -44,13 +43,13 @@ public interface Constant {
 	int TIMEOUT_HTTP = 30000;
 
 	/** DATA状态 */
-	/** 正常状态 */ 
+	/** 正常状态 */
 	String USER_STATUS_COMMON = "0";
 
-	/** 冻结状态 */ 
+	/** 冻结状态 */
 	String USER_STATUS_FROZEN = "10";
 
-	/** 管理员级别 90-98*/
+	/** 管理员级别 90-98 */
 	String USER_STATUS_ADMIN = "90";
 	/** ROOT用户级别(最高) */
 	String USER_STATUS_ROOT = "99";
@@ -62,7 +61,6 @@ public interface Constant {
 	String STATUS_ILLEGAL_PARAM = "2";
 	/** 登录异常 */
 	String STATUS_LOGIN_ERR = "3";
-	
 
 	/** 状态为注册 */
 	String ACCESS_STATUS_REG = "REG";
@@ -112,20 +110,20 @@ public interface Constant {
 	 */
 	String REL_STATUS_DELETED = "3";
 
-	// 45.55.4.64  digitalocean
+	// 45.55.4.64 digitalocean
 	// 123.57.158.124 aliyun
 	// localhost
 	/**
 	 * SERVER_IP
 	 * */
-	String IP = "123.57.158.124";
-	
-	/**域名*/
+	String IP = "localhost";
+
+	/** 域名 */
 	String DOMAIN = "gaowen.me";
-	
-	/**FEEDBACK反馈页面成功提示*/
+
+	/** FEEDBACK反馈页面成功提示 */
 	String FEEDBACK_URL = "http://123.57.158.124:8081/feedback/index.html";
-	
+
 	/**
 	 * SERVER_PORT
 	 * */
@@ -141,12 +139,25 @@ public interface Constant {
 
 	String OS_NAME_ANDROID = "ANDROID";
 	String OS_NAME_IOS = "IOS";
-	
+
 	/** 头像上传的路径 */
 	String PIC_PATH = "D:\\";
-	
+
 	/** 推送 */
 	int PUSHTYPE_PUSH = 1;
 	/** 透传消息 */
 	int PUSHTYPE_MSG = 0;
+
+	/** 添加好友途径:手机 */
+	String REQ_WAY_MOBILE = "MOBILE";
+	/** 添加好友途径:姓名 */
+	String REQ_WAY_NAME = "NAME";
+	/** 添加好友途径:昵称 */
+	String REQ_WAY_NICKNAME = "NICKNAME";
+	/** 添加好友途径:QQ */
+	String REQ_WAY_QQ = "QQ";
+	/** 添加好友途径:微信 */
+	String REQ_WAY_WECHAT = "WECHAT";
+	/** 添加好友途径:邮件 */
+	String REQ_WAY_EMAIL = "EMAIL";
 }

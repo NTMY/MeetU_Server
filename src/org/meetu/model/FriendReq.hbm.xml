@@ -5,8 +5,8 @@
 
 <hibernate-mapping package="org.meetu.model">
 
-	<class name="FriendReq" table="u_friends_req" dynamic-update="true">
-		<id name="reqId" column="reqId">
+	<class name="FriendReq" table="u_friends_req" dynamic-update="true" select-before-update="true">
+		<id name="reqId" column="reqId" type="java.lang.Integer">
 			<generator class="identity" />
 		</id>
 		<property name="reqUserId" column="reqUserId" type="java.lang.Integer" />

@@ -33,7 +33,7 @@ public class AndroidPushMsgToSingleDevice extends PushBaiduDef {
 		pushClient.setChannelLogHandler(new YunLogHandler() {
 			@Override
 			public void onHandle(YunLogEvent event) {
-				System.out.println(event.getMessage());
+				logger.info(event.getMessage());
 			}
 		});
 
@@ -59,13 +59,13 @@ public class AndroidPushMsgToSingleDevice extends PushBaiduDef {
 					// 1：通知,0:透传消息. 默认为0 注：IOS只有通知.
 					.addMessageType(p.getType())
 					.addMessage(notification.toString())
-					.addDeviceType(3);// deviceType =>
-														// 3:android, 4:ios
+					// deviceType => 3:android, 4:ios
+					.addDeviceType(3);
 			// 5. http request
 			PushMsgToSingleDeviceResponse response = pushClient
 					.pushMsgToSingleDevice(request);
 			// Http请求结果解析打印
-			System.out.println("msgId: " + response.getMsgId() + ",sendTime: "
+			logger.info("msgId: " + response.getMsgId() + ",sendTime: "
 					+ response.getSendTime());
 		} catch (PushClientException e) {
 			/*
@@ -80,7 +80,7 @@ public class AndroidPushMsgToSingleDevice extends PushBaiduDef {
 			if (BaiduPushConstants.ERROROPTTYPE) {
 				throw e;
 			} else {
-				System.out.println(String.format(
+				logger.info(String.format(
 						"requestId: %d, errorCode: %d, errorMessage: %s",
 						e.getRequestId(), e.getErrorCode(), e.getErrorMsg()));
 			}

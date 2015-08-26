@@ -18,7 +18,7 @@
 		<property name="defaultAutoCommit" value="true" />
 		<!-- 45.55.4.64 -->
 		<!-- 123.57.158.124 -->
-		<property name="url" value="jdbc:mysql://123.57.158.124:3306/meetu" />
+		<property name="url" value="jdbc:mysql://localhost:3306/meetu" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 		<property name="maxActive" value="100" />
@@ -37,6 +37,7 @@
 				<value>org/meetu/model/LocationCurr.hbm.xml</value>
 				<value>org/meetu/model/LocationHis.hbm.xml</value>
 				<value>org/meetu/model/FriendReq.hbm.xml</value>
+				<value>org/meetu/model/FriendRel.hbm.xml</value>
 				<value>org/meetu/model/Feedback.hbm.xml</value>
 			</list>
 		</property>
@@ -98,7 +99,8 @@
             <tx:method name="query*" propagation="REQUIRED" read-only="true"/>
             
             <tx:method name="upload*" propagation="REQUIRED" />
-            <tx:method name="meetu*" propagation="REQUIRED" />  
+            <tx:method name="meetu*" propagation="REQUIRED" />
+            <tx:method name="deal*" propagation="REQUIRED" />  
         </tx:attributes>  
     </tx:advice>   
     <!-- 需要引入aop的命名空间 -->  

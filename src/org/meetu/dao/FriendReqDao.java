@@ -22,7 +22,7 @@ public class FriendReqDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public int insert(FriendReq req) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		int pk = (Integer) session.save(req);
@@ -36,15 +36,21 @@ public class FriendReqDao {
 	}
 
 	public void delete(FriendReq req) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.delete(req);
 	}
 
 	public List<FriendReq> selectListAll(FriendReq req) {
 		Session session = sessionFactory.getCurrentSession();
-		StringBuffer hql = new StringBuffer("select R from FriendReq R where 1 = 1 ");
+		StringBuffer hql = new StringBuffer(
+				"select R from FriendReq R where 1 = 1 ");
 		if (null != req.getReqId() && !"".equals(req.getReqId())) {
 			hql.append(" and R.reqId = '" + req.getReqId() + "'");// id
+		}
+		// 被申请人
+		if (null != req.getReqFriendId() && !"".equals(req.getReqFriendId())) {
+			hql.append(" and R.reqFriendId = '").append(req.getReqFriendId())
+					.append("'");
 		}
 		Query query = session.createQuery(hql.toString());
 		List<FriendReq> list = new ArrayList<FriendReq>();
@@ -71,6 +77,5 @@ public class FriendReqDao {
 		}
 		return req;
 	}
-
 
 }

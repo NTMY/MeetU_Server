@@ -30,12 +30,6 @@ public class PushInfoBaidu extends BaseModel {
 	private Integer userId;
 
 	/**
-	 * 百度推送方userId
-	 * */
-	@Column(name = "userId_push")
-	private String userId_push;
-
-	/**
 	 * 百度推送方硬件标识
 	 * */
 	@Column(name = "channelId", nullable = false)
@@ -51,27 +45,10 @@ public class PushInfoBaidu extends BaseModel {
 	/**
 	 * 构造方法
 	 * */
-	public PushInfoBaidu(int userId, String userId_push, String channelId) {
+	public PushInfoBaidu(int userId, String channelId) {
 		super();
 		this.userId = userId;
-		this.userId_push = userId_push;
 		this.channelId = channelId;
-	}
-
-
-	/**
-	 * @return the userId_push
-	 */
-	public String getUserId_push() {
-		return userId_push;
-	}
-
-	/**
-	 * @param userId_push
-	 *            the userId_push to set
-	 */
-	public void setUserId_push(String userId_push) {
-		this.userId_push = userId_push;
 	}
 
 	/**
