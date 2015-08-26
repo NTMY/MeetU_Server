@@ -18,7 +18,7 @@
 		<property name="defaultAutoCommit" value="true" />
 		<!-- 45.55.4.64 -->
 		<!-- 123.57.158.124 -->
-		<property name="url" value="jdbc:mysql://localhost:3306/meetu" />
+		<property name="url" value="jdbc:mysql://123.57.158.124:3306/meetu" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 		<property name="maxActive" value="100" />
@@ -100,7 +100,7 @@
             
             <tx:method name="upload*" propagation="REQUIRED" />
             <tx:method name="meetu*" propagation="REQUIRED" />
-            <tx:method name="deal*" propagation="REQUIRED" />  
+            <tx:method name="deal*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>  
         </tx:attributes>  
     </tx:advice>   
     <!-- 需要引入aop的命名空间 -->  

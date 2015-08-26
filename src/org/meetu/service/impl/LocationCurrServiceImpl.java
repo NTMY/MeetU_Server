@@ -98,10 +98,12 @@ public class LocationCurrServiceImpl implements ILocationCurrService {
 
 			beans.setList(list);
 		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动回滚
 			beans = new ListBean<>();
 			beans.setErrCode(STATUS_FAIL);
 			beans.setErrMsg("查询附近的人出现异常");
 			logger.error(e);
+			e.printStackTrace();
 		}
 		return beans;
 	}

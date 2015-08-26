@@ -23,7 +23,7 @@ public class FriendRelDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public void insert(FriendRel rel) throws Exception {
+	public void insert(FriendRel rel) {
 		Session session = sessionFactory.getCurrentSession();
 		Object pk =  session.save(rel);
 		logger.info("return PK = " + pk);

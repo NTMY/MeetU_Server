@@ -121,9 +121,13 @@ public class FriendAction extends ActionSupport {
 		} catch(Exception e) {
 			logger.error(e.getStackTrace());
 			e.printStackTrace();
+			dealDto.setErrCode(STATUS_FAIL);
+			dealDto.setErrMsg("处理好友申请DB异常");
 		} finally{
 			xml = BeanConverter.bean2xml(dealDto);
 			out.write(xml);
+			logger.warn("处理好友请求返回的XML是");
+			logger.warn(xml);
 			out.close();
 		}
 		

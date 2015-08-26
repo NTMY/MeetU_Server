@@ -16,6 +16,7 @@ import org.meetu.model.key.FriendRelPK;
 import org.meetu.service.IFriendReqService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 @Service
 public class FriendReqServiceImpl implements IFriendReqService {
@@ -54,24 +55,23 @@ public class FriendReqServiceImpl implements IFriendReqService {
 	}
 
 	@Override
-	public FriendReqDealDto dealFriendReq(FriendReq req) {
+	public FriendReqDealDto dealFriendReq(FriendReq req) throws Exception {
 		FriendReqDealDto dealDto = new FriendReqDealDto();
-		try {
 			// JDK7+才支持String的switch case
 			switch (req.getReqStatus()) {
 			case REQ_STATUS_AGREE: {
 				// 同意 1更新REQ表 2插入REL表
 				FriendRel rel = new FriendRel();
 				FriendRelPK pk = new FriendRelPK();
-				rel.setPk(pk);
 				pk.setUserId(req.getReqUserId());
 				pk.setFriendId(req.getReqFriendId());
+				rel.setPk(pk);
 				rel.setHappenTime(new Date());
 				rel.setStatusRel(REL_STATUS_NORMAL);// 设置好友关系为正常
 				relDao.insert(rel);
-				pk.setUserId(req.getReqFriendId());
-				pk.setFriendId(req.getReqUserId());
-				relDao.insert(rel);
+//				pk.setUserId(req.getReqFriendId());
+//				pk.setFriendId(req.getReqUserId());
+//				relDao.insert(rel);
 				req.setReqStatus(REQ_STATUS_AGREE);// 设置请求关系为"已同意"
 				break;
 			}
@@ -99,11 +99,8 @@ public class FriendReqServiceImpl implements IFriendReqService {
 				dealDto.setErrMsg("处理好友申请异常,status参数异常");
 				break;
 			}
-			reqDao.update(req);
-		} catch (Exception e) {
-			logger.error(e);
-			logger.error(e.getStackTrace());
-		}
+		reqDao = null;
+		reqDao.update(req);
 		return dealDto;
 	}
 

@@ -5,11 +5,11 @@
 
 <hibernate-mapping package="org.meetu.model">
 
-	<class name="FriendRel" table="u_friends_rel" dynamic-update="true">
+	<class name="FriendRel" table="u_friends_rel" dynamic-update="true" select-before-update="true">
         <composite-id name="pk" class="org.meetu.model.key.FriendRelPK"><!--联合主键，表中的主键为(userId,friendId)-->  
         <!--name及cardID为Student类中的属性-->
-           <key-property name="userId" column="userId" type="java.lang.String"></key-property>  
-           <key-property name="friendId" column="friendId" type="java.lang.String"></key-property>  
+           <key-property name="userId" column="userId" type="java.lang.Integer"></key-property>  
+           <key-property name="friendId" column="friendId" type="java.lang.Integer"></key-property>  
         </composite-id>  
 		<property name="statusRel" column="statusRel" type="java.lang.String" />
 		<property name="happenTime" column="happenTime" type="java.util.Date"/>

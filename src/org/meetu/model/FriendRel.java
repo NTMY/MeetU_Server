@@ -52,19 +52,6 @@ public class FriendRel extends BaseModel {
 		this.happenTime = happenTime;
 	}
 
-	/**
-	 * @return the serialversionuid
-	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	/**
-	 * @return the statusRel
-	 */
-	public String getStatusRel() {
-		return statusRel;
-	}
 
 	/**
 	 * @param statusRel
@@ -86,6 +73,10 @@ public class FriendRel extends BaseModel {
 	 */
 	public void setPk(FriendRelPK pk) {
 		this.pk = pk;
+	}
+
+	public String getStatusRel() {
+		return statusRel;
 	}
 
 }

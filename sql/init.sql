@@ -93,7 +93,7 @@ drop table if exists u_friends_rel;
 create table u_friends_rel (
 	userId int(16) not null comment '用户id',
 	friendId int(16) not null comment '朋友id',
-	relStatus varchar(4) not null comment '朋友状态0:正常 1:亲密状态 2:黑名单 3:已删除',
+	statusRel varchar(4) not null comment '朋友状态0:正常 1:亲密状态 2:黑名单 3:已删除',
 	happenTime timestamp comment '成为朋友的时间',
 	primary key (userId , friendId)
 ) comment '用户好友关系表'; 
