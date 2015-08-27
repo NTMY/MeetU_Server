@@ -29,7 +29,7 @@ public class ConfigUtil {
 	public static void init() {
 		// 此处路径问题 /XXXX为从classes下开始寻找 不加/则为从当前类路径下开始寻找
 		InputStream in = ConfigUtil.class
-				.getResourceAsStream("/meetu.properties");
+				.getResourceAsStream("/config/meetu.properties");
 		try {
 			p.load(in);
 			if (p == null) {

@@ -133,7 +133,7 @@ public interface Constant {
 
 	String PROTOCAL_HTTPS = "https";
 
-	String SERVER_NAME = "";
+	String SERVER_NAME = "meetu";
 
 	String URL = PROTOCAL_HTTP + "://" + IP + ":" + PORT + "/" + SERVER_NAME;
 
