@@ -4,10 +4,12 @@ import static org.meetu.client.util.HttpUtil.sendPost;
 import static org.meetu.constant.Constant.URL;
 
 import org.meetu.client.listener.FriendDealReqListener;
+import org.meetu.client.listener.FriendGetReqActiveListener;
 import org.meetu.client.listener.FriendSendReqListener;
 import org.meetu.dto.BaseDto;
 import org.meetu.model.FriendReq;
 import org.meetu.util.BeanConverter;
+import org.meetu.util.ListBean;
 
 /**
  * 好友相关操作Handler<br>
@@ -39,9 +41,8 @@ public class FriendHandler {
 	 * */
 	public void onDealFriendReq(FriendDealReqListener listener, FriendReq req) {
 		String subUrl = "/friendAction!dealFriendReq?";
-		StringBuffer param = new StringBuffer();
-		param.append("req.reqId=").append(req.getReqId())
-				.append("&req.reqUserId=").append(req.getReqUserId())
+		StringBuffer param = new StringBuffer("req.Id=00");
+		param.append("&req.reqUserId=").append(req.getReqUserId())
 				.append("&req.reqFriendId=").append(req.getReqFriendId())
 				.append("&req.reqStatus=").append(req.getReqStatus());
 		String xml = sendPost(URL + subUrl, param.toString());
@@ -49,6 +50,22 @@ public class FriendHandler {
 
 		if (listener != null) {
 			listener.dealFriendReq(dto);
+		}
+	}
+	
+	/**
+	 * 客户端主动请求未处理好友申请
+	 * */
+	public void onGetFriendReqActive(FriendGetReqActiveListener listener ,FriendReq req) {
+		String subUrl = "/friendAction!getFriendReqActive?";
+		StringBuffer param = new StringBuffer();
+		param.append("&req.reqFriendId=").append(req.getReqFriendId());
+		
+		String xml = sendPost(URL + subUrl, param.toString());
+		ListBean beans = (ListBean) BeanConverter.xmlToBean(xml);
+		
+		if (listener != null) {
+			listener.getFriendReqActive(beans);
 		}
 	}
 

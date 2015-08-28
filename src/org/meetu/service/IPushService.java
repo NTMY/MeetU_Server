@@ -5,6 +5,9 @@ import java.util.List;
 import org.meetu.dto.PushBaiduParam;
 import org.meetu.model.PushInfoBaidu;
 
+/**
+ * 推送相关接口
+ * */
 public interface IPushService {
 	
 	/**
@@ -15,7 +18,7 @@ public interface IPushService {
 	/**
 	 * 通过用户查询用户推送信息
 	 * */
-	List<PushInfoBaidu> queryPushInfo(List userList);
+	List queryPushInfo(List userList);
 	
 	/**
 	 * 发送推送给指定用户
@@ -41,4 +44,15 @@ public interface IPushService {
 	 * 推送给所有用户
 	 */
 	void pushToAll(PushBaiduParam param) throws Exception;
+	
+	
+	/**
+	 * 
+	 * 由定时任务调用<br>
+	 * 1.查询所有未处理好友请求
+	 * 2.给处理方推送
+	 * */
+	void pushFriendReqTask() throws Exception;
+	
+	
 }

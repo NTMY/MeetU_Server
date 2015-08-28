@@ -12,6 +12,8 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:config/spring/applicationContext.xml,
+			classpath:config/spring/applicationContext-datasource.xml,
+			classpath:config/spring/applicationContext-tx.xml,
 			classpath:config/spring/applicationContext-task.xml
 		</param-value>
 	</context-param> 

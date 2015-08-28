@@ -52,6 +52,10 @@ public class FriendReqDao {
 			hql.append(" and R.reqFriendId = '").append(req.getReqFriendId())
 					.append("'");
 		}
+		if (null != req.getReqStatus() && !"".equals(req.getReqStatus())) {
+			hql.append(" and R.reqStatus = '").append(req.getReqStatus())
+					.append("'");
+		}
 		Query query = session.createQuery(hql.toString());
 		List<FriendReq> list = new ArrayList<FriendReq>();
 		list = query.list();

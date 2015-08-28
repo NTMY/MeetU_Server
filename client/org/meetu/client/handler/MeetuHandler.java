@@ -22,7 +22,9 @@ public class MeetuHandler {
 	public void onMeetu(MeetuListener listener, LocationCurr curr) {
 		String subUrl = "/meetuAction!meetu?";
 		// userId=1&longitude=50.000000&latitude=10.000000
+
 		StringBuffer param = new StringBuffer();
+		checkLocLegal(curr);
 		param.append("curr.userId=").append(curr.getUserId()).append("&curr.longitude=")
 				.append(curr.getLongitude()).append("&curr.latitude=")
 				.append(curr.getLatitude()).append("&curr.address=")
@@ -44,6 +46,7 @@ public class MeetuHandler {
 	public void onUpload(MeetuUploadListener listener, LocationCurr curr) {
 		String subUrl = "/meetuAction!upload?";
 		StringBuffer param = new StringBuffer();
+		checkLocLegal(curr);
 		param.append("curr.userId=").append(curr.getUserId()).append("&curr.longitude=")
 				.append(curr.getLongitude()).append("&curr.latitude=")
 				.append(curr.getLatitude()).append("&curr.address=")
@@ -57,5 +60,17 @@ public class MeetuHandler {
 
 	}
 
-
+	/**
+	 * 检查经纬度信息
+	 * */
+	private static void checkLocLegal(LocationCurr curr) {
+		if(curr.getLongitude()!=null && curr.getLatitude()!=null) {
+			
+			//如果经纬度都是0
+			if(curr.getLatitude() == 0 && curr.getLongitude() == 0) {
+				throw new RuntimeException("位置信息非法");
+			}
+		}
+	}
+	
 }

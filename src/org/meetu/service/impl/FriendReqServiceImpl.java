@@ -58,12 +58,11 @@ public class FriendReqServiceImpl implements IFriendReqService {
 	@Override
 	public FriendReqDealDto dealFriendReq(FriendReq req) throws Exception {
 		FriendReqDealDto dealDto = new FriendReqDealDto();
-//		try {
 		// JDK7+才支持String的switch case
 		switch (req.getReqStatus()) {
 		case REQ_STATUS_AGREE: {
 			// 同意 1更新REQ表 2插入REL表两条数据(互为好友)
-			//插入第一条
+			// 插入第一条
 			FriendRel rel = new FriendRel();
 			FriendRelPK pk = new FriendRelPK();
 			pk.setUserId(req.getReqUserId());
@@ -72,16 +71,16 @@ public class FriendReqServiceImpl implements IFriendReqService {
 			rel.setHappenTime(new Date());
 			rel.setStatusRel(REL_STATUS_NORMAL);// 设置好友关系为正常
 			relDao.insert(rel);
-			//插入第二条
+			// 插入第二条
 			FriendRel rel2 = new FriendRel();
-			BeanUtils.copyProperties(rel2 , rel);//将rel的属性都给rel2
+			BeanUtils.copyProperties(rel2, rel);// 将rel的属性都给rel2
 			FriendRelPK pk2 = new FriendRelPK();
 			pk2.setUserId(req.getReqFriendId());
 			pk2.setFriendId(req.getReqUserId());
 			rel2.setPk(pk2);
 			relDao.insert(rel2);
 			req.setReqStatus(REQ_STATUS_AGREE);// 设置请求关系为"已同意"\
-			//insert完成
+			// insert完成
 			break;
 		}
 		case REQ_STATUS_REFUSE: {
@@ -108,33 +107,27 @@ public class FriendReqServiceImpl implements IFriendReqService {
 			dealDto.setErrMsg("处理好友申请异常,status参数异常");
 			break;
 		}
-//		reqDao.update(req);
-//		} catch(Exception e) {
-//			logger.error(e);
-//			e.printStackTrace();
-//			throw new Exception();
-//		}
+		// reqDao.update(req);//更新req请求表状态
+		FriendReq reqQuery = new FriendReq();
+		reqQuery.setReqUserId(req.getReqUserId());
+		reqQuery.setReqFriendId(req.getReqFriendId());
+		reqQuery.setReqStatus(REQ_STATUS_ORIGIN);// 初始状态
+		List<FriendReq> list = reqDao.selectListAll(reqQuery);
+		if (list == null || list.size() > 1) {
+			// 如果list为null或同样的好友申请数量不为0
+			dealDto.setErrCode(STATUS_FAIL);
+			dealDto.setErrMsg("处理好友申请异常,查询异常");
+			return dealDto;
+		} else {
+			// 如果有一条好友申请
+			reqQuery = list.get(0);
+			reqQuery.setReqStatus(req.getReqStatus());// 设置状态
+			reqQuery.setRespTime(new Date());//设置处理的时间
+			//持久态对象自动更新,
+		}
+
 		return dealDto;
 	}
 
-	/***********************************************************************************
-	 * 
-	 * getters and setters
-	 * 
-	 ***********************************************************************************/
-	/**
-	 * @return the reqDao
-	 */
-	public FriendReqDao getReqDao() {
-		return reqDao;
-	}
-
-	/**
-	 * @param reqDao
-	 *            the reqDao to set
-	 */
-	public void setReqDao(FriendReqDao reqDao) {
-		this.reqDao = reqDao;
-	}
 
 }

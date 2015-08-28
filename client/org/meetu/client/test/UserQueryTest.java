@@ -16,8 +16,8 @@ public class UserQueryTest {
 	public static void main(String[] args) {
 		UserQueryListener listener = new UserQueryListenerImpl();
 		User user = new User();
-		user.setId(1);
-//		user.setMobile("15011448840");
+//		user.setId(1);
+		user.setMobile("15011448840");
 //		user.setName("高文");
 //		user.setQq("1053186456");
 //		user.setEmail("giuge@aliyun.com");

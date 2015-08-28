@@ -13,7 +13,7 @@ public class UserAccessTest {
 	public static void main(String[] args) {
 		UserAccessListener listener = new UserAccessListenerImpl();
 		User user = new User();
-		user.setMobile("15011448842");
+		user.setMobile("18101241218");
 		user.setPwd("123123");
 		
 		new UserHandler().onAccess(listener, user);

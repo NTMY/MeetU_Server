@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+				         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+				         http://www.springframework.org/schema/aop
+				         http://www.springframework.org/schema/aop/spring-aop.xsd
+						 http://www.springframework.org/schema/tx
+						 http://www.springframework.org/schema/tx/spring-tx.xsd
+						 http://www.springframework.org/schema/context 
+				         http://www.springframework.org/schema/context/spring-context-3.2.xsd
+				         http://www.springframework.org/schema/task 
+				         http://www.springframework.org/schema/task/spring-task-3.0.xsd
+				         "
+	xmlns:context="http://www.springframework.org/schema/context">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="defaultAutoCommit" value="true" />
+		<!-- 45.55.4.64 -->
+		<!-- 123.57.158.124 -->
+		<property name="url" value="jdbc:mysql://123.57.158.124:3306/meetu" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		<property name="maxActive" value="100" />
+		<property name="maxIdle" value="30" />
+		<property name="minIdle" value="5" />
+		<property name="maxWait" value="30" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		scope="singleton">
+		<property name="dataSource" ref="dataSource" />
+		<!-- Hibernate XML -->
+		<property name="mappingResources">
+			<list>
+				<value>org/meetu/model/User.hbm.xml</value>
+				<value>org/meetu/model/LocationCurr.hbm.xml</value>
+				<value>org/meetu/model/LocationHis.hbm.xml</value>
+				<value>org/meetu/model/FriendReq.hbm.xml</value>
+				<value>org/meetu/model/FriendRel.hbm.xml</value>
+				<value>org/meetu/model/Feedback.hbm.xml</value>
+			</list>
+		</property>
+		<!-- Hibernate Annotation -->
+		<property name="packagesToScan">
+            <list>
+                <!-- 可以加多个包 -->
+                <value>org.meetu.model</value>
+            </list>
+        </property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLInnoDBDialect
+				</prop>
+				<prop key="hibernate.show_sql">
+					true
+				</prop>
+				<prop key="current_session_context_class">
+					thread
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">
+					update
+				</prop>
+				<prop key="hibernate.format_sql">
+					false
+				</prop>
+				<prop key="hibernate.use_sql_comments">
+					true
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+
+</beans>

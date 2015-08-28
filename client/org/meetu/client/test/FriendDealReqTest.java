@@ -10,9 +10,9 @@ public class FriendDealReqTest {
 	public static void main(String[] args) {
 		FriendHandler handler = new FriendHandler();
 		FriendReq req = new FriendReq();
-		req.setReqId(3);//
-		req.setReqUserId(1);
-		req.setReqFriendId(2);
+		req.setReqId(3);//这个值
+		req.setReqUserId(2);
+		req.setReqFriendId(1);
 		req.setReqStatus(Constant.REQ_STATUS_AGREE);
 		handler.onDealFriendReq(new FriendDealReqListenerImpl(), req);
 	}

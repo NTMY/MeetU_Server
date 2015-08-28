@@ -44,7 +44,7 @@
 		</action>
 	</package>
 	
-	<package name="feedbak" extends="global" namespace="/">
+	<package name="feedback" extends="global" namespace="/">
 		<action name="feedbackAction" class="org.meetu.action.FeedbackAction">
 		</action>
 	</package>	

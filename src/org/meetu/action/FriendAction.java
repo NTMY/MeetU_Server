@@ -75,23 +75,39 @@ public class FriendAction extends ActionSupport {
 		BaseDto dto = new BaseDto();//返回的对象
 		try {
 			out = response.getWriter();
-			req.setReqTime(new Date());//请求时间为当前时间
 			req.setReqStatus(REQ_STATUS_ORIGIN);//设置请求状态为初始状态
-			int reqId = reqService.insert(req);//向好友申请表insert数据
-			//给对方发送好友请求推送
-			PushBaiduParam param = new PushBaiduParam();
-			param.setType(PUSHTYPE_PUSH);//0透传 1推送
-			param.setTitle("您有一个好友申请未处理");
-			param.setDesc("用户ID: "+req.getReqUserId()+" 通过 " +req.getReqWay() + " 想添加您为好友!  留言:"+ req.getReqMessage() +" |||| REQID="+ reqId);
-			List<Integer> userIds = new ArrayList<>();
-			userIds.add(req.getReqFriendId());
-			pushService.pushToTarget(userIds , param);
+			//根据userId和friendId查询req表,是否存在未处理的请求
+			FriendReq reqCondition = new FriendReq();//构造只包含要查询,查询条件的对象
+			reqCondition.setReqUserId(req.getReqUserId());
+			reqCondition.setReqFriendId(req.getReqFriendId());
+			List list = reqService.queryList(reqCondition);
+			if(list == null) {
+				dto = new BaseDto(STATUS_FAIL,"好友请求发送失败,查询失败");
+				return null;
+			} else if(list.size() == 0) {
+				req.setReqTime(new Date());//请求时间为当前时间
+				int reqId = reqService.insert(req);//向好友申请表insert数据
+				//给对方发送好友请求推送
+				PushBaiduParam param = new PushBaiduParam();
+				param.setType(PUSHTYPE_PUSH);//0透传 1推送
+				param.setTitle("您有一个好友申请未处理");
+				param.setDesc("用户ID: "+req.getReqUserId()+" 通过 " +req.getReqWay() + " 想添加您为好友!  留言:"+ req.getReqMessage() +" |||| REQID="+ reqId);
+				List<Integer> userIds = new ArrayList<>();
+				userIds.add(req.getReqFriendId());
+				pushService.pushToTarget(userIds , param);
+			} else {
+				dto = new BaseDto(STATUS_FAIL,"您已经向对方发送过好友请求,请等待对方处理");
+				return null;
+			}
 		} catch (Exception e) {
 			logger.error(e);
+			e.printStackTrace();
 			dto = new BaseDto(STATUS_FAIL,"好友请求发送失败");
 		} finally{
 			xml = BeanConverter.bean2xml(dto);
 			out.write(xml);
+			logger.warn("发送好友申请返回的XML是");
+			logger.warn(xml);
 			out.close();
 		}
 		return null;
@@ -157,6 +173,7 @@ public class FriendAction extends ActionSupport {
 		List<FriendReq> list = new ArrayList<>();
 		try {
 			out = response.getWriter();
+			req.setReqStatus(REQ_STATUS_ORIGIN);//查询初始状态的好友申请
 			list = reqService.queryList(req);
 			beans.setList(list);
 		} catch (IOException e) {
@@ -167,6 +184,8 @@ public class FriendAction extends ActionSupport {
 		} finally{
 			xml = BeanConverter.bean2xml(beans);
 			out.write(xml);
+			logger.warn("主动获取好友申请信息返回XML是");
+			logger.warn(xml);
 			out.close();
 		}
 				
@@ -174,6 +193,16 @@ public class FriendAction extends ActionSupport {
 		return null;
 	}
 
+	/**
+	 * 查找自己所有好友<br>
+	 * 可用作好友列表,好友筛选...
+	 * */
+	public String queryMyFriend() {
+		
+		
+		return null;
+	}
+	
 	/***************************************************************************
 	 * 
 	 * getters and setters
