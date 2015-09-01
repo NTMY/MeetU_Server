@@ -13,7 +13,11 @@ public class Test {
 		System.out.println(u.getId());
 
 		System.out.println("/xE6/x92/x92/xE6/x92/x92");
-		String s = null;
+		String s = "2.y";
+		
+		float f = Float.valueOf(s);
+		System.out.println("f = " + f);
+		
 		try {
 			switch (2) {
 			case 1:
@@ -29,5 +33,6 @@ public class Test {
 		} finally{
 			System.out.println("finally");
 		}
+		
 	}
 }
