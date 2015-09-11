@@ -115,6 +115,7 @@ public class FeedbackAction {
 			dto = new BaseDto(STATUS_FAIL, "反馈信息提交成功,推送失败");
 		} catch (Exception e) {
 			logger.error(e);
+			logger.error("用户反馈信息失败",e);
 			dto = new BaseDto(STATUS_FAIL, "用户反馈信息失败,请重试");
 		} finally {
 			xml = BeanConverter.bean2xml(dto);

@@ -62,13 +62,16 @@ public class PubAction extends ActionSupport {
 			
 		} catch (IOException e) {
 			logger.error(e);
+			logger.error("PUBDATA IO EX", e);
 			e.printStackTrace();
 			dto = new PubDataDto(STATUS_FAIL , "IO EXCEPTION");
 		} catch(NumberFormatException e) {
 			logger.error(e);
+			logger.error("PUBDATA NUMBERFMT EX", e);
 			e.printStackTrace();
 			dto = new PubDataDto(STATUS_FAIL , "参数异常");
 		} catch(RuntimeException e) {
+			logger.error("PUBDATA RUNTIME EX", e);
 			dto = new PubDataDto(STATUS_FAIL , e.getMessage());
 		} 
 		finally{

@@ -61,6 +61,7 @@ public class PushAction extends ActionSupport {
 		} catch (IOException e) {
 			dto = new BaseDto(STATUS_FAIL,"上传用户百度推送信息失败,请重试");
 			logger.error(e);
+			logger.error("上传用户百度推送信息失败",e);
 		} finally{
 			xml = BeanConverter.bean2xml(dto);
 			logger.warn("上传用户百度推送信息的返回XML");

@@ -67,6 +67,7 @@ public class DeviceAction {
 			uService.update(u);
 		} catch (Exception e) {
 			logger.error(e);
+			logger.error("更新信息失败为",e);
 			dto.setErrCode(STATUS_FAIL);
 			dto.setErrMsg("更新信息失败");
 		} finally {

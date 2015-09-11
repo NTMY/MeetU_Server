@@ -6,14 +6,12 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.meetu.action.MeetuAction;
 import org.meetu.dao.LocationCurrDao;
 import org.meetu.dao.LocationHisDao;
 import org.meetu.dto.BaseDto;
 import org.meetu.model.LocationCurr;
 import org.meetu.model.LocationHis;
 import org.meetu.service.ILocationCurrService;
-import org.meetu.util.BeanConverter;
 import org.meetu.util.ListBean;
 import org.meetu.util.RangeCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,7 +101,7 @@ public class LocationCurrServiceImpl implements ILocationCurrService {
 			beans.setErrCode(STATUS_FAIL);
 			beans.setErrMsg("查询附近的人出现异常");
 			logger.error(e);
-			e.printStackTrace();
+			logger.error("查询附近的人出现异常",e);
 		}
 		return beans;
 	}
@@ -147,6 +145,7 @@ public class LocationCurrServiceImpl implements ILocationCurrService {
 			dto.setErrCode(STATUS_FAIL);
 			dto.setErrMsg("上传用户LOCATION信息UPLOAD处理异常");
 			logger.error(e);
+			logger.error("上传用户LOCATION信息UPLOAD处理异常",e);
 		}
 		return dto;
 	}

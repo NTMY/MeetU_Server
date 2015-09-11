@@ -101,7 +101,7 @@ public class FriendAction extends ActionSupport {
 			}
 		} catch (Exception e) {
 			logger.error(e);
-			e.printStackTrace();
+			logger.error("发送好友请求失败",e);
 			dto = new BaseDto(STATUS_FAIL,"好友请求发送失败");
 		} finally{
 			xml = BeanConverter.bean2xml(dto);
@@ -136,7 +136,7 @@ public class FriendAction extends ActionSupport {
 			}
 		} catch(Exception e) {
 			logger.error(e.getStackTrace());
-			e.printStackTrace();
+			logger.error("处理好友申请异常",e);
 			dealDto.setErrCode(STATUS_FAIL);
 			dealDto.setErrMsg("处理好友申请DB异常");
 		} finally{
@@ -178,7 +178,7 @@ public class FriendAction extends ActionSupport {
 			beans.setList(list);
 		} catch (IOException e) {
 			logger.error(e);
-			e.printStackTrace();
+			logger.error("查询好友请求异常",e);
 			beans.setErrCode(STATUS_FAIL);
 			beans.setErrMsg("查询好友请求异常");
 		} finally{

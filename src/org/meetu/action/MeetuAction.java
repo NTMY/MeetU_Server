@@ -70,6 +70,7 @@ public class MeetuAction {
 			dto = currService.upload(curr);
 		} catch(Exception e) {
 			logger.error(e);
+			logger.error("用户上报UPLOAD异常",e);
 		} finally {
 			retXml = BeanConverter.bean2xml(dto);
 			logger.warn("用户上报UPLOAD接口返回XML");
@@ -96,6 +97,7 @@ public class MeetuAction {
 			beans = currService.meetu(curr);
 		} catch (Exception e) {
 			logger.error(e);
+			logger.error("相遇MEETU",e);
 			beans.setErrCode(STATUS_FAIL);
 			beans.setErrMsg(e.getCause().toString());
 		} finally {

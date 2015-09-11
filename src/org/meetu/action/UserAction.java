@@ -112,6 +112,7 @@ public class UserAction extends ActionSupport {
 			accessDto.setErrCode(STATUS_FAIL);
 			accessDto.setErrMsg("用户接入异常");
 			logger.error(e);
+			logger.error("用户接入ACCESS异常",e);
 		} finally {
 			logger.warn("用户接入ACCESS接口返回XML");
 			logger.warn(retXml);
@@ -146,6 +147,7 @@ public class UserAction extends ActionSupport {
 			}
 		} catch (Exception e) {
 			logger.error(e);
+			logger.error("用户更新资料异常",e);
 			dto.setErrCode(STATUS_FAIL);
 			dto.setErrMsg("用户更新资料异常");
 		} finally {
@@ -174,6 +176,7 @@ public class UserAction extends ActionSupport {
 			beans.setList(list);
 		} catch (IOException e) {
 			logger.error(e);
+			logger.error("用户查询异常",e);
 			beans.setErrCode(STATUS_FAIL);
 			beans.setErrMsg("查询用户失败");
 		} finally {
