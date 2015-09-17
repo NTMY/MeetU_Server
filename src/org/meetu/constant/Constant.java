@@ -116,18 +116,18 @@ public interface Constant {
 	/**
 	 * SERVER_IP
 	 * */
-	String IP = "localhost";
+	String IP = "123.57.158.124";
 
 	/** 域名 */
 	String DOMAIN = "gaowen.me";
 
-	/** FEEDBACK反馈页面成功提示 */
-	String FEEDBACK_URL = "http://123.57.158.124:8081/feedback/index.html";
+
 
 	/**
-	 * SERVER_PORT
+	 * SERVER_PORT<br>
+	 * aliyun的APACHE设置为88, 80端口要留给blog
 	 * */
-	String PORT = "8080";
+	String PORT = "88";
 
 	String PROTOCAL_HTTP = "http";
 
@@ -137,6 +137,9 @@ public interface Constant {
 
 	String URL = PROTOCAL_HTTP + "://" + IP + ":" + PORT + "/" + SERVER_NAME;
 
+	/** FEEDBACK反馈页面成功提示 */
+	String FEEDBACK_URL = URL+"/feedback/index.html";
+	
 	String OS_NAME_ANDROID = "ANDROID";
 	String OS_NAME_IOS = "IOS";
 
