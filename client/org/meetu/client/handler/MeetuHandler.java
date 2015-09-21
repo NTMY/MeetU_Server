@@ -13,7 +13,7 @@ import static org.meetu.constant.Constant.*;
 /**
  * 处理meetu过程 供客户端调用
  * */
-public class MeetuHandler {
+public class MeetuHandler extends BaseHandler{
 
 	/**
 	 * 上报用户地理位置信息,并查找附近的人<br>
@@ -30,7 +30,7 @@ public class MeetuHandler {
 				.append(curr.getLatitude()).append("&curr.address=")
 				.append(curr.getAddress()).append("&curr.business=")
 				.append(curr.getBusiness());
-		String xml = sendPost(URL + subUrl, param.toString());
+		xml = send(subUrl, param.toString());
 		ListBean<LocationCurr> beans = (ListBean<LocationCurr>) BeanConverter.xmlToBean(xml);
 		
 		if (listener != null) {
@@ -52,7 +52,7 @@ public class MeetuHandler {
 				.append(curr.getLatitude()).append("&curr.address=")
 				.append(curr.getAddress()).append("&curr.business=")
 				.append(curr.getBusiness());
-		String xml = sendPost(URL + subUrl, param.toString());
+		xml = send(subUrl, param.toString());
 		BaseDto dto = (BaseDto) BeanConverter.xmlToBean(xml);
 		if (listener != null) {
 			listener.upload(dto);
@@ -65,7 +65,6 @@ public class MeetuHandler {
 	 * */
 	private static void checkLocLegal(LocationCurr curr) {
 		if(curr.getLongitude()!=null && curr.getLatitude()!=null) {
-			
 			//如果经纬度都是0
 			if(curr.getLatitude() == 0 && curr.getLongitude() == 0) {
 				throw new RuntimeException("位置信息非法");

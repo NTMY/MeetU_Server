@@ -10,12 +10,11 @@ import org.meetu.util.BeanConverter;
 import org.meetu.util.ListBean;
 
 import static org.meetu.client.util.HttpUtil.*;
-import static org.meetu.constant.Constant.*;
 
 /**
  * 处理access(reg/login)过程 供客户端调用
  * */
-public class UserHandler {
+public class UserHandler extends BaseHandler {
 
 	/**
 	 * 用户接入(注册/登录)<br>
@@ -32,7 +31,7 @@ public class UserHandler {
 		.append("&device.osVer=").append(device.getOsVer())
 		.append("&device.deviceCompany=").append(device.getDeviceCompany())
 		*/
-		String xml = sendPost(URL + subUrl, param.toString());
+		xml = send(subUrl, param.toString());
 		UserAccessDto bean = (UserAccessDto) BeanConverter.xmlToBean(xml);
 		if (listener != null) {
 			listener.access(bean);
@@ -84,7 +83,7 @@ public class UserHandler {
 		if (user.getWechat() != null && !user.getWechat().equals("")) {
 			param.append("&user.wechat=").append(user.getWechat());
 		}
-		String xml = sendPost(URL + subUrl, param.toString());
+		xml = send(subUrl, param.toString());
 		BaseDto dto = (BaseDto) BeanConverter.xmlToBean(xml);
 		if (listener != null) {
 			listener.update(dto);
@@ -137,7 +136,7 @@ public class UserHandler {
 			param.append("&user.wechat=").append(user.getWechat());
 		}
 		
-		String xml = sendPost(URL + subUrl, param.toString());
+		xml = send(subUrl, param.toString());
 		ListBean beans = (ListBean) BeanConverter.xmlToBean(xml);
 		if (listener != null) {
 			listener.query(beans);

@@ -1,20 +1,14 @@
 package org.meetu.client.util;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.meetu.model.User;
-import org.meetu.util.SecureUtil;
 
 import static org.meetu.constant.Constant.*;
 
@@ -85,5 +79,16 @@ public class HttpUtil {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * 测试
+	 * 
+	 * */
+	public static void main(String[] args) {
+        String url = "https://localhost:8443/feedbackAction!feedback?";
+        String httpUrl = "http://localhost:8080/feedbackAction!feedback?";  
+        String param = "feed.userId=1&feed.content=fuckUALL";
+		sendPost(httpUrl , param);
+	}
+	
 }

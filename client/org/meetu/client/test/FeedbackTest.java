@@ -9,7 +9,7 @@ public class FeedbackTest {
 		FeedbackHandler handler = new FeedbackHandler();
 		Feedback feed = new Feedback();
 		feed.setUserId(1);
-		feed.setContent("1");
+		feed.setContent("123abc中文中文中文中文中文abc123!@#$%^&");
 		handler.onFeedback(new FeedbackListenerImpl(), feed);
 	}
 }

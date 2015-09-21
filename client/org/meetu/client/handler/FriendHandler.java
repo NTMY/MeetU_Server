@@ -1,7 +1,6 @@
 package org.meetu.client.handler;
 
 import static org.meetu.client.util.HttpUtil.sendPost;
-import static org.meetu.constant.Constant.URL;
 
 import org.meetu.client.listener.FriendDealReqListener;
 import org.meetu.client.listener.FriendGetReqActiveListener;
@@ -15,7 +14,7 @@ import org.meetu.util.ListBean;
  * 好友相关操作Handler<br>
  * 由andriod调用
  * */
-public class FriendHandler {
+public class FriendHandler extends BaseHandler {
 
 	/**
 	 * 发送好友请求
@@ -28,9 +27,8 @@ public class FriendHandler {
 				.append("&req.reqWay=").append(req.getReqWay())
 				.append("&req.reqFriendData=").append(req.getReqFriendData())
 				.append("&req.reqMessage=").append(req.getReqMessage());
-		String xml = sendPost(URL + subUrl, param.toString());
+		xml = send(subUrl, param.toString());
 		BaseDto dto = (BaseDto) BeanConverter.xmlToBean(xml);
-
 		if (listener != null) {
 			listener.sendFriendReq(dto);
 		}
@@ -45,7 +43,7 @@ public class FriendHandler {
 		param.append("&req.reqUserId=").append(req.getReqUserId())
 				.append("&req.reqFriendId=").append(req.getReqFriendId())
 				.append("&req.reqStatus=").append(req.getReqStatus());
-		String xml = sendPost(URL + subUrl, param.toString());
+		xml = send(subUrl, param.toString());
 		BaseDto dto = (BaseDto) BeanConverter.xmlToBean(xml);
 
 		if (listener != null) {
@@ -61,7 +59,7 @@ public class FriendHandler {
 		StringBuffer param = new StringBuffer();
 		param.append("&req.reqFriendId=").append(req.getReqFriendId());
 		
-		String xml = sendPost(URL + subUrl, param.toString());
+		xml = send(subUrl, param.toString());
 		ListBean beans = (ListBean) BeanConverter.xmlToBean(xml);
 		
 		if (listener != null) {

@@ -19,7 +19,7 @@ public class PushTask {
 	
 	/**constructor*/
 	public PushTask() {
-		logger.info("PushFriendReqTask定时推送为处理好友请求以创建实例");
+		logger.info("--- PushFriendReqTask定时推送为处理好友请求以创建实例 ----");
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class PushTask {
 		try {
 			service.pushFriendReqTask();
 		} catch (Exception e) {
-			logger.error(e);
+			logger.error("定时推送好友请求任务异常",e);
 			e.printStackTrace();
 		}
 		logger.info("---------- 定时推送好友请求任务结束 ----------");

@@ -110,13 +110,12 @@ public interface Constant {
 	 */
 	String REL_STATUS_DELETED = "3";
 
-	// 45.55.4.64 digitalocean
 	// 123.57.158.124 aliyun
 	// localhost
 	/**
 	 * SERVER_IP
 	 * */
-	String IP = "123.57.158.124";
+	String IP = "localhost";
 
 	/** 域名 */
 	String DOMAIN = "gaowen.me";
@@ -128,6 +127,13 @@ public interface Constant {
 	 * aliyun的APACHE设置为88, 80端口要留给blog
 	 * */
 	String PORT = "88";
+	
+	/**
+	 * HTTPS端口<br>
+	 * tomcat https默认为8443<br>
+	 * apache
+	 * */
+	String PORT_HTTPS = "8443";
 
 	String PROTOCAL_HTTP = "http";
 
@@ -137,6 +143,8 @@ public interface Constant {
 
 	String URL = PROTOCAL_HTTP + "://" + IP + ":" + PORT + "/" + SERVER_NAME;
 
+	String URL_HTTPS = PROTOCAL_HTTPS + "://" + IP + ":" + PORT_HTTPS + "/" + SERVER_NAME;
+	
 	/** FEEDBACK反馈页面成功提示 */
 	String FEEDBACK_URL = URL+"/feedback/index.html";
 	
