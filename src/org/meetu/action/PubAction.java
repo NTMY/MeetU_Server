@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
-import org.meetu.dto.BaseDto;
+import org.meetu.cache.Cache;
 import org.meetu.dto.PubDataDto;
+import org.meetu.model.AppVer;
+import org.meetu.model.PubData;
+import org.meetu.service.IAppVerService;
 import org.meetu.util.BeanConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -26,6 +30,9 @@ public class PubAction extends ActionSupport {
 	
 	private static Log logger = LogFactory.getLog(PubAction.class);
 	
+	@Autowired
+	private IAppVerService appVerService;
+	
 	HttpServletRequest request = null;
 	HttpServletResponse response = null;
 	
@@ -34,6 +41,12 @@ public class PubAction extends ActionSupport {
 	 * 写回给客户端的xml串 
 	 * */
 	String xml = "";
+	
+	/**
+	 * STRUTS2注入参数对象
+	 * */
+	private PubData data;
+	
 	
 	
 	/**
@@ -44,13 +57,16 @@ public class PubAction extends ActionSupport {
 		response = ServletActionContext.getResponse();
 		PubDataDto dto = new PubDataDto();
 		
-		String os = request.getParameter("os");//操作系统名称/android/ios
-		String osVer = request.getParameter("osVer");//操作系统版本
-		String appVerStr = request.getParameter("appVer");// 客户端app版本号
-		String signature = request.getParameter("signature");// 客户端签名加密串
+		String os = data.getOs();//操作系统名称/android/ios
+		String appVerStr = data.getAppVer();// 客户端app版本号
+		String signature = data.getSignature();// 客户端签名加密串
 
 		try {
 			out = response.getWriter();
+			//缓存中的appVer信息(来自于DB)
+			AppVer appVerDB = (AppVer)Cache.get(os);
+			
+			//TODO...比较版本信息,先睡觉去了
 			float appVer = Float.valueOf(appVerStr);
 			
 			if(appVer != 1.0f) {
@@ -82,6 +98,18 @@ public class PubAction extends ActionSupport {
 		}
 
 		return null;
+	}
+
+
+
+	public PubData getData() {
+		return data;
+	}
+
+
+
+	public void setData(PubData data) {
+		this.data = data;
 	}
 
 }

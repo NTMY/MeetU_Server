@@ -16,6 +16,6 @@ public class PushBaiduDef {
 	/**
 	 * 定义参数对象,不用每个类都定义一遍了,太多了
 	 * */
-	protected final static PushKeyPair pair = new PushKeyPair(Cache.get(Constant.BAIDU_PUSH_APIKEY), Cache.get(Constant.BAIDU_PUSH_SECRETKEY));
+	protected final static PushKeyPair pair = new PushKeyPair((String)Cache.get(Constant.BAIDU_PUSH_APIKEY), (String)Cache.get(Constant.BAIDU_PUSH_SECRETKEY));
 	
 }

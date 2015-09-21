@@ -28,7 +28,7 @@ public class Cache {
 	/**
 	 * core data map
 	 * */
-	private static final Map<String, String> cacheMap = new HashMap<String, String>();
+	private static final Map<String, Object> cacheMap = new HashMap<String, Object>();
 
 	/**
 	 * SingletonModel
@@ -36,18 +36,8 @@ public class Cache {
 	private static Cache cache = new Cache();
 
 
-	public static String get(String key) {
-		String value = "";
-		if (null == cacheMap) {
-			logger.warn("cache map is null");
-			return value;
-		}
-		value = cacheMap.get(key);
-		return value;
-	}
-	
-	public static String get(String key,String defaultV) {
-		String value = defaultV;
+	public static Object get(String key) {
+		Object value = "";
 		if (null == cacheMap) {
 			logger.warn("cache map is null");
 			return value;
@@ -67,7 +57,7 @@ public class Cache {
 	/*************************************************************
 	 * getters and setters
 	 *************************************************************/
-	public static Map<String, String> getCacheMap() {
+	public static Map<String, Object> getCacheMap() {
 		return cacheMap;
 	}
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.meetu.model">
+
+	<class name="AppVer" table="sys_app_ver" dynamic-update="true" select-before-update="true">
+        <composite-id name="pk" class="org.meetu.model.key.AppVerPK"><!--联合主键，表中的主键为(os,appVer)-->  
+        <!--name及cardID为Student类中的属性-->
+           <key-property name="os" column="os" type="java.lang.String"></key-property>  
+           <key-property name="appVer" column="appVer" type="java.lang.String"></key-property>  
+        </composite-id>  
+		<property name="signature" column="signature" type="java.lang.String" />
+		<property name="description" column="description" type="java.lang.String"/>
+		<property name="isTop" column="isTop" />
+	</class>
+
+</hibernate-mapping>
+

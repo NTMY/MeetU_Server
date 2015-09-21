@@ -77,16 +77,17 @@ insert into sys_param values ('BAIDU_PUSH_SECRETKEY','ZDtmKIqZ8rYDUx9n6VhikGOjVd
 
 
 
-drop table if exists sys_client_info;
-create table sys_client_info (
+drop table if exists sys_app_ver;
+create table sys_app_ver (
 	os varchar(16) not null comment '操作系统 android/ios',
-	version varchar(8) not null comment '版本号',
+	appVer varchar(8) not null comment '版本号',
 	signature varchar(64) not null comment '数字签名信息',
-	description varchar(128),
-	primary key (os,version)
-) comment '客户端信息表'; 
+	description varchar(128) comment '版本描述',
+	isTop boolean not null comment '是否为最新' ,
+	primary key (os,appVer)
+) comment '客户端版本信息表'; 
 
-insert into sys_client_info values('android','0.1','123123','desc 0.1版本');
+insert into sys_app_ver values('android','0.1','123123','desc 0.1版本');
 
 
 drop table if exists u_friends_rel;
