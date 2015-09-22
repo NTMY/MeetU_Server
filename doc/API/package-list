@@ -18,9 +18,11 @@ org.meetu.dto
 org.meetu.file
 org.meetu.filter
 org.meetu.model
+org.meetu.model.key
 org.meetu.service
 org.meetu.service.impl
 org.meetu.servlet
+org.meetu.task.spring
 org.meetu.thirdparty.baidu.lbs
 org.meetu.thirdparty.baidu.push
 org.meetu.util
