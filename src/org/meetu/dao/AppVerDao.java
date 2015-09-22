@@ -3,13 +3,10 @@ package org.meetu.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.meetu.model.AppVer;
-import org.meetu.model.key.AppVerPK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -24,9 +21,9 @@ public class AppVerDao {
 	
 
 	/**
-	 * 根据pk查询
+	 * 根据OS和appVer查询
 	 * */
-	public List<AppVer> selectByPK(AppVerPK pk) {
+	public List<AppVer> selectByOsAndVer(AppVer appVer) {
 		Session session = sessionFactory.getCurrentSession();
 		// from后面是类名，不是表名
 		String hql = "from AppVer R where R.os = :os and R.appVer = :appVer";// 使用命名参数，推荐使用，易读。

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.meetu.cache.Cache;
-import org.meetu.dao.SysParamDao;
 import org.meetu.model.AppVer;
 import org.meetu.model.SysParam;
 import org.meetu.service.IAppVerService;
@@ -63,7 +62,7 @@ public class InitServlet extends HttpServlet {
 		//加载app top版本信息
 		List<AppVer> appVerTopList = appVerService.queryTop();
 		for(AppVer appVer : appVerTopList) {
-			Cache.getCacheMap().put(appVer.getPk().getOS(), appVer);
+			Cache.getCacheMap().put(appVer.getOs().toUpperCase(), appVer);
 		}
 		logger.info("InitServlet init初始化资源结束");
 	}

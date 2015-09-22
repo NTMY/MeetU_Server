@@ -1,38 +1,19 @@
 package org.meetu;
 
+import java.util.Arrays;
+
 import org.meetu.model.User;
 
 public class Test {
 	public static void main(String[] args) throws Exception {
-		User user = new User();
-		user.setId(1);
-		user.setName("1");
-
-		User u = new User();
-		u.copyFrom(user);
-		System.out.println(u.getId());
-
-		System.out.println("/xE6/x92/x92/xE6/x92/x92");
-		String s = "2.y";
+		String a = "1.0.01";
+		String b = "1.2.3";
+		String c = "1.2";
 		
-		float f = Float.valueOf(s);
-		System.out.println("f = " + f);
-		
-		try {
-			switch (2) {
-			case 1:
-				System.out.println(1);
-				break;
-			case 2:
-				s.split(" ");
-				break;
-			}
-		} catch (Exception e) {
-			System.out.println("catch");
-			e.printStackTrace();
-		} finally{
-			System.out.println("finally");
-		}
+		String[] str = c.split("\\.");
+		System.out.println(Arrays.toString(str));
 		
 	}
+	
+	
 }

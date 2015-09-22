@@ -115,7 +115,7 @@ public interface Constant {
 	/**
 	 * SERVER_IP
 	 * */
-	String IP = "localhost";
+	String IP = "123.57.158.124";
 
 	/** 域名 */
 	String DOMAIN = "gaowen.me";
@@ -171,4 +171,15 @@ public interface Constant {
 	String REQ_WAY_WECHAT = "WECHAT";
 	/** 添加好友途径:邮件 */
 	String REQ_WAY_EMAIL = "EMAIL";
+	
+	
+	/**
+	 * APP版本更新建议
+	 * */
+	/**无更新*/
+	String UPDATE_LV_NO = "0";
+	/** 建议更新 */
+	String UPDATE_LV_SUGGEST = "1";
+	/** 强制更新 */
+	String UPDATE_LV_FORCE = "2";
 }

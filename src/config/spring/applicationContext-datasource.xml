@@ -43,6 +43,7 @@
 				<value>org/meetu/model/FriendReq.hbm.xml</value>
 				<value>org/meetu/model/FriendRel.hbm.xml</value>
 				<value>org/meetu/model/Feedback.hbm.xml</value>
+				<value>org/meetu/model/AppVer.hbm.xml</value>
 			</list>
 		</property>
 		<!-- Hibernate Annotation -->
