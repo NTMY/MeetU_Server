@@ -26,14 +26,14 @@ public class BaseHandler {
 	 * static全局变量<br>
 	 * 只有子类有其访问权限
 	 * */
-	static String ProtocolType = Constant.PROTOCAL_HTTPS;
+	static String ProtocolType = Constant.PROTOCAL_HTTP;
 	
 	/**服务器端响应的XML*/
 	String xml = "";
 	
 	
 	static {
-		//默认协议为https
+		//默认协议为http
 //		ProtocolType = Constant.PROTOCAL_HTTPS;
 		//不要把判断逻辑写在static{}中,因为ProtocolType这个static全局变量有可能在运行期修改,如果在运行期修改的话,static{}静态块中逻辑并不会因为全局变量的修改而改变逻辑
 		//我把判断逻辑写在构造方法中,每次修改ProtocolType全局变量.new 出来的子类都是最新的逻辑
