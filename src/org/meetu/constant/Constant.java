@@ -126,14 +126,14 @@ public interface Constant {
 	 * SERVER_PORT<br>
 	 * aliyun的APACHE设置为88, 80端口要留给blog
 	 * */
-	String PORT = "88";
+	String PORT = "8081";
 	
 	/**
 	 * HTTPS端口<br>
 	 * tomcat https默认为8443<br>
 	 * apache
 	 * */
-	String PORT_HTTPS = "8443";
+	String PORT_HTTPS = "8444";
 
 	String PROTOCAL_HTTP = "http";
 
