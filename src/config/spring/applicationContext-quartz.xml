@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+				         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+				         http://www.springframework.org/schema/aop
+				         http://www.springframework.org/schema/aop/spring-aop.xsd
+						 http://www.springframework.org/schema/tx
+						 http://www.springframework.org/schema/tx/spring-tx.xsd
+						 http://www.springframework.org/schema/context 
+				         http://www.springframework.org/schema/context/spring-context-3.2.xsd
+				         http://www.springframework.org/schema/task 
+				         http://www.springframework.org/schema/task/spring-task-3.0.xsd
+				         "
+	xmlns:context="http://www.springframework.org/schema/context">
+	
+	
+	<!-- 启动 spring 定时器 	-->
+	<bean id="scheduleReportFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="applicationContextSchedulerContextKey" value="applicationContextKey" />
+		<property name="configLocation" value="classpath:/config/quartz2/quartz.properties" /> 
+	</bean>
+	
+	<!-- 定义Quartz任务实现类 -->
+	<!-- spring3.1之前版本org.springframework.scheduling.quartz.JobDetailBean -->
+	<bean name="pushJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="true"></property>
+		<property name="jobClass" value="org.meetu.task.quartz.PushJob" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="timeout" value="0" />
+			</map>
+		</property>
+	</bean>
+	
+	<!-- 定义Quartz非侵入式任务实现类 -->
+	<bean id="pushJobFree" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		<property name="targetObject">  
+			<bean class="org.meetu.task.quartz.PushJobFree" />  
+		</property>  
+		<property name="targetMethod" value="exePush" />  
+		<property name="concurrent" value="false" /><!-- 作业是否并发调度 -->  
+	</bean>  
+
+	<!-- 间隔执行 -->
+	<!-- spring3.1之前版本org.springframework.scheduling.quartz.SimpleTriggerBean -->
+	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">  
+		<property name="jobDetail" ref="pushJob" />  
+		<property name="startDelay" value="0" /><!-- 调度工厂实例化后，经过0秒开始执行调度 -->  
+		<property name="repeatInterval" value="2000" /><!-- 每2秒调度一次 -->  
+	</bean>  
+
+	<!-- 间隔执行 -->
+	<!-- spring3.1之前版本org.springframework.scheduling.quartz.SimpleTriggerBean -->
+	<bean id="simpleTrigger1" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">  
+		<property name="jobDetail" ref="pushJobFree" />  
+		<property name="startDelay" value="0" /><!-- 调度工厂实例化后，经过0秒开始执行调度 -->  
+		<property name="repeatInterval" value="2000" /><!-- 每2秒调度一次 -->  
+	</bean>  
+
+	<!-- 定时执行 -->
+	<!-- spring3.1之前版本org.springframework.scheduling.quartz.CronTriggerBean -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+		<property name="jobDetail" ref="pushJob" />  
+		<property name="cronExpression" value="0 0 12 * * ?" />  
+	</bean>  
+
+
+	<!-- 调度工厂 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+		<property name="triggers">  
+			<list>  
+				<ref bean="simpleTrigger" />
+				<ref bean="simpleTrigger1" />
+				<ref bean="cronTrigger" />    
+			</list>  
+		</property>  
+	</bean>  
+
+
+	 <!-- 
+	 
+	 cronExpression的配置说明，具体使用以及参数请百度google
+字段   允许值   允许的特殊字符
+秒    0-59    , - * /
+分    0-59    , - * /
+小时    0-23    , - * /
+日期    1-31    , - * ? / L W C
+月份    1-12 或者 JAN-DEC    , - * /
+星期    1-7 或者 SUN-SAT    , - * ? / L C #
+年（可选）    留空, 1970-2099    , - * / 
+- 区间  
+* 通配符  
+? 你不想设置那个字段
+下面只例出几个式子
+ 
+CRON表达式    含义 
+"0 0 12 * * ?"    每天中午十二点触发 
+"0 15 10 ? * *"    每天早上10：15触发 
+"0 15 10 * * ?"    每天早上10：15触发 
+"0 15 10 * * ? *"    每天早上10：15触发 
+"0 15 10 * * ? 2005"    2005年的每天早上10：15触发 
+"0 * 14 * * ?"    每天从下午2点开始到2点59分每分钟一次触发 
+"0 0/5 14 * * ?"    每天从下午2点开始到2：55分结束每5分钟一次触发 
+"0 0/5 14,18 * * ?"    每天的下午2点至2：55和6点至6点55分两个时间段内每5分钟一次触发 
+"0 0-5 14 * * ?"    每天14:00至14:05每分钟一次触发 
+"0 10,44 14 ? 3 WED"    三月的每周三的14：10和14：44触发 
+"0 15 10 ? * MON-FRI"    每个周一、周二、周三、周四、周五的10：15触发 
+	 
+	  -->
+
+
+</beans>
