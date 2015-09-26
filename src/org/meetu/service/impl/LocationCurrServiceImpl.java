@@ -132,7 +132,7 @@ public class LocationCurrServiceImpl implements ILocationCurrService {
 				oldCurr = isExistList.get(0);
 				currDao.delete(oldCurr);// 在curr当前表中删除
 				LocationHis his = new LocationHis(oldCurr);
-				hisDao = null;//主动制造异常,测试回滚
+//				hisDao = null;//主动制造异常,测试回滚
 				hisDao.insert(his);// 在his历史表中添加
 				// 如果在curr当前表中有多条此用户数据,则不将老数据迁入历史表,直接在当前表删除(这种情况说明有问题)
 			} else if (isExistList.size() > 1) {
