@@ -24,7 +24,7 @@ create table u_user(
 	regtime varchar(64) comment '注册时间',
 	mood varchar(512) comment '心情签名',
 	status varchar(3) comment '状态 0:正常 10:冻结 90-98:admin 99:root'
-) comment = '用户表';
+) comment = '用户表' engine=InnoDB;
 
 drop table if exists u_device; 
 create table u_device(
@@ -35,7 +35,7 @@ create table u_device(
 	deviceCompany varchar(64) comment '设备制造厂商',
 	lastTime timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '最后登陆时间' ,
 	addTime timestamp comment '设备添加时间'
-) comment = '用户设备表';
+) comment = '用户设备表' engine=InnoDB;
 
 
 drop table if exists u_loc_his; 
@@ -47,7 +47,7 @@ create table u_loc_his(
 	address varchar(256) comment '地址信息',
 	business varchar(256) comment '商圈',
 	uploadtime timestamp comment '本次上传时间'
-) comment '用户历史位置信息表';
+) comment '用户历史位置信息表' engine=InnoDB;
 
 drop table if exists u_loc_curr;
 create table u_loc_curr(
@@ -57,7 +57,7 @@ create table u_loc_curr(
 	address varchar(256) comment '地址信息',
 	business varchar(256) comment '商圈',
 	uploadtime timestamp comment '本次上传时间'
-) comment '用户当前位置信息表';
+) comment '用户当前位置信息表' engine=InnoDB;
 
 
 drop table if exists sys_param;
@@ -66,7 +66,7 @@ create table sys_param(
 	_value varchar(128) comment '参数值',
 	description varchar(128) comment '描述',
 	primary key (_key)
-) comment '系统参数表';
+) comment '系统参数表' engine=InnoDB;
 
 
 insert into sys_param values ('upload_freq','600','上传频率(单位秒)');
@@ -86,7 +86,7 @@ create table sys_app_ver (
 	description varchar(128) comment '版本描述',
 	isTop boolean not null comment '是否为最新' ,
 	downloadUrl varchar(64) comment '下载地址'
-) comment '客户端版本信息表'; 
+) comment '客户端版本信息表' engine=InnoDB; 
 
 insert into sys_app_ver values(0,'android','1.0.0','123123','desc 1.0.0版本',true,'www.baidu.com');
 
@@ -98,7 +98,7 @@ create table u_friends_rel (
 	statusRel varchar(4) not null comment '朋友状态0:正常 1:亲密状态 2:黑名单 3:已删除',
 	happenTime timestamp comment '成为朋友的时间',
 	primary key (userId , friendId)
-) comment '用户好友关系表'; 
+) comment '用户好友关系表' engine=InnoDB; 
 
 
 drop table if exists u_friends_req;
@@ -112,14 +112,14 @@ create table u_friends_req (
 	reqStatus varchar(4) not null comment '请求的状态 0:已提交,未处理 1:已同意 2:已拒绝 3:已忽略 4忽略并拒绝此人再次添加',
 	reqTime timestamp comment '请求发送的时间',
 	respTime timestamp comment '请求处理的时间'
-) comment '用户好友请求表,在合适的时间推送给客户端'; 
+) comment '用户好友请求表,在合适的时间推送给客户端' engine=InnoDB; 
 
 drop table if exists sys_feedback;
 create table sys_feedback(
 	userId int(16) comment '反馈人用户id',
 	content varchar(512) comment '反馈内容',
 	feedbackTime timestamp comment '反馈时间'
-) comment '用户反馈表';
+) comment '用户反馈表' engine=InnoDB;
 
 
 drop table if exists push_info_baidu;
@@ -128,7 +128,7 @@ create table push_info_baidu(
 	userId int(16) comment 'meetu系统用户id',
 	channelId varchar(32) comment '推送系统channelId',
 	primary key(imei)
-) comment '百度推送用户信息表';
+) comment '百度推送用户信息表' engine=InnoDB;
 
 
 insert into push_info_baidu values('motoXpro',1,'3545744288033740498');
@@ -141,7 +141,7 @@ create table u_friend_msg(
 	userId int(16) comment '留言人id', 
 	msg varchar(512) comment '留言内容',
 	msgDate timestamp
-) comment '好友申请相互留言表';
+) comment '好友申请相互留言表' engine=InnoDB;
 
 
 

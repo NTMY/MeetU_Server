@@ -67,6 +67,9 @@ public class PushBaiduServiceImpl implements IPushService {
 		}
 	}
 
+	/**
+	 * 推送给所有用户
+	 * */
 	@Override
 	public void pushToAll(PushBaiduParam param) throws Exception {
 		logger.info("---------- push to all users ----------");
@@ -74,6 +77,10 @@ public class PushBaiduServiceImpl implements IPushService {
 		AndroidPushMsgToAll.push(param);
 	}
 
+	
+	/**
+	 * 推送所有未处理的好友请求
+	 * */
 	@Override
 	public void pushFriendReqTask() throws Exception {
 		logger.info("------------ 定时推送所有好友请求开始START -----------");
