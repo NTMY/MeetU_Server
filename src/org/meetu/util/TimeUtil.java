@@ -7,6 +7,9 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * 时间工具类
+ * */
 public class TimeUtil {
 	
 	static Log log = LogFactory.getLog(TimeUtil.class);

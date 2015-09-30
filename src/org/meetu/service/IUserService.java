@@ -24,4 +24,9 @@ public interface IUserService {
 	 * */
 	List<User> selectByLevel(int level , String oper) throws Exception;
 	
+	/**
+	 * 查询好友列表
+	 * */
+	List<User> queryMyFriendList(int userId) throws Exception;
+	
 }

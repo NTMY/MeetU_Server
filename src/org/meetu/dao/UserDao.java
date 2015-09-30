@@ -120,5 +120,21 @@ public class UserDao {
 	}
 	
 
+	/**
+	 * 根据id查询此人好友
+	 * */
+	public List<User> selectMyFriendList(int userId) throws Exception
+	{
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "select U from User U where U.id != " + userId ;
+		Query query = session.createQuery(sql);
+		List<User> userList = new ArrayList<User>();
+		userList = query.list();
+		if(userList == null) { 
+			throw new Exception("SELECT FRIEND LIST");
+		}
+//		session.close();
+		return userList;
+	}
 	
 }

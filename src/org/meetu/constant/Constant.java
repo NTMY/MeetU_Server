@@ -115,7 +115,7 @@ public interface Constant {
 	/**
 	 * SERVER_IP
 	 * */
-	String IP = "123.57.158.124";
+	String IP = "localhost";
 
 	/** 域名 */
 	String DOMAIN = "gaowen.me";
@@ -126,7 +126,7 @@ public interface Constant {
 	 * SERVER_PORT<br>
 	 * aliyun的APACHE设置为88, 80端口要留给blog
 	 * */
-	String PORT = "8081";
+	String PORT = "8080";
 	
 	/**
 	 * HTTPS端口<br>
@@ -182,4 +182,15 @@ public interface Constant {
 	String UPDATE_LV_SUGGEST = "1";
 	/** 强制更新 */
 	String UPDATE_LV_FORCE = "2";
+	
+	/**
+	 * 非高清头像文件存放路径<br>
+	 * D:\\_images\\portrait\\
+	 * */
+	String PORTRAIT_PATH = "D:\\_images\\portrait\\";
+	/**
+	 * 高清头像文件存放路径<br>
+	 * D:\\_images\\portraitHD\\
+	 * */
+	String PORTRAIT_HD_PATH = "D:\\_images\\portraitHD\\";
 }

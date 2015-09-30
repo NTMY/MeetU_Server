@@ -16,10 +16,13 @@ import org.meetu.dto.BaseDto;
 import org.meetu.dto.FriendReqDealDto;
 import org.meetu.dto.PushBaiduParam;
 import org.meetu.model.FriendReq;
+import org.meetu.model.User;
 import org.meetu.service.IFriendRelService;
 import org.meetu.service.IFriendReqService;
 import org.meetu.service.IPushService;
+import org.meetu.service.IUserService;
 import org.meetu.util.BeanConverter;
+import org.meetu.util.CheckUtil;
 import org.meetu.util.ListBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -49,6 +52,10 @@ public class FriendAction extends ActionSupport {
 	@Autowired
 	private IFriendRelService relService;
 	
+	@Autowired
+	private IUserService userService;
+	
+	
 	/** 推送服务 */
 	@Autowired
 	private IPushService pushService;
@@ -58,6 +65,10 @@ public class FriendAction extends ActionSupport {
 	 * */
 	private FriendReq req;
 	
+	/**
+	 * STRUTS2接收上传参数对象
+	 * */
+	private User user;
 	/**
 	 *  
 	 * */
@@ -197,8 +208,25 @@ public class FriendAction extends ActionSupport {
 	 * 查找自己所有好友<br>
 	 * 可用作好友列表,好友筛选...
 	 * */
-	public String queryMyFriend() {
-		
+	public String getMyFriendList() {
+		request = ServletActionContext.getRequest();
+		response = ServletActionContext.getResponse();
+		List<User> list = null;
+		ListBean<User> beans = new ListBean<>();
+		try {
+			out = response.getWriter();
+			list = userService.queryMyFriendList(user.getId());
+			beans.setList(list);
+		} catch (Exception e) {
+			logger.error("获取好友列表失败",e);
+		} finally {
+			xml = BeanConverter.bean2xml(beans);
+			//xml = CheckUtil.replaceESC(xml);//不能在server端进行转换,否则客户端xsteam无法解析
+			out.write(xml);
+			logger.warn("获取好友列表返回的数据是");
+			logger.warn(xml);
+			out.close();
+		}
 		
 		return null;
 	}
@@ -221,6 +249,16 @@ public class FriendAction extends ActionSupport {
 	 */
 	public void setReq(FriendReq req) {
 		this.req = req;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 

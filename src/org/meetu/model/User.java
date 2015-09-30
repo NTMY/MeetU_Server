@@ -2,6 +2,8 @@ package org.meetu.model;
 
 import javax.persistence.JoinColumn;
 
+import org.meetu.constant.Constant;
+
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 /**
@@ -64,7 +66,16 @@ public class User extends BaseModel {
 	/** 状态 */
 	private String status;
 
-
+	/**
+	 * 非高清头像
+	 * */
+	private String imgUrl;
+	
+	/**
+	 * 高清头像
+	 * */
+	private String imgUrlHD;
+	
 	/**
 	 * 关联<br>
 	 * 虽然数据上的关系是一对多,但是只读取那个当前使用的1v1的关系就够了
@@ -290,6 +301,38 @@ public class User extends BaseModel {
 	 */
 	public void setWechat(String wechat) {
 		this.wechat = wechat;
+	}
+
+
+
+	public String getImgUrl() {
+		if(imgUrl == null) {
+			return imgUrl;
+		} else {
+			return Constant.URL+imgUrl;
+		}
+	}
+
+
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+
+
+	public String getImgUrlHD() {
+		if(imgUrlHD == null) {
+			return imgUrlHD;
+		} else {
+			return Constant.URL+imgUrlHD;
+		}
+	}
+
+
+
+	public void setImgUrlHD(String imgUrlHD) {
+		this.imgUrlHD = imgUrlHD;
 	}
 
 

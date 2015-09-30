@@ -55,6 +55,12 @@ public class UserServiceImpl implements IUserService {
 		List<User> list = userDao.selectByLevel(level, oper);
 		return list;
 	}
+
+	@Override
+	public List<User> queryMyFriendList(int userId) throws Exception {
+		List list = userDao.selectMyFriendList(userId);
+		return list;
+	}
 	
 	
 }

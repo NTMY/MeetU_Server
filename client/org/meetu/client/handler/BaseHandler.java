@@ -40,13 +40,13 @@ public class BaseHandler {
 		
 		
         // 密码  
-        String password = "123123";  
+//        String password = "123123";  
         // 密钥库  
-        String keyStorePath = "D://tomcat.keystore";  
+//        String keyStorePath = "D://tomcat.keystore";  
         // 信任库  
-        String trustStorePath = "D://tomcat.keystore";  
+//        String trustStorePath = "D://tomcat.keystore";  
         try {
-			HttpsUtil.initHttpsURLConnection(password, keyStorePath, trustStorePath);
+//			HttpsUtil.initHttpsURLConnection(password, keyStorePath, trustStorePath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}  

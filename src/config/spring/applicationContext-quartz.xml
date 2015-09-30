@@ -67,7 +67,7 @@
 	</bean>  
 
 
-	<!-- 调度工厂 -->
+	<!-- 调度工厂 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
 		<property name="triggers">  
 			<list>  
@@ -77,7 +77,7 @@
 			</list>  
 		</property>  
 	</bean>  
-
+	-->
 
 	 <!-- 
 	 

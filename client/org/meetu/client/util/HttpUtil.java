@@ -1,16 +1,29 @@
 package org.meetu.client.util;
 
+import static org.meetu.constant.Constant.TIMEOUT_HTTP;
+
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import net.sf.jmimemagic.Magic;
+import net.sf.jmimemagic.MagicMatch;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import static org.meetu.constant.Constant.*;
 
 /**
  * HTTP通信工具类
@@ -80,15 +93,148 @@ public class HttpUtil {
 		return result;
 	}
 	
+	
+	/**
+	 * 支持图片上传
+	 * @param
+	 * @param textMap文字字段放进textMap
+	 * @param fileMap图片,例如fileMap.put("file", "D:/meet_me.jpg");
+	 * */
+	public static String sendPostFile(String urlStr,
+			Map<String, String> textMap, Map<String, String> fileMap) {
+		String res = "";
+		HttpURLConnection conn = null;
+		String BOUNDARY = "---------------------------123821742118716"; // boundary就是request头和上传文件内容的分隔符
+		try {
+			URL url = new URL(urlStr);
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setConnectTimeout(5000);
+			conn.setReadTimeout(30000);
+			conn.setDoOutput(true);
+			conn.setDoInput(true);
+			conn.setUseCaches(false);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Connection", "Keep-Alive");
+			conn.setRequestProperty("User-Agent",
+					"Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-CN; rv:1.9.2.6)");
+			conn.setRequestProperty("Content-Type",
+					"multipart/form-data; boundary=" + BOUNDARY);
+
+			OutputStream out = new DataOutputStream(conn.getOutputStream());
+			// text
+			if (textMap != null) {
+				StringBuffer strBuf = new StringBuffer();
+				Iterator<Map.Entry<String, String>> iter = textMap.entrySet()
+						.iterator();
+				while (iter.hasNext()) {
+					Map.Entry<String, String> entry = iter.next();
+					String inputName = (String) entry.getKey();
+					String inputValue = (String) entry.getValue();
+					if (inputValue == null) {
+						continue;
+					}
+					strBuf.append("\r\n").append("--").append(BOUNDARY)
+							.append("\r\n");
+					strBuf.append("Content-Disposition: form-data; name=\""+ inputName + "\"\r\n\r\n");
+							
+					strBuf.append(inputValue);
+				}
+				out.write(strBuf.toString().getBytes());
+			}
+
+			// file
+			if (fileMap != null) {
+				Iterator<Map.Entry<String, String>> iter = fileMap.entrySet()
+						.iterator();
+				while (iter.hasNext()) {
+					Map.Entry<String, String> entry = iter.next();
+					String inputName = (String) entry.getKey();
+					String inputValue = (String) entry.getValue();
+					if (inputValue == null) {
+						continue;
+					}
+					File file = new File(inputValue);
+					String filename = file.getName();
+					String contentType = "";
+					try {
+						MagicMatch match = Magic.getMagicMatch(file, false, false);
+						contentType = match.getMimeType();
+					} catch(Exception e) {
+						contentType = "image/jpg";
+						//异常时默认为jpg格式
+						//常用mime类型image/jpg  text/plain ... ....百度吧
+					}
+					
+					StringBuffer strBuf = new StringBuffer();
+					strBuf.append("\r\n").append("--").append(BOUNDARY)
+							.append("\r\n");
+					strBuf.append("Content-Disposition: form-data; name=\""
+							+ inputName + "\"; filename=\"" + filename
+							+ "\"\r\n");
+					strBuf.append("Content-Type:" + contentType + "\r\n\r\n");
+
+					out.write(strBuf.toString().getBytes());
+
+					DataInputStream in = new DataInputStream(
+							new FileInputStream(file));
+					int bytes = 0;
+					byte[] bufferOut = new byte[1024];
+					while ((bytes = in.read(bufferOut)) != -1) {
+						out.write(bufferOut, 0, bytes);
+					}
+					in.close();
+				}
+			}
+
+			byte[] endData = ("\r\n--" + BOUNDARY + "--\r\n").getBytes();
+			out.write(endData);
+			out.flush();
+			out.close();
+
+			// 读取返回数据
+			StringBuffer strBuf = new StringBuffer();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					conn.getInputStream()));
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				strBuf.append(line).append("\n");
+			}
+			res = strBuf.toString();
+			System.out.println(res);
+			reader.close();
+			reader = null;
+		} catch (Exception e) {
+			System.out.println("发送POST请求出错。" + urlStr);
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				conn.disconnect();
+				conn = null;
+			}
+		}
+		return res;
+	}
+	
+	
+	
 	/**
 	 * 测试
 	 * 
 	 * */
 	public static void main(String[] args) {
-        String url = "https://localhost:8443/feedbackAction!feedback?";
-        String httpUrl = "http://localhost:8080/feedbackAction!feedback?";  
-        String param = "feed.userId=1&feed.content=fuckUALL";
-		sendPost(httpUrl , param);
+        String httpUrl = "http://localhost:8080/fileUploadAction!upload?";  
+//		sendPost(httpUrl , param);
+        Map<String,String> textMap = new HashMap<>();
+        textMap.put("userId", "4");
+        textMap.put("resolution", "");
+        Map<String,String> fileMap = new HashMap<>();
+        fileMap.put("file", "D:/meet_me.jpg");
+        
+        sendPostFile(httpUrl,textMap,fileMap);
+        
+        
+        
 	}
+	
 	
 }

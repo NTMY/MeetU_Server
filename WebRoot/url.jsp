@@ -36,5 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     http://localhost:8080/deviceAction!uploadDeviceInfo?device.userId=1&device.imei=111&device.osName=ANDROID&device.osVer=5.0&device.deviceCompany=GOOGLE<br>
   百度云推送信息<br>
     http://localhost:8080/pushAction!savePushInfo?push.imei=111&push.userId=1&push.userId_push=baidu1&push.channelId=3545744288033740498<br>
+ 文件下载<br>
+ 	http://localhost:8080/fileDownloadAction!download?userId=1&resolution=&fileName=USER_1.jpg<br>
   </body>
 </html>

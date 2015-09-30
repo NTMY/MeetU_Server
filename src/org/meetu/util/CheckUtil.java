@@ -63,4 +63,15 @@ public class CheckUtil {
 		return ret;
 	}
 	
+	/**
+	 * 替换转义字符<br>
+	 * 当需要调用时调用,效率低下
+	 * 不行!!!!转完之后XSTREAM不认了!!!不能在服务端转
+	 * * */
+	public static String replaceESC(String origin) {
+		String ret = "";
+		ret = origin.replace("&amp;" , "&").replace("&quot;" , "\"").replace("&lt;" , "<").replace("&gt;" , ">").replace("&nbsp;" , " ");
+		return ret;
+	}
+	
 }

@@ -23,7 +23,9 @@ create table u_user(
 	home_addr varchar(256) comment '家庭地址',
 	regtime varchar(64) comment '注册时间',
 	mood varchar(512) comment '心情签名',
-	status varchar(3) comment '状态 0:正常 10:冻结 90-98:admin 99:root'
+	status varchar(3) comment '状态 0:正常 10:冻结 90-98:admin 99:root',
+	imgUrl varchar(256) comment '非高清头像',
+	imgUrlHD varchar(256) comment '高清头像'
 ) comment = '用户表' engine=InnoDB;
 
 drop table if exists u_device; 

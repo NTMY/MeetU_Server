@@ -17,6 +17,7 @@ import org.meetu.dto.UserAccessDto;
 import org.meetu.model.User;
 import org.meetu.service.IUserService;
 import org.meetu.util.BeanConverter;
+import org.meetu.util.CheckUtil;
 import org.meetu.util.ListBean;
 import org.meetu.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,6 +114,7 @@ public class UserAction extends ActionSupport {
 			logger.error("用户接入ACCESS异常",e);
 		} finally {
 			logger.warn("用户接入ACCESS接口返回XML");
+//			retXml = CheckUtil.replaceESC(retXml);//不能在server端进行转换,否则客户端xsteam无法解析
 			logger.warn(retXml);
 			out.write(retXml);
 			out.close();

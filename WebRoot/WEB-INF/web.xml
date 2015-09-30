@@ -22,7 +22,6 @@
    		<param-name>log4jConfigLocation</param-name>
    		<param-value>classpath:/config/log4j/log4j.properties</param-value>
 	</context-param>
-	
 	<!-- Spring3.2 Config Start -->
 	<listener>
 	  	<listener-class>

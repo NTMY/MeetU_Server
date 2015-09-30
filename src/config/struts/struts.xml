@@ -62,7 +62,24 @@
 	<package name="push" extends="global" namespace="/">
 		<action name="pushAction" class="org.meetu.action.PushAction">
 		</action>
-	</package>			
+	</package>		
+	
+	<package name="fileUpDown" extends="struts-default" namespace="/">
+		<action name="fileUploadAction" class="org.meetu.action.FileUploadAction">
+			<param name="maxSize">2000000</param><!-- 3000kb -->
+			<param name="allowTypes">image/jpg,image/png</param>
+		</action>
+		<action name="fileDownloadAction" class="org.meetu.action.FileDownloadAction">
+			<param name="filePath">D:\\_images\\portrait\\</param>
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">img</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+	</package>	
+		
 	
 	<!-- 默认的package的特点就在于不定义namespace属性，这样所有未定义的namespace都会转向这里。name="default"是为了便于阅读，其实name是什么都可以，也可以为空：name="" 
 	<package name="default" extends="struts-default">
