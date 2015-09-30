@@ -1,0 +1,5 @@
+2015-09-30 22:28:27,284 [main] ERROR org.meetu.client.util.HttpUtil - java.net.SocketTimeoutException: Read timed out
+2015-09-30 23:19:12,276 [main] ERROR org.meetu.client.util.HttpUtil - java.net.SocketTimeoutException: Read timed out
+2015-09-30 23:26:00,677 [main] ERROR org.meetu.client.util.HttpUtil - java.net.SocketTimeoutException: Read timed out
+2015-09-30 23:28:36,106 [main] ERROR org.meetu.client.util.HttpUtil - java.net.SocketTimeoutException: Read timed out
+2015-09-30 23:42:34,136 [main] ERROR org.meetu.client.util.HttpUtil - java.net.ConnectException: Connection refused: connect
