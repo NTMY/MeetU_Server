@@ -18,7 +18,17 @@ public class PortraitUploadModel {
 	 * */
 	private String resolution;
 	
+	/**
+	 * 要上传的文件的本地路径+文件名
+	 * */
+	private String fileLocalPath;
 	
+
+
+
+	/**
+	 * 构造方法
+	 * */
 	public PortraitUploadModel() {
 		
 	}
@@ -48,5 +58,12 @@ public class PortraitUploadModel {
 	}
 	
 	
-	
+	public String getFileLocalPath() {
+		return fileLocalPath;
+	}
+
+
+	public void setFileLocalPath(String fileLocalPath) {
+		this.fileLocalPath = fileLocalPath;
+	}
 }

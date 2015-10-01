@@ -115,7 +115,7 @@ public interface Constant {
 	/**
 	 * SERVER_IP
 	 * */
-	String IP = "localhost";
+	String IP = "192.168.1.7";
 
 	/** 域名 */
 	String DOMAIN = "gaowen.me";

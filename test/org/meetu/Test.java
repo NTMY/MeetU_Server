@@ -1,8 +1,8 @@
 package org.meetu;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Arrays;
-
-import org.meetu.model.User;
 
 public class Test {
 	public static void main(String[] args) throws Exception {
@@ -12,6 +12,9 @@ public class Test {
 		
 		String[] str = c.split("\\.");
 		System.out.println(Arrays.toString(str));
+		
+		
+		InputStream in = new FileInputStream("");
 		
 	}
 	

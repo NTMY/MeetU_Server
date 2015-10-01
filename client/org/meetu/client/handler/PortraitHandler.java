@@ -23,11 +23,12 @@ public class PortraitHandler extends BaseHandler {
         fileMap.put("file", "D:/meet_me.jpg");
 	 * */
 	public void onUpload(PortraitUploadListener listener , PortraitUploadModel model) {
-		String subUrl = "/fileUploadAction!upload?";
+		String subUrl = "fileUploadAction!upload?";//加不加/都一样
 		StringBuffer param = new StringBuffer();
 		param.append("userId=").append(model.getUserId()).append("&resolution=").append(model.getResolution());
 		Map<String, String> fileMap = new HashMap<>();
-		xml = HttpUtil.sendPostFile(Constant.URL, null, fileMap);
+		fileMap.put("file", model.getFileLocalPath());
+		xml = HttpUtil.sendPostFile(Constant.URL + subUrl + param, null, fileMap);
 		BaseDto dto = (BaseDto) BeanConverter.xmlToBean(xml);
 		if (listener != null) {
 			listener.upload(dto);

@@ -107,6 +107,8 @@ public class FileUploadAction extends ActionSupport {
 					u.setImgUrl("fileDownloadAction!download?userId="+userId+"&resolution=&fileName="+ImgGen.genFileName(userId, resolution, extName));
 				}
 				userService.update(u);
+				logger.info(u.getImgUrl());
+				logger.info(u.getImgUrlHD());
 			} catch (Exception e) {
 				logger.error("文件上传过程异常",e);
 				dto = new BaseDto(Constant.STATUS_FAIL , "文件上传过程异常"+e.getClass());

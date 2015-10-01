@@ -309,6 +309,9 @@ public class User extends BaseModel {
 		if(imgUrl == null) {
 			return imgUrl;
 		} else {
+			if(imgUrl.startsWith(Constant.URL)) {
+				return imgUrl;
+			}
 			return Constant.URL+imgUrl;
 		}
 	}
