@@ -306,39 +306,76 @@ public class User extends BaseModel {
 
 
 	public String getImgUrl() {
-		if(imgUrl == null) {
-			return imgUrl;
-		} else {
-			if(imgUrl.startsWith(Constant.URL)) {
-				return imgUrl;
-			}
-			return Constant.URL+imgUrl;
-		}
+		return imgUrl;
 	}
 
 
-
+	/**
+	 * 设置路径
+	 * */
 	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+		if(imgUrl == null) {
+			this.imgUrl = imgUrl;
+		} else {
+			if(imgUrl.startsWith(Constant.URL)) {
+				imgUrl.replace(Constant.URL, "");
+			} else {
+				this.imgUrl = imgUrl;
+			}
+		}
 	}
 
 
 
 	public String getImgUrlHD() {
-		if(imgUrlHD == null) {
-			return imgUrlHD;
-		} else {
-			return Constant.URL+imgUrlHD;
-		}
+		return imgUrlHD;
 	}
 
 
 
 	public void setImgUrlHD(String imgUrlHD) {
-		this.imgUrlHD = imgUrlHD;
+		if(imgUrlHD == null) {
+			this.imgUrlHD = imgUrlHD;
+		} else {
+			if(imgUrlHD.startsWith(Constant.URL)) {
+				imgUrlHD.replace(Constant.URL, "");
+			} else {
+				this.imgUrlHD = imgUrlHD;
+			}
+		}
 	}
 
+	
+	/**
+	 * 返回完整的imgUrl连接
+	 * */
+	public String getImgUrlReal() {
+		if(imgUrl == null) {
+			return null;
+		} else {
+			if(imgUrl.startsWith(Constant.URL)) {
+				return imgUrl;
+			} else {
+				return Constant.URL + imgUrl;
+			}
+		}
+	}
 
+	
+	/**
+	 * 返回完整的imgUrlHD连接
+	 * */
+	public String getImgUrlHDReal() {
+		if(imgUrlHD == null) {
+			return null;
+		} else {
+			if(imgUrlHD.startsWith(Constant.URL)) {
+				return imgUrlHD;
+			} else {
+				return Constant.URL + imgUrlHD;
+			}
+		}
+	}
 
 //	public PushInfoBaidu getPushInfo() {
 //		return pushInfo;
