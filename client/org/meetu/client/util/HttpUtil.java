@@ -4,10 +4,13 @@ import static org.meetu.constant.Constant.TIMEOUT_HTTP;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,6 +28,7 @@ import net.sf.jmimemagic.MagicMatch;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.meetu.constant.Constant;
 
 /**
  * HTTP通信工具类
@@ -223,7 +227,7 @@ public class HttpUtil {
 	 * @param fileMap图片,例如fileMap.put("file", "D:/meet_me.jpg");
 	 * */
 	public static String sendPostFileStream(String urlStr,
-			Map<String, String> textMap, Map<String, InputStream> fileMap) {
+			Map<String, String> textMap, Map<String, byte[]> fileMap) {
 		String res = "";
 		HttpURLConnection conn = null;
 		String BOUNDARY = "---------------------------123821742118716"; // boundary就是request头和上传文件内容的分隔符
@@ -266,16 +270,16 @@ public class HttpUtil {
 
 			// file
 			if (fileMap != null) {
-				Iterator<Map.Entry<String, InputStream>> iter = fileMap.entrySet()
-						.iterator();
+				Iterator<Map.Entry<String,byte[] >> iter = fileMap.entrySet().iterator();
+						
 				while (iter.hasNext()) {
-					Map.Entry<String, InputStream> entry = iter.next();
+					Map.Entry<String, byte[]> entry = iter.next();
 					String inputName = (String) entry.getKey();
-					InputStream inStream = (InputStream) entry.getValue();
-					if (inStream == null) {
+					byte[] bytess = (byte[]) entry.getValue();
+					if (bytess == null) {
 						continue;
 					}
-					File file = new File("inStream");//inStream
+					File file = new File("bytes");//inStream
 					String filename = file.getName();
 					String contentType = "";
 					try {
@@ -298,7 +302,7 @@ public class HttpUtil {
 					out.write(strBuf.toString().getBytes());
 
 					DataInputStream in = new DataInputStream(
-							new FileInputStream(file));
+							new ByteArrayInputStream(bytess));
 					int bytes = 0;
 					byte[] bufferOut = new byte[1024];
 					while ((bytes = in.read(bufferOut)) != -1) {
@@ -345,19 +349,42 @@ public class HttpUtil {
 	 * 
 	 * */
 	public static void main(String[] args) {
-        String httpUrl = "http://localhost:8080/fileUploadAction!upload?";  
+        String httpUrl = "http://localhost:8080/fileUploadAction!upload?";
+        
+        String sub = "fileUploadAction!upload?";
 //		sendPost(httpUrl , param);
         Map<String,String> textMap = new HashMap<>();
         textMap.put("userId", "4");
         textMap.put("resolution", "");
         Map<String,String> fileMap = new HashMap<>();
-        fileMap.put("file", "D:/1.jpg");
+        fileMap.put("file", "D:/meet_me.jpg");
         
-        sendPostFile(httpUrl,textMap,fileMap);
-        
-        
+//        sendPostFile(Constant.URL+sub,textMap,fileMap);
+        Map<String,byte[]> byteMap = new HashMap<>();
+        byte[] bytes = null;
+		try {
+			bytes = input2byte(new FileInputStream("D://meet_me.jpg"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        byteMap.put("file",bytes);
+        sendPostFileStream(httpUrl, textMap, byteMap);
         
 	}
 	
+	
+	   public static final byte[] input2byte(InputStream inStream)  
+	            throws IOException {  
+	        ByteArrayOutputStream swapStream = new ByteArrayOutputStream();  
+	        byte[] buff = new byte[100];  
+	        int rc = 0;  
+	        while ((rc = inStream.read(buff, 0, 100)) > 0) {  
+	            swapStream.write(buff, 0, rc);  
+	        }  
+	        byte[] in2b = swapStream.toByteArray();  
+	        return in2b;  
+	    }  
 	
 }

@@ -19,11 +19,14 @@ public class PortraitUploadModel {
 	private String resolution;
 	
 	/**
-	 * 要上传的文件的本地路径+文件名
+	 * 文件名
 	 * */
-	private String fileLocalPath;
+	private String fileName;
 	
-
+	/**
+	 * 文件内容
+	 * */
+	private byte[] fileBytes;
 
 
 	/**
@@ -56,14 +59,30 @@ public class PortraitUploadModel {
 	public void setResolution(String resolution) {
 		this.resolution = resolution;
 	}
-	
-	
-	public String getFileLocalPath() {
-		return fileLocalPath;
+
+
+
+	public String getFileName() {
+		return fileName;
 	}
 
 
-	public void setFileLocalPath(String fileLocalPath) {
-		this.fileLocalPath = fileLocalPath;
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
+
+
+
+	public byte[] getFileBytes() {
+		return fileBytes;
+	}
+
+
+
+	public void setFileBytes(byte[] fileBytes) {
+		this.fileBytes = fileBytes;
+	}
+	
+	
 }

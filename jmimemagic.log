@@ -3,3 +3,16 @@
 2015-09-30 23:26:00,677 [main] ERROR org.meetu.client.util.HttpUtil - java.net.SocketTimeoutException: Read timed out
 2015-09-30 23:28:36,106 [main] ERROR org.meetu.client.util.HttpUtil - java.net.SocketTimeoutException: Read timed out
 2015-09-30 23:42:34,136 [main] ERROR org.meetu.client.util.HttpUtil - java.net.ConnectException: Connection refused: connect
+2015-10-02 21:38:35,536 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)
+2015-10-02 21:40:46,822 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)
+2015-10-02 22:53:51,883 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)
+2015-10-02 22:58:51,623 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)
+2015-10-02 22:59:43,311 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)
+2015-10-02 23:04:06,918 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)
+2015-10-02 23:05:34,148 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)
+2015-10-02 23:10:34,410 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)
+2015-10-02 23:25:14,724 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)
+2015-10-02 23:34:22,268 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)
+2015-10-02 23:35:28,142 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)
+2015-10-02 23:50:10,570 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)
+2015-10-02 23:51:28,722 [main] ERROR net.sf.jmimemagic.Magic - getMagicMatch(File): java.io.FileNotFoundException: bytes (系统找不到指定的文件。)

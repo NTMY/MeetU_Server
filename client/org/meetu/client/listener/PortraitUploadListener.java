@@ -1,12 +1,12 @@
 package org.meetu.client.listener;
 
-import org.meetu.dto.BaseDto;
+import org.meetu.model.User;
 
 /**
  * 头像上传listener
  * */
 public interface PortraitUploadListener {
 
-	void upload(BaseDto dto);
+	void upload(User dto);
 	
 }

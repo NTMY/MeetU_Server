@@ -72,16 +72,19 @@ public class FileUploadAction extends ActionSupport {
 		response = ServletActionContext.getResponse();
 		
 		//返回
-		BaseDto dto = new BaseDto();
+		User dto = new User();
 		//上传userId
 		String userId = request.getParameter("userId");
 		//上传分辨率 是否高清
 		String resolution = request.getParameter("resolution");//分辨率.高清传HD
-
+		//上传文件名
+		String fileNameUp = request.getParameter("fileName");
+		
 		logger.info("--------------------------文件上传开始-----------------------------");
 		logger.info("userId =  " + userId);
 		logger.info("resolution =  " + resolution);
-		logger.info("fileName = " + this.getFileFileName());
+		logger.info("fileNameUp = " + fileNameUp);
+		logger.info("getFileFileName() = " + this.getFileFileName());
 		//可以上传
 		if (filterUploadFile() == true) {
 			try {
@@ -89,7 +92,8 @@ public class FileUploadAction extends ActionSupport {
 				is = new FileInputStream(file);
 				System.out.println("fileContentType= " + fileContentType);
 				String filePath = ImgGen.genFileDiskPath(resolution);
-				String extName = getFileFileName().split("\\.")[getFileFileName().split("\\.").length-1];
+				
+				String extName = fileNameUp.split("\\.")[fileNameUp.split("\\.").length-1];
 				String fileName = ImgGen.genFileName(userId, resolution , extName);
 				File toFile = new File(filePath, fileName);
 				os = new FileOutputStream(toFile);
@@ -109,9 +113,11 @@ public class FileUploadAction extends ActionSupport {
 				userService.update(u);
 				logger.info(u.getImgUrl());
 				logger.info(u.getImgUrlHD());
+				dto = u;
 			} catch (Exception e) {
 				logger.error("文件上传过程异常",e);
-				dto = new BaseDto(Constant.STATUS_FAIL , "文件上传过程异常"+e.getClass());
+				dto.setErrCode(Constant.STATUS_FAIL);
+				dto.setErrMsg("文件上传过程异常"+e.getClass());
 				throw (e);
 			} finally {
 				xml = BeanConverter.bean2xml(dto);
@@ -126,7 +132,8 @@ public class FileUploadAction extends ActionSupport {
 		} 
 		//如果不允许上传 
 		else {
-			dto = new BaseDto(Constant.STATUS_FAIL, "格式错误或文件太大");
+			dto.setErrCode(Constant.STATUS_FAIL);
+			dto.setErrMsg("文件上传过程异常_格式错误或文件太大");
 			xml = BeanConverter.bean2xml(dto);
 			out.write(xml);
 			out.close();
