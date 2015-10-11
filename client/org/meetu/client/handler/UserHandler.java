@@ -59,6 +59,10 @@ public class UserHandler extends BaseHandler {
 		if (user.getNickname() != null && !user.getNickname().equals("")) {
 			param.append("&user.nickname=").append(user.getNickname());
 		}
+		// IMEI
+		if (user.getImei() != null && !user.getImei().equals("")) {
+			param.append("&user.imei=").append(user.getImei());
+		}
 		// 密码
 		if (user.getPwd() != null && !user.getPwd().equals("")) {
 			param.append("&user.pwd=").append(user.getPwd());

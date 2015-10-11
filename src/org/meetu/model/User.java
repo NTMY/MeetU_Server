@@ -106,6 +106,14 @@ public class User extends BaseModel {
 		if (user.getName() != null && !user.getName().equals("")) {
 			this.name = user.getName();
 		}
+		//昵称nickname
+		if (user.getNickname() != null && !user.getNickname().equals("")) {
+			this.nickname = user.getNickname();
+		}
+		//IMEI
+		if (user.getImei() != null && !user.getImei().equals("")) {
+			this.imei = user.getImei();
+		}
 		//密码
 		if (user.getPwd() != null && !user.getPwd().equals("")) {
 			this.pwd = user.getPwd();
