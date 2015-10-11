@@ -55,6 +55,10 @@ public class UserHandler extends BaseHandler {
 		if (user.getName() != null && !user.getName().equals("")) {
 			param.append("&user.name=").append(user.getName());
 		}
+		// 昵称nickname
+		if (user.getNickname() != null && !user.getNickname().equals("")) {
+			param.append("&user.nickname=").append(user.getNickname());
+		}
 		// 密码
 		if (user.getPwd() != null && !user.getPwd().equals("")) {
 			param.append("&user.pwd=").append(user.getPwd());
