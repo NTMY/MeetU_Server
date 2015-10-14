@@ -15,8 +15,10 @@ public interface IFriendRelService {
 	
 	/**
 	 * 通过用户id查询他的好友
+	 * @param userId 用户本人id
+	 * @param statusRel好友关系 见Constant
 	 * @throws Exception 
 	 * */
-	List<FriendRel> queryByUserId(Integer userId) throws Exception;
+	List<Object[]> queryMyFriendList(Integer userId,String statueRel) throws Exception;
 	
 }

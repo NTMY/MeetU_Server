@@ -28,11 +28,12 @@ public class FriendRelServiceImpl implements IFriendRelService {
 	}
 
 	@Override
-	public List<FriendRel> queryByUserId(Integer userId) throws Exception {
-		List list = relDao.selectByUserId(userId);
+	public List<Object[]> queryMyFriendList(Integer userId, String statusRel)
+			throws Exception {
+		List<Object[]> list = relDao.selectMyFriend(userId,statusRel);
+		
 		return list;
 	}
 	
-	
-	
+
 }

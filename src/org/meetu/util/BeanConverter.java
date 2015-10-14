@@ -1,13 +1,15 @@
 package org.meetu.util;
 
+import static org.meetu.constant.Constant.STATUS_FAIL;
+import static org.meetu.constant.Constant.XML_HEAD;
+
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.meetu.dto.BaseDto;
 
 import com.thoughtworks.xstream.XStream;
-
-import static org.meetu.constant.Constant.*;
 
 
 
@@ -91,6 +93,12 @@ public class BeanConverter {
 	 * @return 如果接收list数据,则转为ListBean,否则转为不同的实体类或者根据字段解析
 	 * */
 	public static Object xmlToBean(String xml) {
+		if(xml == null || xml.equals("")) {
+			return new BaseDto(STATUS_FAIL,"XML空");
+		} 
+		if(!xml.startsWith(XML_HEAD)) {
+			return new BaseDto(STATUS_FAIL,"XML头非法");
+		}
 		Object obj =  xstream.fromXML(xml);
 		return obj;
 	}

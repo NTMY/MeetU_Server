@@ -10,8 +10,8 @@ public class FriendSendReqTest {
 	public static void main(String[] args) {
 		FriendHandler handler = new FriendHandler();
 		FriendReq req = new FriendReq();
-		req.setReqUserId(2);
-		req.setReqFriendId(1);
+		req.setReqUserId(1);
+		req.setReqFriendId(4);
 		req.setReqWay(REQ_WAY_MOBILE);
 		req.setReqFriendData("18102651218");
 		req.setReqMessage("加好友");

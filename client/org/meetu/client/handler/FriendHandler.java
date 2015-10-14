@@ -5,10 +5,11 @@ import org.meetu.client.listener.FriendGetMyFriendListListener;
 import org.meetu.client.listener.FriendGetReqActiveListener;
 import org.meetu.client.listener.FriendSendReqListener;
 import org.meetu.dto.BaseDto;
+import org.meetu.model.FriendRel;
 import org.meetu.model.FriendReq;
-import org.meetu.model.User;
 import org.meetu.util.BeanConverter;
 import org.meetu.util.ListBean;
+
 
 /**
  * 好友相关操作Handler<br>
@@ -70,10 +71,10 @@ public class FriendHandler extends BaseHandler {
 	/**
 	 * 获取好友列表
 	 * */
-	public void onGetMyFriendList(FriendGetMyFriendListListener listener , User user) {
+	public void onGetMyFriendList(FriendGetMyFriendListListener listener , FriendRel rel) {
 		String subUrl = "/friendAction!getMyFriendList?";
 		StringBuffer param = new StringBuffer();
-		param.append("&user.id=").append(user.getId());
+		param.append("&userId=").append(rel.getPk().getUserId()).append("&statusRel=").append(rel.getStatusRel());
 		
 		xml = send(subUrl, param.toString());
 		ListBean beans = (ListBean) BeanConverter.xmlToBean(xml);
