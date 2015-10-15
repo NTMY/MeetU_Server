@@ -7,6 +7,7 @@ import org.meetu.client.listener.FriendSendReqListener;
 import org.meetu.dto.BaseDto;
 import org.meetu.model.FriendRel;
 import org.meetu.model.FriendReq;
+import org.meetu.model.User;
 import org.meetu.util.BeanConverter;
 import org.meetu.util.ListBean;
 
@@ -71,16 +72,33 @@ public class FriendHandler extends BaseHandler {
 	/**
 	 * 获取好友列表
 	 * */
-	public void onGetMyFriendList(FriendGetMyFriendListListener listener , FriendRel rel) {
+	@Deprecated
+	public void onGetMyFriendList(FriendGetMyFriendListListener listener , User user) {
 		String subUrl = "/friendAction!getMyFriendList?";
+		StringBuffer param = new StringBuffer();
+		param.append("&user.id=").append(user.getId());
+		
+		xml = send(subUrl, param.toString());
+		ListBean<User> beans = (ListBean<User>) BeanConverter.xmlToBean(xml);
+		
+		if (listener != null) {
+			listener.getMyFriendList(beans);
+		}
+	}
+	
+	/**
+	 * 获取真正的好友列表
+	 * */
+	public void onGetMyFriendListReal(FriendGetMyFriendListListener listener , FriendRel rel) {
+		String subUrl = "/friendAction!getMyFriendListReal?";
 		StringBuffer param = new StringBuffer();
 		param.append("&userId=").append(rel.getPk().getUserId()).append("&statusRel=").append(rel.getStatusRel());
 		
 		xml = send(subUrl, param.toString());
-		ListBean beans = (ListBean) BeanConverter.xmlToBean(xml);
+		ListBean<Object[]> beans = (ListBean) BeanConverter.xmlToBean(xml);
 		
 		if (listener != null) {
-			listener.getMyFriendList(beans);
+			listener.getMyFriendListReal(beans);
 		}
 	}
 }

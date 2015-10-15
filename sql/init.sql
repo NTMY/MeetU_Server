@@ -142,8 +142,23 @@ create table u_friend_msg(
 	reqId int(16) primary key comment '关联好友申请表的主键',
 	userId int(16) comment '留言人id', 
 	msg varchar(512) comment '留言内容',
-	msgDate timestamp
+	msgDate timestamp comment '留言时间'
 ) comment '好友申请相互留言表' engine=InnoDB;
+
+
+drop table if exists log_meet;
+create table log_meet(
+	id int(16) auto_increment primary key comment '主键',
+	userId int(16) comment '主动用户id',
+	user_longitude double comment '主动用户相遇地点经度',
+	user_latitude double comment '主动用户相遇地点纬度',
+	user_address varchar(256) comment '主动用户地点位置描述',
+	friendId int(16) comment '被动用户id',
+	friend_longitude double comment '被动用户相遇地点经度',
+	friend_latitude double comment '被动用户相遇地点经度',
+	friend_address varchar(256) comment '被动用户相遇地点位置描述',
+	happenTime timestamp comment '相遇时间'
+) comment '相遇记录,每个用户的相遇都会记录在此,如果一个用户同时与多人相遇,记录多条数据' engine=InnoDB
 
 
 

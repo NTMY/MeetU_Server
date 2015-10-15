@@ -2,15 +2,19 @@ package org.meetu.service.impl;
 
 import static org.meetu.constant.Constant.STATUS_FAIL;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.meetu.dao.LocationCurrDao;
 import org.meetu.dao.LocationHisDao;
+import org.meetu.dao.LogMeetDao;
 import org.meetu.dto.BaseDto;
 import org.meetu.model.LocationCurr;
 import org.meetu.model.LocationHis;
+import org.meetu.model.LogMeet;
 import org.meetu.service.ILocationCurrService;
 import org.meetu.util.ListBean;
 import org.meetu.util.RangeCalculator;
@@ -29,6 +33,9 @@ public class LocationCurrServiceImpl implements ILocationCurrService {
 
 	@Autowired
 	private LocationHisDao hisDao;
+	
+	@Autowired
+	private LogMeetDao meetDao;
 
 	@Override
 	public void insert(LocationCurr curr) {
@@ -92,8 +99,27 @@ public class LocationCurrServiceImpl implements ILocationCurrService {
 			double[] range = RangeCalculator.getSquare(curr.getLatitude(),
 					curr.getLongitude(), 3000);
 			curr.setRange(range);// 设置边界值(查询条件)
-			List list = currDao.queryNear(curr);// 查询附近的人
-
+			List<LocationCurr> list = currDao.queryNear(curr);// 查询附近的人
+			if(list==null) {
+				beans.setErrCode(STATUS_FAIL);
+				beans.setErrMsg("查询附近的人DB异常");
+				return beans;
+			}
+			//记录相遇log
+			for(int i=0;i<list.size();i++) {
+				LogMeet logMeet = new LogMeet();
+				//logMeet.setId(0);//MySQL设为id自增,Hibernate设置策略
+				logMeet.setUserId(curr.getUserId());
+				logMeet.setUserLongitude(curr.getLongitude());
+				logMeet.setUserLatitude(curr.getLatitude());
+				logMeet.setUserAddress(curr.getAddress());
+				logMeet.setFriendId(list.get(i).getUserId());
+				logMeet.setFriendLongitude(list.get(i).getLongitude());
+				logMeet.setFriendLatitude(list.get(i).getLatitude());
+				logMeet.setFriendAddress(list.get(i).getAddress());
+				logMeet.setHappenTime(new Timestamp(new Date().getTime()));
+				meetDao.insert(logMeet);
+			}
 			beans.setList(list);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动回滚

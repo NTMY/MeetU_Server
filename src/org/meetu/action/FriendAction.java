@@ -23,7 +23,6 @@ import org.meetu.service.IFriendReqService;
 import org.meetu.service.IPushService;
 import org.meetu.service.IUserService;
 import org.meetu.util.BeanConverter;
-import org.meetu.util.CheckUtil;
 import org.meetu.util.ListBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -206,12 +205,40 @@ public class FriendAction extends ActionSupport {
 
 		return null;
 	}
-
+	
 	/**
+	 * 返回所有用户,单纯的List<User>
+	 * */
+	@Deprecated
+	public String getMyFriendList() {
+		request = ServletActionContext.getRequest();
+		response = ServletActionContext.getResponse();
+		List<User> list = null;
+		ListBean<User> beans = new ListBean<>();
+		try {
+			out = response.getWriter();
+			list = userService.queryMyFriendList(user.getId());//获取所有用户
+			beans.setList(list);
+		} catch (Exception e) {
+			logger.error("获取好友列表失败",e);
+		} finally {
+			xml = BeanConverter.bean2xml(beans);
+			//xml = CheckUtil.replaceESC(xml);//不能在server端进行转换,否则客户端xsteam无法解析
+			out.write(xml);
+			logger.warn("获取好友列表返回的数据是");
+			logger.warn(xml);
+			out.close();
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 真正的好友
 	 * 查找自己所有好友<br>
 	 * 可用作好友列表,好友筛选...
 	 * */
-	public String getMyFriendList() {
+	public String getMyFriendListReal() {
 		request = ServletActionContext.getRequest();
 		response = ServletActionContext.getResponse();
 		ListBean<User> beans = new ListBean<>();
@@ -223,7 +250,6 @@ public class FriendAction extends ActionSupport {
 			userId = Integer.valueOf(userIdStr);
 			List list = null;
 			out = response.getWriter();
-			// list = userService.queryMyFriendList(user.getId());//获取所有用户
 			list = relService.queryMyFriendList(userId, statusRel);
 			beans.setList(list);
 			if(list == null) {
