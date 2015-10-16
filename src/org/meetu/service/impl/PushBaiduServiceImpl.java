@@ -1,9 +1,9 @@
 package org.meetu.service.impl;
 
+import static org.meetu.constant.Constant.REQ_STATUS_ORIGIN;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.meetu.constant.Constant.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,12 +12,12 @@ import org.meetu.dao.PushBaiduDao;
 import org.meetu.dto.PushBaiduParam;
 import org.meetu.model.FriendReq;
 import org.meetu.model.PushInfoBaidu;
+import org.meetu.push.baidu.AndroidPushMsgToAll;
+import org.meetu.push.baidu.AndroidPushMsgToSingleDevice;
 import org.meetu.service.IPushService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baidu.yun.push.sample.AndroidPushMsgToAll;
-import com.baidu.yun.push.sample.AndroidPushMsgToSingleDevice;
 
 @Service
 public class PushBaiduServiceImpl implements IPushService {

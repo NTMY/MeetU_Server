@@ -15,22 +15,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 import org.meetu.constant.Constant;
-import org.meetu.dao.PushBaiduDao;
 import org.meetu.dto.BaseDto;
 import org.meetu.dto.PushBaiduParam;
 import org.meetu.model.Feedback;
-import org.meetu.model.PushInfoBaidu;
 import org.meetu.model.User;
 import org.meetu.service.IFeedbackService;
 import org.meetu.service.IPushService;
 import org.meetu.service.IUserService;
-import org.meetu.service.impl.PushBaiduServiceImpl;
 import org.meetu.util.BeanConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baidu.yun.push.exception.PushClientException;
 import com.baidu.yun.push.exception.PushServerException;
-import com.baidu.yun.push.sample.AndroidPushMsgToSingleDevice;
 
 /**
  * 用户反馈Action
