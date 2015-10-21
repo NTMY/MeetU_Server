@@ -131,5 +131,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jedis-2.7.2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jpush-client-3.2.7.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/gson-2.2.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
