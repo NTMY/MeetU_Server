@@ -1,15 +1,18 @@
 package org.meetu.dao.mybatis;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
+import org.meetu.model.LocationCurr;
+import org.meetu.model.LocationHis;
 import org.meetu.model.User;
 
 
 public class UserDaoTest {
 	
-	UserDao dao = new UserDao();
+	UserMapper dao = new UserMapper();
 	
 	
 	@Test
@@ -30,6 +33,22 @@ public class UserDaoTest {
 		dao.insert(u);
 	}
 	
+	
+	@Test
+	public void testQueryLocCurr() {
+		LocationCurr curr = new LocationCurr();
+		curr.setUserId(4);
+		LocationCurr res = dao.queryLocCurr(curr);
+		System.out.println(res);
+	}
+	
+	@Test
+	public void testQueryLocHis() {
+		LocationHis his = new LocationHis();
+		his.setUserId(4);
+		List list = dao.queryLocHis(his);
+		System.out.println(list);
+	}
 	
 }
 

@@ -4,28 +4,97 @@
 <!-- 命名空间：mapper接口全名 -->
 <mapper namespace="org.meetu.dao.IUserDao">
 
-	<sql id="userFields"> 
+	<sql id="userFields">
 		id,mobile,pwd,imei,name,nickname,birthdate,gender,qq,wechat,email,company,company_addr,home_addr,regtime,mood,status,imgUrl,imgUrlHD
-    </sql>
+	</sql>
 
 	<!-- 主键查询 -->
 	<!-- resultType,parameterType可以写别名alias也可以直接写类全名 -->
-	<select id="queryById" parameterType="java.lang.String" resultType="org.meetu.model.User">
-		select <include refid="userFields"/> from _user where id = #{id};
+	<select id="queryById" parameterType="java.lang.String"
+		resultType="org.meetu.model.User">
+		select
+		<include refid="userFields" />
+		from _user where id = #{id};
 	</select>
-	
-	<select id="queryById_Map" parameterType="java.lang.String" resultType="map">
+
+	<select id="queryById_Map" parameterType="java.lang.String"
+		resultType="map">
 		select * from _user where id = #{id};
 	</select>
-	
+
 	<insert id="insert" parameterType="User">
-		insert into u_user ( <include refid="userFields"/> ) values
+		insert into u_user (
+		<include refid="userFields" />
+		) values
 		(
-			#{id} , #{mobile}, #{pwd}, #{imei}, #{name} , #{nickname} , #{birthdate} , #{gender} , #{qq} , #{wechat} , #{email} , #{company} , #{company_addr} , #{home_addr} , #{regtime} , #{mood} , #{status} , #{imgUrl} , #{imgUrlHD}
+		#{id} , #{mobile}, #{pwd}, #{imei}, #{name} , #{nickname} , #{birthdate} ,
+		#{gender} , #{qq} , #{wechat} , #{email} , #{company} ,
+		#{company_addr} , #{home_addr} , #{regtime} , #{mood} , #{status} ,
+		#{imgUrl} , #{imgUrlHD}
 		);
 	</insert>
 	
-	<select id="queryFewTable"></select>
-	
-	
+	<resultMap type="LocationCurr" id="locCurrResultMap"> 
+	    <id property="userId" column="userId"/> 
+	    <result property="address" column="address"/>
+	    <result property="business" column="business"/>  
+	    <association property="user" column="userId" javaType="User" />
+	    <!-- select="getAuthorById" -->
+	</resultMap> 
+	<!-- 1-1 -->
+	<select id="queryLocCurr" parameterType="LocationCurr" resultMap="locCurrResultMap">
+		select
+			lc.user_Id ,
+			lc.longitude,
+			lc.latitude,
+			lc.address,
+			lc.business,
+			u.id,
+			u.name,
+			u.nickname
+		from U_LOC_CURR lc left join U_USER u 
+		on lc.user_Id = u.id
+		where 1 = 1
+	<if test="userId != null and '' != userId">  
+        and u.id = #{userId}  
+    </if>  
+		 <!--  
+		 <if test="flag != null and '' != flag">  
+            <![CDATA[  
+              and D.FLAG = #{flag}  
+            ]]>  
+        </if>  
+        -->	
+
+	</select>
+
+
+	<resultMap type="User" id="locHisResultMap"> 
+	    <id property="id" column="id"/> 
+	    <result property="name" column="name"/>
+	    <result property="nickname" column="nickname"/>
+        <collection property="hisList" ofType="org.meetu.model.LocationHis" column="id">  
+           	<result property="address" column="address"/>
+	    	<result property="business" column="business"/>
+        </collection>  
+	</resultMap> 
+	<!-- 1-n -->
+	<select id="queryLocHis" parameterType="LocationHis" resultMap="locHisResultMap">
+		select
+			lh.id,
+			lh.user_Id ,
+			lh.longitude,
+			lh.latitude,
+			lh.address,
+			lh.business,
+			u.id,
+			u.name,
+			u.nickname  
+		from U_USER u right join U_LOC_HIS lh 
+		on lh.user_Id = u.id
+		where 1 = 1
+	<if test="userId != null and '' != userId">  
+        and u.id = #{userId}  
+    </if>  
+	</select>
 </mapper>

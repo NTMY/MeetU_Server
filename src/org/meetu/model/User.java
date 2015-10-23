@@ -1,5 +1,7 @@
 package org.meetu.model;
 
+import java.util.List;
+
 import javax.persistence.JoinColumn;
 
 import org.meetu.constant.Constant;
@@ -80,6 +82,10 @@ public class User extends BaseModel {
 	 * 关联<br>
 	 * 虽然数据上的关系是一对多,但是只读取那个当前使用的1v1的关系就够了
 	 * */
+	private LocationCurr curr;
+	
+	private List<LocationHis> hisList;
+	
 	/** 百度推送信息 */
 //	private PushInfoBaidu pushInfo;
 	
@@ -384,6 +390,45 @@ public class User extends BaseModel {
 			}
 		}
 	}
+
+
+
+	/**
+	 * @return the curr
+	 */
+	public LocationCurr getCurr() {
+		return curr;
+	}
+
+
+
+	/**
+	 * @param curr the curr to set
+	 */
+	public void setCurr(LocationCurr curr) {
+		this.curr = curr;
+	}
+
+
+
+	/**
+	 * @return the hisList
+	 */
+	public List<LocationHis> getHisList() {
+		return hisList;
+	}
+
+
+
+	/**
+	 * @param hisList the hisList to set
+	 */
+	public void setHisList(List<LocationHis> hisList) {
+		this.hisList = hisList;
+	}
+
+
+
 
 //	public PushInfoBaidu getPushInfo() {
 //		return pushInfo;

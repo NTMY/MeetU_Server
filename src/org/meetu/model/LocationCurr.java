@@ -26,7 +26,10 @@ public class LocationCurr extends BaseModel {
 	/** 上传时间 */
 	private Date uploadTime;
 
-	
+	/**
+	 * 关联
+	 * */
+	private User user;
 	
 	/**
 	 * 
@@ -180,6 +183,20 @@ public class LocationCurr extends BaseModel {
 
 	public void setBusiness(String business) {
 		this.business = business;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }
