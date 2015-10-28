@@ -39,10 +39,7 @@ public class LocationHisDao {
 	public List<LocationHis> queryAll(LocationHis his)
 	{
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select HIS from LocationHis HIS where 1= 1 ";
-		if (null != his.getUserId() && !"".equals(his.getUserId())){
-			sql += " and HIS.imei = '" + his.getUserId() + "'";// 
-		}
+		String sql = "select HIS from LocationHis HIS where 1= 1 order by id";
 		Query query = session.createQuery(sql);
 		List<LocationHis> userList = new ArrayList<LocationHis>();
 		userList = query.list();

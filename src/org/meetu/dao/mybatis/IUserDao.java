@@ -33,5 +33,5 @@ public interface IUserDao {
 	/**
 	 * 一对n
 	 * */
-	List queryLocHis(LocationHis his);
+	User queryLocHis(LocationHis his);
 }

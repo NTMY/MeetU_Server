@@ -95,15 +95,16 @@ public class UserMapper implements IUserDao {
 	}
 
 	@Override
-	public List queryLocHis(LocationHis his) {
+	public User queryLocHis(LocationHis his) {
 		SqlSession session = sqlSessionFactory.openSession();
-		List list = null;
+		User user=new User();
 		try {
-			list = session.selectList("org.meetu.dao.IUserDao.queryLocHis", his);
+			 Object obj = session.selectList("org.meetu.dao.IUserDao.queryLocHis", his);
+			 System.out.println(obj);
 		} finally {
 			session.close();
 		}
-		return list;
+		System.out.println(user.getHisList().size());
+		return user;
 	}
-	
 }

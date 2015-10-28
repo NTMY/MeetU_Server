@@ -152,7 +152,8 @@ public class User extends BaseModel {
 	
 	@Override
 	public String toString(){
-		return "id="+this.getId();
+		return super.toString();
+//		return "id="+this.getId();
 	}
 	
 	@Override
@@ -167,7 +168,8 @@ public class User extends BaseModel {
 	
 	@Override
 	public int hashCode() {
-		return this.imei.hashCode();
+		return super.hashCode();
+//		return this.imei.hashCode();
 	}
 	
 	/**************************************************

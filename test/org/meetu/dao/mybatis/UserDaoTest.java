@@ -46,8 +46,8 @@ public class UserDaoTest {
 	public void testQueryLocHis() {
 		LocationHis his = new LocationHis();
 		his.setUserId(4);
-		List list = dao.queryLocHis(his);
-		System.out.println(list);
+		User user = dao.queryLocHis(his);
+		System.out.println(user);
 	}
 	
 }

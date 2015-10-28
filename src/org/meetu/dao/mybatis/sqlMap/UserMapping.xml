@@ -69,32 +69,52 @@
 	</select>
 
 
-	<resultMap type="User" id="locHisResultMap"> 
-	    <id property="id" column="id"/> 
+	<resultMap type="User" id="locHisResultCollMap"> 
+	    <id property="id" column="userId"/> 
 	    <result property="name" column="name"/>
 	    <result property="nickname" column="nickname"/>
+	    <result property="mobile" column="mobile"/>
         <collection property="hisList" ofType="org.meetu.model.LocationHis" column="id">  
+           	<result property="id" column="hisId"/>
+           	<result property="userId" column="userId"/>
            	<result property="address" column="address"/>
 	    	<result property="business" column="business"/>
+	    	<result property="longitude" column="longitude"/>
+	    	<result property="latitude" column="latitude"/>
         </collection>  
+	</resultMap> 
+	
+	<resultMap type="Map" id="locHisResultMap"> 
+	    <id property="id" column="userId"/> 
+	    <result property="name" column="name"/>
+	    <result property="nickname" column="nickname"/>
+	    <result property="mobile" column="mobile"/>
+          	<result property="id" column="hisId"/>
+           	<result property="userId" column="userId"/>
+           	<result property="address" column="address"/>
+	    	<result property="business" column="business"/>
+	    	<result property="longitude" column="longitude"/>
+	    	<result property="latitude" column="latitude"/>
 	</resultMap> 
 	<!-- 1-n -->
 	<select id="queryLocHis" parameterType="LocationHis" resultMap="locHisResultMap">
 		select
-			lh.id,
-			lh.user_Id ,
+			lh.id as hisId,
+			lh.user_Id as userId,
 			lh.longitude,
 			lh.latitude,
 			lh.address,
 			lh.business,
-			u.id,
+			u.id as userId,
 			u.name,
-			u.nickname  
-		from U_USER u right join U_LOC_HIS lh 
+			u.nickname,
+			u.mobile,
+			u.email
+		from U_USER u left join U_LOC_HIS lh 
 		on lh.user_Id = u.id
 		where 1 = 1
 	<if test="userId != null and '' != userId">  
-        and u.id = #{userId}  
+        and lh.user_Id = #{userId}  
     </if>  
 	</select>
 </mapper>
