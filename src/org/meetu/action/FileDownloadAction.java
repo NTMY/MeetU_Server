@@ -32,7 +32,11 @@ public class FileDownloadAction extends ActionSupport {
 	 * */
 	private String fileName;
 	
+	/**普通头像文件路径*/
 	private String filePath;
+	
+	/**高清大图文件路径*/
+	private String filePathHD;
 	
 	
 	public String download()
@@ -56,7 +60,11 @@ public class FileDownloadAction extends ActionSupport {
 
 		InputStream is = null;
 		try {
-			is = new FileInputStream(filePath + fileName);
+			if(resolution != null && resolution.equalsIgnoreCase("HD")) {
+				is = new FileInputStream(filePathHD + fileName);
+			} else {
+				is = new FileInputStream(filePath + fileName);
+			}
 			return is;
 		} catch (FileNotFoundException e) {
 			logger.error("文件下载出现异常FileNotFoundException", e);
@@ -88,6 +96,20 @@ public class FileDownloadAction extends ActionSupport {
 
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
+	}
+
+	/**
+	 * @return the filePathHD
+	 */
+	public String getFilePathHD() {
+		return filePathHD;
+	}
+
+	/**
+	 * @param filePathHD the filePathHD to set
+	 */
+	public void setFilePathHD(String filePathHD) {
+		this.filePathHD = filePathHD;
 	}
 	
 }

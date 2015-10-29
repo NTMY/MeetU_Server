@@ -71,6 +71,7 @@
 		</action>
 		<action name="fileDownloadAction" class="org.meetu.action.FileDownloadAction">
 			<param name="filePath">/home/dev/portrait/</param>
+			<param name="filePathHD">/home/dev/portraitHD/</param>
 			<result name="success" type="stream">
 				<param name="contentType">application/octet-stream</param>
 				<param name="inputName">img</param>

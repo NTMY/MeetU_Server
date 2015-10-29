@@ -32,7 +32,7 @@ public class Constant {
 	 * */
 	public static String PORTRAIT_HD_PATH = "/home/dev/portraitHD/";
 
-	private static String MODE = "LOCAL";
+	private static String MODE = "Server";
 	static {
 		//如果是本地开发
 		if (MODE.equalsIgnoreCase("LOCAL")) {
