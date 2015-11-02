@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.meetu.cache.Cache;
+import org.meetu.constant.Constant;
 import org.meetu.dao.LocationCurrDao;
 import org.meetu.dao.LocationHisDao;
 import org.meetu.dao.LogMeetDao;
@@ -27,7 +29,10 @@ public class LocationCurrServiceImpl implements ILocationCurrService {
 
 	private static Log logger = LogFactory
 			.getLog(LocationCurrServiceImpl.class);
-
+	/**
+	 * */
+	
+	
 	@Autowired
 	private LocationCurrDao currDao;
 
@@ -97,7 +102,7 @@ public class LocationCurrServiceImpl implements ILocationCurrService {
 			currDao.insert(curr);
 			// 查找附近的好友(利用当前表)
 			double[] range = RangeCalculator.getSquare(curr.getLatitude(),
-					curr.getLongitude(), 3000);
+					curr.getLongitude(), Constant.MEETU_RANGE);
 			curr.setRange(range);// 设置边界值(查询条件)
 			List<LocationCurr> list = currDao.queryNear(curr);// 查询附近的人
 			if(list==null) {

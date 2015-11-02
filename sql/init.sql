@@ -76,6 +76,9 @@ insert into sys_param values ('meetu_freq','600','上传并查找频率(单位�
 insert into sys_param values ('BAIDU_DEV_SN','F56034a118b5fedfc66f6e39498b9c2e','百度开发者SN');
 insert into sys_param values ('BAIDU_PUSH_APIKEY','CiiSrq7SctOXARW0GrxKU9VA','百度云推送apikey');
 insert into sys_param values ('BAIDU_PUSH_SECRETKEY','ZDtmKIqZ8rYDUx9n6VhikGOjVd3XOX6o','百度云推送密钥key');
+insert into sys_param values ('MEETU_RANGE','3000','搜索附近的人距离范围(单位:米)');
+insert into sys_param values ('JPUSH_MASTER_SECRET','35d0b56ced7282c7e5f7ee71','极光master_key');
+insert into sys_param values ('JPUSH_APP_KEY','190029569855c6523b7004b3','极光app_key');
 
 
 
