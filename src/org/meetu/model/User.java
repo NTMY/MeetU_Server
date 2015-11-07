@@ -109,11 +109,11 @@ public class User extends BaseModel {
 			this.mobile = user.getMobile();
 		}
 		//姓名
-		if (user.getName() != null && !user.getName().equals("")) {
+		if (user.getName() != null) {
 			this.name = user.getName();
 		}
 		//昵称nickname
-		if (user.getNickname() != null && !user.getNickname().equals("")) {
+		if (user.getNickname() != null) {
 			this.nickname = user.getNickname();
 		}
 		//IMEI
@@ -125,27 +125,27 @@ public class User extends BaseModel {
 			this.pwd = user.getPwd();
 		}
 		//生日
-		if (user.getBirthdate() != null && !user.getBirthdate().equals("")) {
+		if (user.getBirthdate() != null) {
 			this.birthdate = user.getBirthdate();
 		}
 		//性别
-		if (user.getGender() != null && !user.getGender().equals("")) {
+		if (user.getGender() != null) {
 			this.gender = user.getGender();
 		}
 		//QQ
-		if (user.getQq() != null && !user.getQq().equals("")) {
+		if (user.getQq() != null) {
 			this.qq = user.getQq();
 		}
 		//Email
-		if (user.getEmail() != null && !user.getEmail().equals("")) {
+		if (user.getEmail() != null) {
 			this.email = user.getEmail();
 		}
 		//mood
-		if (user.getMood() != null && !user.getMood().equals("")) {
+		if (user.getMood() != null) {
 			this.mood = user.getMood();
 		}
 		//wechat
-		if (user.getWechat() != null && !user.getWechat().equals("")) {
+		if (user.getWechat() != null) {
 			this.wechat = user.getWechat();
 		}
 	}
