@@ -1,7 +1,5 @@
 package org.meetu.constant;
 
-import org.meetu.cache.Cache;
-
 /**
  * 常量类<br>
  * interface中属性默认为public static final
@@ -34,7 +32,7 @@ public class Constant {
 	 * */
 	public static String PORTRAIT_HD_PATH = "/home/dev/portraitHD/";
 
-	private static String MODE = "SERVER";
+	private static String MODE = "Server";
 	static {
 		//如果是本地开发
 		if (MODE.equalsIgnoreCase("LOCAL")) {
@@ -73,9 +71,9 @@ public class Constant {
 	/************************************************************************************************************************************************************************************************************
 	 * 极光帐号信息START
 	 ************************************************************************************************************************************************************************************************************/
-	public static final String JPUSH_MASTER_SECRET = (String)Cache.get("JPUSH_MASTER_SECRET");
+	public static final String JPUSH_MASTER_SECRET = "35d0b56ced7282c7e5f7ee71";
 	
-	public static final String JPUSH_APP_KEY = (String)Cache.get("JPUSH_APP_KEY");
+	public static final String JPUSH_APP_KEY = "190029569855c6523b7004b3";
 
 	/************************************************************************************************************************************************************************************************************
 	 * 极光帐号信息END
@@ -99,7 +97,7 @@ public class Constant {
 	public static final String BAIDU_PUSH_CLIENT = "BAIDU_PUSH_CLIENT";
 
 	/** PUSH CHANNELID临时测试用MOTO X PRO */
-	//public static final String channelId = "3545744288033740498";
+	public static final String channelId = "3545744288033740498";
 
 	/** 百度LBS服务输出数据格式 */
 	public static final String BAIDU_LBS_OUTPUT = "xml";
@@ -224,8 +222,8 @@ public class Constant {
 	public static final String UPDATE_LV_FORCE = "2";
 
 	/**
-	 * 搜索附近的人距离限制(单位:米)
+	 * 查询多少米之内,附近的人(单位:米)
 	 * */
-	public static int MEETU_RANGE = Integer.valueOf((String)Cache.get("MEETU_RANGE"));
+	public static int MEETU_RANGE = 3000;
 	
 }
