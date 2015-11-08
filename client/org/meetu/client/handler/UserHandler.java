@@ -52,11 +52,11 @@ public class UserHandler extends BaseHandler {
 			param.append("&user.mobile=").append(user.getMobile());
 		}
 		// 姓名
-		if (user.getName() != null && !user.getName().equals("")) {
+		if (user.getName() != null) {
 			param.append("&user.name=").append(user.getName());
 		}
 		// 昵称nickname
-		if (user.getNickname() != null && !user.getNickname().equals("")) {
+		if (user.getNickname() != null) {
 			param.append("&user.nickname=").append(user.getNickname());
 		}
 		// IMEI
@@ -68,27 +68,27 @@ public class UserHandler extends BaseHandler {
 			param.append("&user.pwd=").append(user.getPwd());
 		}
 		// 生日
-		if (user.getBirthdate() != null && !user.getBirthdate().equals("")) {
+		if (user.getBirthdate() != null) {
 			param.append("&user.birthdate=").append(user.getBirthdate());
 		}
 		// 性别
-		if (user.getGender() != null && !user.getGender().equals("")) {
+		if (user.getGender() != null) {
 			param.append("&user.gender=").append(user.getGender());
 		}
 		// QQ
-		if (user.getQq() != null && !user.getQq().equals("")) {
+		if (user.getQq() != null) {
 			param.append("&user.qq=").append(user.getQq());
 		}
 		// Email
-		if (user.getEmail() != null && !user.getEmail().equals("")) {
+		if (user.getEmail() != null) {
 			param.append("&user.email=").append(user.getEmail());
 		}
 		//mood心情签名
-		if (user.getMood() != null && !user.getMood().equals("")) {
+		if (user.getMood() != null) {
 			param.append("&user.mood=").append(user.getMood());
 		}
 		//微信号
-		if (user.getWechat() != null && !user.getWechat().equals("")) {
+		if (user.getWechat() != null) {
 			param.append("&user.wechat=").append(user.getWechat());
 		}
 		xml = send(subUrl, param.toString());
